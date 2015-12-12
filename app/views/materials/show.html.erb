@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @material.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @material.description %>
+</p>
+
+<p>
+  <strong>Uploaddate:</strong>
+  <%= @material.uploadDate %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @material.type %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @material.category %>
+</p>
+
+<p>
+  <strong>Format:</strong>
+  <%= @material.format %>
+</p>
+
+<%= link_to 'Edit', edit_material_path(@material) %> |
+<%= link_to 'Back', materials_path %>
