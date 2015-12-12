@@ -7,4 +7,5 @@ class Material
   field :category, type: Hash
   field :format, type: String
   belongs_to :user
+  embeds_many :comments
 end

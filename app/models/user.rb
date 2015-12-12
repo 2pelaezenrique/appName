@@ -2,6 +2,7 @@ class User
   include Mongoid::Document
   has_and_belongs_to_many :classrooms
   has_many :materials
+  embeds_many :favorites
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
