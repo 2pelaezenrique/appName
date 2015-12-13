@@ -2,12 +2,23 @@
 <html>
 <head>
   <title>AppName</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all'%>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<header class="header">
+			<div class="logo">Logo</div>
+			<div class="asignaturas">Asignaturas v</div>
+			<div class="sesion">
+				<div class="login">
+					Iniciar Sesión
+				</div>
+				<div class="signin">
+					Registrate
+				</div>
+			</div>
+		</header>
 <%= yield %>
 
 </body>
