@@ -9,16 +9,14 @@
 </head>
 <body>
 <header class="header">
-			<div class="logo">Logo</div>
+			<div class="logo"><%= link_to "Logo", root_path%></div>
 			<div class="asignaturas">Asignaturas</div>
-			<div class="sesion">
-				<div class="login">
-					Iniciar Sesión
-				</div>
-				<div class="signin">
-					Registrate
-				</div>
-			</div>
+			<% if !user_signed_in? %>
+				<%= render '/aplication/no_user.html.erb' %>
+			<% else%>
+				<%= render '/aplication/user_buttons.html.erb' %>
+				
+			<% end %>
 		</header>
 <%= yield %>
 

@@ -1,0 +1,19 @@
+<div class="panel">
+	<%= link_to destroy_user_session_path, method: :delete,class: "signout"  do %>
+		<div class="panelButton icon signout"></div>
+	<% end %>
+	<div class="panelButton username">
+		<%= current_user.username %>		
+	</div>
+	<%= link_to destroy_user_session_path, method: :delete, class: "fav" do %>
+		<div class="panelButton icon star"></div>
+	<% end %>
+	<%= link_to destroy_user_session_path, method: :delete, class: "lists" do %>
+		<div class="panelButton icon list-alt"></div>
+	<% end %>
+	<%= link_to destroy_user_session_path, method: :delete, class: "classrooms" do %>
+		<div class="panelButton iconos">&#xe807;</div>
+	<% end %>
+	
+	
+</div>
