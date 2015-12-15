@@ -198,15 +198,20 @@ a.signuptext:hover{
     position            : relative;
 }
 .searchinput{
-    border              : 1px solid gainsboro;
     float               : right;
     height              : 100%;
     width               : 95%;
-    border-radius       : 11px;
-    padding-left        : 5%;
-    font-size           : 1.2em;
+    padding-left        : 5%; 
+    margin-top          : 0px;
 }
-.searchinput:focus{
+input{
+    border              : 1px solid gainsboro;
+    padding-left        : 10px;
+    font-size           : 1.2em;
+    border-radius       : 50px;
+    margin-top          : 4px; 
+}
+input:focus{
     box-shadow          : 0 0 5px 1px rgba(115,152,44,0.5);
     outline             : none;
 }
@@ -253,4 +258,64 @@ a.fav, a.fav:visited{
 }
 .panelButton:hover{
     background-color: rgba(0, 0, 0, 0.08);
+}
+footer{
+    bottom: 0px;
+    position: absolute;
+    height: 48px;
+    background-color: white;
+    width: 100%;
+    text-align: center;
+    line-height: 48px;
+}
+.uploadMaterial {
+    float: right;
+    font-family: 'Courgette', cursive;
+    background-color: rgb(0, 142, 228);
+    color: white;
+    height: 38px;
+    line-height: 38px;
+    padding-right: 12px;
+    padding-left: 12px;
+    font-size: 1.6em;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-top: 5px;
+    border-radius: 9px;
+}
+.uploadMaterial:hover{
+    background-color: rgba(22, 22, 241, 0.71);;
+
+}
+a.uploadMaterial:visited , a.uploadMaterial {
+    color: white;
+    text-decoration: none;
+}
+a.classrooms, a.classrooms:visited {
+    color: #823F02;
+    text-decoration: none;
+}
+a.lists, a.lists:visited{
+    color: rgba(241, 146, 21, 0.94);
+    text-decoration: none;
+}
+.new_material{
+    display: table;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 42px;
+    width: 69%;
+}
+label{
+    font-size: 1.4em;
+    font-family: 'Courgette';
+
+}
+.titulo input{
+    height: 37px;
+    width: 100%;
+    padding-left: 28px;
+    line-height: 37px;
+    font-size: 1.4em;
+    border-radius: 0px;
 }

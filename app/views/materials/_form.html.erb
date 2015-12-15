@@ -11,9 +11,8 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="field titulo">
+    <%= f.text_field :name, placeholder: "Título..." %>
   </div>
   <div class="field">
     <%= f.label :description %><br>
@@ -29,6 +28,40 @@
     <%= f.label :format %><br>
     <%= f.text_field :format %>
   </div>
+
+  <div class="field">
+    <%= f.label :link %><br>
+    <%= f.text_field :link %>
+  </div>
+
+  <div class="field">
+    <%= f.label :authors %><br>
+    <%= f.text_field :authors %>
+  </div>
+
+  <div class="field">
+    <%= f.label :youtubeChannel %><br>
+    <%= f.text_field :youtubeChannel %>
+  </div>
+
+  <div class="field">
+    <%= f.label :account %><br>
+    <%= f.text_field :account %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tags %><br>
+    <%= f.text_field :tags %>
+  </div>
+
+  <div class="field">
+    <%= f.label :subject %><br>
+    <%= f.text_field :subject %>
+  </div>
+
+
+
+
   <div class="actions">
     <%= f.submit %>
   </div>
