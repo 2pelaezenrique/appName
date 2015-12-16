@@ -25,56 +25,68 @@
     
     <% end %> 
   </div>
-  <div class="field">
+  <div class="field descripcion">
    
-    <%= f.text_area :description, placeholder: "Descripción", cols: "58", rows: "16"%>
+    <%= f.text_area :description, placeholder: "Descripción"%>
   </div>
-  <div class="info">
-      <div class="field block standarMargin type">
-        <%= f.label :type, "¿Qué vas a publicar?" %><br>
-        <%= f.select(:type) do %>
+  <div class="data">
+      <div class="info">
+          <div class="field block standarMargin type">
+            <%= f.label :type, "¿Qué vas a publicar?" %><br>
+            <%= f.select(:type) do %>
+                <%= content_tag(:option, "", value: "", :disabled => true, :selected => true) %>
+                <% [['Apuntes / Teoría', 1], ['Ejercicios', 2], ['Exámenes', 3],  ['Otro', 4]].each do |c| -%>
+              
+                     <%= content_tag(:option, c.first, value: c.last) %>
+              
+                <% end %>
             
-            <% [['Apuntes / Teoría', 1], ['Ejercicios', 2], ['Exámenes', 3],  ['Otro', 4]].each do |c| -%>
-          
-                 <%= content_tag(:option, c.first, value: c.last) %>
-          
-            <% end %>
+            <% end %>    
+          </div>
+
+          <div class="field block standarMargin formato">
+              <%= f.label :format, "Formato: " %><br>
+              <%= f.select(:format) do %>
+                  <%= content_tag(:option, "", value: "", :disabled => true, :selected => true) %>
+                  <% ['Vídeo', 'PDF', 'Documento de Texto', 'Imagen', 'Diapositivas', 'Hoja de Calculo','Texto Plano (Código)', 'Otro'].each do |c| -%>
+              
+                     <%= content_tag(:option, c, value: c) %>
+                  <% end %>
+              <% end %> 
+          </div>
+
+
+      </div>
+      <div class="info extra">
         
-        <% end %>    
-      </div>
+        <div class="field block standarMargin secundario link">
+          <%= f.label :link %><br>
+          <%= f.text_field :link %>
 
-      <div class="field block standarMargin formato">
-          <%= f.label :format, "Formato: " %><br>
-          <%= f.select(:format) do %>
-              <%= content_tag(:option, "", value: "", :disabled => true, :selected => true) %>
-              <% ['Vídeo', 'PDF', 'Documento de Texto', 'Imagen', 'Diapositivas', 'Hoja de Calculo','Texto Plano (Código)', 'Otro'].each do |c| -%>
-          
-                 <%= content_tag(:option, c, value: c) %>
-              <% end %>
-          <% end %> 
-      </div>
+        </div>
 
-      <div class="field standarMargin block">
-          <%= f.label :authors, "Autor/es: " %><br>
-          <%= f.text_field :authors , placeholder: "Separados por comas ',' " %>
+
+        <div class="field block secundario standarMargin youtubeChannel">
+          <%= f.label :youtubeChannel %><br>
+          <%= f.text_field :youtubeChannel %>
+        </div>
+
+      </div>
+      <div class="field standarMargin block autor">
+          <%= f.label :authors do %>
+             Autor/es <low> (Separados por comas)</low> :
+
+          <% end %>
+          <br>
+          <%= f.text_field :authors , placeholder: "Unicoos, Enrique Peláez, ..." %>
       </div>
   </div>
-  <div class="field secundario link">
-    <%= f.label :link %><br>
-    <%= f.text_field :link %>
-
-  </div>
-
-
-  <div class="field secundario youtubeChannel invisible">
-    <%= f.label :youtubeChannel %><br>
-    <%= f.text_field :youtubeChannel %>
-  </div>
-
+<!--
   <div class="field">
     <%= f.label :account %><br>
     <%= f.text_field :account %>
   </div>
+-->
 
   <div class="field">
     <%= f.label :tags %><br>
@@ -100,15 +112,20 @@
       }else if (selected == 'Vídeo') {
         $(".youtubeChannel , .link").removeClass("invisible");
         $(".link label").html("Enlace al vídeo (Youtube):");
+        $(".link input").attr("placeholder" , "https://www.youtube.com/watch?v=........");
         $(".youtubeChannel label").html("Enlace al canal de youtube:");
+        $(".youtubeChannel input").attr("placeholder", "https://www.youtube.com/channel/......");
       }else if (selected == 'Imagen') {
         $(".link label").html("URL de la imagen:");
+        $(".link input").attr("placeholder", "URL");
         $(".link").removeClass("invisible");
       }else if (selected == 'Texto Plano (Código)' || selected == "Otro"){
         $(".link").removeClass("invisible");
+        $(".link input").attr("placeholder", "URL");
         $(".link label").html("Enlace al archivo:");
       }else{
         $(".link").removeClass("invisible");
+        $(".link input").attr("placeholder", "https://docs.google.com/.........");
         $(".link label").html("Enlace al documento (Google Drive):");
       }; 
   

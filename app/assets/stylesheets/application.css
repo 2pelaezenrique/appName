@@ -327,10 +327,15 @@ textarea{
     font-family: Tahoma;
     font-size: 1.3em;
     border-color: gainsboro;
+    width: 100%;
+    height: 100%;
+    resize : none;
+    border-radius: 5px;
 }
 textarea:focus{
     box-shadow          : 0 0 5px 1px rgba(115,152,44,0.5);
     outline             : none;
+
 
 }
 .field {
@@ -339,12 +344,11 @@ textarea:focus{
 }
 .standarMargin {
     margin-top: 12px;
-    margin-right: 20px;
     margin-left: 24px;
 }
 select{
     width: 90%;
-    height: 34px;
+    height: 39px;
     border-radius: 6px;
     background-color: white;
     border: 1px solid silver;
@@ -357,14 +361,17 @@ select:focus{
     outline             : none;
 
 }
-.invisible{
-    display: none;
-}
+
 .block{
     display: block;
 }
+.invisible{
+    display: none;
+}
 .info{
     display: inline-block;
+    vertical-align: top;
+    width: 30%;
 }
 .subjectSelector select{
         height: 41px;
@@ -381,4 +388,30 @@ select:focus{
 }
 .subjectSelector{
         width: 15%;
+}
+.extra input, .autor input{
+    width: 95%;
+    height: 34px;
+    border-radius: 6px;
+    background-color: white;
+    border: 1px solid silver;
+    margin-top: 10px;
+    font-size: 13px;
+    padding-left: 10px;
+
+}
+.extra {
+    width: 68%;
+}
+.descripcion{
+    width: 33%;
+    height: 280px;
+}
+.data{
+    display: inline-block;
+    width: 67%;
+}
+low {
+    color:  #57A24B;
+    font-size: 0.9em;
 }
