@@ -55,6 +55,7 @@ body{
     float	 			: right;
     width 				: 271px;
     margin-top 			: 7px;
+    margin-left         : 8%;
 
 }
 .login{
@@ -311,11 +312,66 @@ label{
     font-family: 'Courgette';
 
 }
+.titulo {
+    width: 90%;
+}
 .titulo input{
     height: 37px;
-    width: 100%;
-    padding-left: 28px;
+    width: 97%;
+    padding-left: 3%;
     line-height: 37px;
     font-size: 1.4em;
     border-radius: 0px;
+}
+textarea{
+    font-family: Tahoma;
+    font-size: 1.3em;
+    border-color: gainsboro;
+}
+textarea:focus{
+    box-shadow          : 0 0 5px 1px rgba(115,152,44,0.5);
+    outline             : none;
+
+}
+.field {
+    display: inline-block;
+    vertical-align: top;
+}
+.standarMargin {
+    margin-top: 12px;
+    margin-right: 20px;
+    margin-left: 24px;
+}
+select{
+        margin-top: 10px;
+    border-radius: 35px;
+    background-color: white;
+    border: 1px solid silver;
+}
+select:focus{
+    box-shadow          : 0 0 5px 1px rgba(115,152,44,0.5);
+    outline             : none;
+
+}
+.invisible{
+    display: none;
+}
+.block{
+    display: block;
+}
+.info{
+    display: inline-block;
+}
+.subjectSelector select{
+        height: 41px;
+    padding-left: 3%;
+    line-height: 37px;
+    font-size: 1.4em;
+    border-radius: 0px;
+    width: 100%;
+    margin: 0px;
+    margin-top: 4px;
+}
+.subjectSelector{
+        width: 10%;
 }

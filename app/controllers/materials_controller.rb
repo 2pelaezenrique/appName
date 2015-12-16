@@ -1,5 +1,6 @@
 class MaterialsController < ApplicationController
   before_action :set_material, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /materials
   # GET /materials.json
@@ -14,6 +15,9 @@ class MaterialsController < ApplicationController
 
   # GET /materials/new
   def new
+  
+    @subjects = ["Matematicas" , "Biologia", "Quimica", "Fisica"];
+  
     @material = Material.new
   end
 

@@ -14,32 +14,59 @@
   <div class="field titulo">
     <%= f.text_field :name, placeholder: "Título..." %>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
+    <div class="field subjectSelector">
+    <%= f.select(:subject) do %>
+        <%= content_tag(:option, "Asignatura...", value: "Asignatura...", :disabled => true, :selected => true) %>    
+        <% @subjects.each do |c| -%>
+        
+               <%= content_tag(:option, c, value: c) %>
+        
+        <% end %>
+    
+    <% end %> 
   </div>
-
   <div class="field">
-    <%= f.label :type %><br>
-    <%= f.text_field :type %>
+   
+    <%= f.text_area :description, placeholder: "Descripción", cols: "58", rows: "16"%>
   </div>
+  <div class="info">
+      <div class="field block standarMargin type">
+        <%= f.label :type, "¿Qué vas a publicar?" %><br>
+        <%= f.select(:type) do %>
+            
+            <% [['Apuntes / Teoría', 1], ['Ejercicios', 2], ['Exámenes', 3],  ['Otro', 4]].each do |c| -%>
+          
+                 <%= content_tag(:option, c.first, value: c.last) %>
+          
+            <% end %>
+        
+        <% end %>    
+      </div>
 
-  <div class="field">
-    <%= f.label :format %><br>
-    <%= f.text_field :format %>
+      <div class="field block standarMargin formato">
+          <%= f.label :format, "Formato: " %><br>
+          <%= f.select(:format) do %>
+              <%= content_tag(:option, "", value: "", :disabled => true, :selected => true) %>
+              <% ['Vídeo', 'PDF', 'Documento de Texto', 'Imagen', 'Diapositivas', 'Hoja de Calculo','Texto Plano (Código)', 'Otro'].each do |c| -%>
+          
+                 <%= content_tag(:option, c, value: c) %>
+              <% end %>
+          <% end %> 
+      </div>
+
+      <div class="field standarMargin block">
+          <%= f.label :authors, "Autor/es: " %><br>
+          <%= f.text_field :authors , placeholder: "Separados por comas ',' " %>
+      </div>
   </div>
-
-  <div class="field">
+  <div class="field secundario link">
     <%= f.label :link %><br>
     <%= f.text_field :link %>
+
   </div>
 
-  <div class="field">
-    <%= f.label :authors %><br>
-    <%= f.text_field :authors %>
-  </div>
 
-  <div class="field">
+  <div class="field secundario youtubeChannel invisible">
     <%= f.label :youtubeChannel %><br>
     <%= f.text_field :youtubeChannel %>
   </div>
@@ -54,10 +81,7 @@
     <%= f.text_field :tags %>
   </div>
 
-  <div class="field">
-    <%= f.label :subject %><br>
-    <%= f.text_field :subject %>
-  </div>
+
 
 
 
@@ -66,3 +90,27 @@
     <%= f.submit %>
   </div>
 <% end %>
+<script>
+  $( ".formato select" ).change(function() {
+      var selected = $( ".formato select option:selected" ).text();
+      
+      $(".secundario").addClass("invisible");
+      if (selected == ''){
+        $(".secundario").addClass("invisible")
+      }else if (selected == 'Vídeo') {
+        $(".youtubeChannel , .link").removeClass("invisible");
+        $(".link label").html("Enlace al vídeo (Youtube):");
+        $(".youtubeChannel label").html("Enlace al canal de youtube:");
+      }else if (selected == 'Imagen') {
+        $(".link label").html("URL de la imagen:");
+        $(".link").removeClass("invisible");
+      }else if (selected == 'Texto Plano (Código)' || selected == "Otro"){
+        $(".link").removeClass("invisible");
+        $(".link label").html("Enlace al archivo:");
+      }else{
+        $(".link").removeClass("invisible");
+        $(".link label").html("Enlace al documento (Google Drive):");
+      }; 
+  
+  }).trigger( "change" );
+</script>
