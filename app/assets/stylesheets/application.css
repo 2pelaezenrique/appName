@@ -313,7 +313,7 @@ label{
 
 }
 .titulo {
-    width: 90%;
+    width: 85%;
 }
 .titulo input{
     height: 37px;
@@ -321,7 +321,7 @@ label{
     padding-left: 3%;
     line-height: 37px;
     font-size: 1.4em;
-    border-radius: 0px;
+    border-radius: 6px 0px 0px 6px;
 }
 textarea{
     font-family: Tahoma;
@@ -343,10 +343,14 @@ textarea:focus{
     margin-left: 24px;
 }
 select{
-        margin-top: 10px;
-    border-radius: 35px;
+    width: 90%;
+    height: 34px;
+    border-radius: 6px;
     background-color: white;
     border: 1px solid silver;
+    margin-top: 10px;
+    font-size: 13px;
+    padding-left: 10px;
 }
 select:focus{
     box-shadow          : 0 0 5px 1px rgba(115,152,44,0.5);
@@ -367,11 +371,14 @@ select:focus{
     padding-left: 3%;
     line-height: 37px;
     font-size: 1.4em;
-    border-radius: 0px;
+    border-radius: 0px 6px 6px 0px;
     width: 100%;
     margin: 0px;
     margin-top: 4px;
+    border: 1px solid gainsboro;
+    border-left: none;
+    font-family: 'Courgette', cursive;
 }
 .subjectSelector{
-        width: 10%;
+        width: 15%;
 }
