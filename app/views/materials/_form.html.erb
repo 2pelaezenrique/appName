@@ -103,6 +103,8 @@
   </div>
 <% end %>
 <script>
+$(document).ready(function () {
+  $(".uploadMaterial").toggleClass("invisible");
   $( ".formato select" ).change(function() {
       var selected = $( ".formato select option:selected" ).text();
       
@@ -130,4 +132,6 @@
       }; 
   
   }).trigger( "change" );
+});
+  
 </script>
