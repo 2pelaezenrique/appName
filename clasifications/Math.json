@@ -1,0 +1,9 @@
+{
+	"PRIMARIA" : ["Sumar","Restar"],
+	"INSTITUTO" : ["Primero","Segundo"],
+	"UNIVERSIDAD" : {
+		"Calculo" : ["Derivadas","Series","Integracion","Sucesiones"],
+		"Algebra" : ["Matrices","Determinantes","Aplicaciones Lineales"],
+		"Metodos Matematicos" : ["Fourier" , "Integracion"]
+		}
+}

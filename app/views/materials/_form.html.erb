@@ -1,3 +1,4 @@
+
 <%= form_for(@material) do |f| %>
   <% if @material.errors.any? %>
     <div id="error_explanation">
@@ -131,7 +132,20 @@ $(document).ready(function () {
         $(".link label").html("Enlace al documento (Google Drive):");
       }; 
   
-  }).trigger( "change" );
+  }).trigger("change");
+
+  $( ".subjectSelector select" ).change(function() {
+      var selected = $( ".subjectSelector select option:selected").text();
+      if (selected == 'Matematicas') {
+        var MathsJSON = <%= raw @Maths %>;
+        $.each( MathsJSON, function( key, value ) {
+          console.log( key );
+        });
+      };
+      
+    }).trigger("change");
 });
+
+
   
 </script>

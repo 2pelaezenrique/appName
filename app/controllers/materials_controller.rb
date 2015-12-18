@@ -17,7 +17,7 @@ class MaterialsController < ApplicationController
   def new
   
     @subjects = ["Matematicas" , "Biologia", "Quimica", "Fisica"];
-  
+    @Maths = File.read('clasifications/Math.json');
     @material = Material.new
   end
 
