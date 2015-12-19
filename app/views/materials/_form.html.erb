@@ -13,98 +13,98 @@
   <% end %>
 
   <div class="field titulo">
-    <%= f.text_field :name, placeholder: "Título..." %>
+    <%= f.text_field :name, placeholder: "Título..." , required: true %>
   </div>
     <div class="field subjectSelector">
-    <%= f.select(:subject) do %>
-        <%= content_tag(:option, "Asignatura...", value: "Asignatura...", :disabled => true, :selected => true) %>    
-        <% @subjects.each do |c| -%>
+    <%= f.select :subject, @subjects, { :include_blank => 'Asignatura ...' }, :required => true %>
         
-               <%= content_tag(:option, c, value: c) %>
+
+        <!-- content_tag(:option, "Asignatura...", value: "Asignatura...", :disabled => true, :selected => true)-->    
         
-        <% end %>
-    
-    <% end %> 
+        
+
+
   </div>
   <div class="field descripcion">
    
-    <%= f.text_area :description, placeholder: "Descripción"%>
+    <%= f.text_area :description, placeholder: "Descripción", required: true  %>
   </div>
   <div class="data">
       <div class="info">
-          <div class="field block standarMargin type">
-            <%= f.label :type, "¿Qué vas a publicar?" %><br>
-            <%= f.select(:type) do %>
+        <div class="field block standarMargin type">
+          <%= f.label :type, "¿Qué vas a publicar?" %><br>
+          
+          <%= f.select(:type) do %>
+             
+              <%= content_tag(:option, "", value: "", :disabled => true, :selected => true) %>
+              
+              <% [['Apuntes / Teoría'], ['Ejercicios'], ['Exámenes'],  ['Otro']].each do |c| -%>
+                  <%= content_tag(:option, c.first, value: c.last) %>
+              <% end %>
+          
+          <% end %>    
+        
+        </div>
+        
+        <div class="field block standarMargin formato">
+            <%= f.label :format, "Formato: " %><br>
+            
+            <%= f.select(:format) do %>
+            
                 <%= content_tag(:option, "", value: "", :disabled => true, :selected => true) %>
-                <% [['Apuntes / Teoría', 1], ['Ejercicios', 2], ['Exámenes', 3],  ['Otro', 4]].each do |c| -%>
-              
-                     <%= content_tag(:option, c.first, value: c.last) %>
-              
+                
+                <% ['Vídeo', 'PDF', 'Documento de Texto', 'Imagen', 'Diapositivas', 'Hoja de Calculo','Texto Plano (Código)', 'Otro'].each do |c| -%>
+                  <%= content_tag(:option, c, value: c) %>
                 <% end %>
             
-            <% end %>    
-          </div>
-
-          <div class="field block standarMargin formato">
-              <%= f.label :format, "Formato: " %><br>
-              <%= f.select(:format) do %>
-                  <%= content_tag(:option, "", value: "", :disabled => true, :selected => true) %>
-                  <% ['Vídeo', 'PDF', 'Documento de Texto', 'Imagen', 'Diapositivas', 'Hoja de Calculo','Texto Plano (Código)', 'Otro'].each do |c| -%>
-              
-                     <%= content_tag(:option, c, value: c) %>
-                  <% end %>
-              <% end %> 
-          </div>
-
-
+            <% end %> 
+        </div>
+      
       </div>
+
       <div class="info extra">
         
         <div class="field block standarMargin secundario link">
           <%= f.label :link %><br>
-          <%= f.url_field :link %>
-
+          <%= f.url_field :link , required: true %>
         </div>
-
-
+        
         <div class="field block secundario standarMargin youtubeChannel">
           <%= f.label :youtubeChannel %><br>
           <%= f.url_field :youtubeChannel %>
         </div>
-
+      
       </div>
+
       <div class="field standarMargin block autor">
           <%= f.label :authors do %>
              Autor/es <low> (Separados por comas)</low> :
-
           <% end %>
           <br>
-          <%= f.text_field :authors , placeholder: "Unicoos, Enrique Peláez, ..." %>
+          <%= f.text_field :authors , placeholder: "Unicoos, Anónimo, ..." , required: true %>
       </div>
-  </div>
-<!--
-  <div class="field">
-    <%= f.label :account %><br>
-    <%= f.text_field :account %>
-  </div>
--->
 
-  <div class="field">
-    <%= f.label :tags %><br>
-    <%= f.text_field :tags %>
   </div>
 
+  <div class="field clasification">
+    <%= f.label :tags, "Clasificación:" %><br>
+    <div class="tags tagName"></div>
+    <%= f.hidden_field :tags %>
 
-
-
-
+  </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "¡Listo!" %>
   </div>
+
 <% end %>
+
+
+
 <script>
 $(document).ready(function () {
+  $("select").prop('required',true);
+
   $(".uploadMaterial").toggleClass("invisible");
   $( ".formato select" ).change(function() {
       var selected = $( ".formato select option:selected" ).text();
@@ -133,19 +133,109 @@ $(document).ready(function () {
       }; 
   
   }).trigger("change");
-
-  $( ".subjectSelector select" ).change(function() {
-      var selected = $( ".subjectSelector select option:selected").text();
-      if (selected == 'Matematicas') {
-        var MathsJSON = <%= raw @Maths %>;
-        $.each( MathsJSON, function( key, value ) {
-          console.log( key );
-        });
-      };
+  var resetValueOfTagsInput = function(){
+    var value = [];
+    $(".selectedTag").each(function(){
+      value.push($(this).children().text());
+    });
+    $("#material_tags").attr("value",value);
+  }
+  var resetClasifications = function(){
+    window.clasification = [];
+    var MathsJSON = <%= raw @Maths %>;
+    if ($( ".subjectSelector select option:selected").text() == "Matematicas") {
+      window.clasification = MathsJSON;
+    };
+  }
+  var addNewTags = function(){
+    
+    if ($(".last").length == 0) {
+      resetClasifications();
+      $.each( window.clasification, function( key, value ) {
+        addTag(key, "tag", "+");
+      });
       
-    }).trigger("change");
-});
+    
+    }else{
+    
+      if(!Array.isArray(window.clasification)){
+        window.clasification = window.clasification[$(".last").children().text()];
+        
+        if(!Array.isArray(window.clasification)){
+          
+          $.each(window.clasification, function(key , value){
+            addTag(key,"tag","+");
+          });
+        
+        }else{
+         
+          $.each(window.clasification, function(key , value){
+            addTag(value,"tag","+");
+          })
+        
+        };
+      };
+    };
+    resetValueOfTagsInput();
+  };
 
+  var unselectTag = function(){
+    if ($(".selectedTag").length == 1) {
+      createTags();
+    }else{
+
+      resetClasifications();
+      $(".last").remove();
+      $(".tag").remove();
+      $(".selectedTag").last().addClass("last");
+      $(".last").append(" -")
+      $(".selectedTag").not(".last").each(function(){
+        window.clasification = window.clasification[$(this).children().text()];
+      });
+      
+      addNewTags();
+
+
+    };
+  };
+  var selectTag = function(selected){
+    var alreadySelected = $(".selectedTag");
+    $(".tags").html("");
+    $.each(alreadySelected, function(){
+      addTag($(this).children().text(),"selectedTag", "");
+    })
+    addTag(selected, "selectedTag last","-")
+  }
+  
+  var addTag = function(tagName, appearence, lastIcon){
+    $('.tags').append('<div class="'+ appearence +'"><div class="tagName">' + tagName + '</div> '+lastIcon+'</div>');
+  };
+  var createTags = function(){
+    var subject = $( ".subjectSelector select option:selected").text();
+    $(".tags").html("");
+    addNewTags(subject);
+  };
+  $(".subjectSelector select").change(function() {
+      createTags();
+  }).trigger("change");
+  
+
+
+  $(document).delegate( '.tag', "click", function() {
+    clicked = $(this).children().text();
+    selectTag(clicked);
+    addNewTags();
+  });
+  $(document).delegate( '.selectedTag', "click", function() {
+    clicked = $(this).children().text();
+    unselectTag(clicked);
+  });
+});
+$(".showless").on("click",function(){
+  $(".centered").toggleClass("invisible");
+  $(this).toggleClass("upload-circle");
+  $(this).toggleClass("download-circle");
+});
 
   
 </script>

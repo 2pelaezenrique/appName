@@ -23,14 +23,14 @@
       font-weight: normal;
       font-style: normal;
 }
-body{
+html, body{
  	height 				: 100%;
  	width 				: 100%;
  	background-color 	: #F6F6F6;
-    position: absolute;
- }
+}
+
  .header{.
- 	height 				: 5%;
+ 	height 				: 48px;
     width 				: 100%;
     background-color 	: white;
  }
@@ -196,19 +196,18 @@ a.signuptext:hover{
     margin-right        : auto;
     margin-left         : auto;
     width               : 57%;
-    height              : 40px;
+    height              : 53px;
     position            : relative;
 }
 .searchinput{
     float               : right;
-    height              : 100%;
-    width               : 95%;
-    padding-left        : 5%; 
+    height              : 78%;
+    width               : 100%;
     margin-top          : 0px;
+    text-indent         : 40px; 
 }
 input{
     border              : 1px solid gainsboro;
-    padding-left        : 10px;
     font-size           : 1.2em;
     border-radius       : 50px;
     margin-top          : 4px; 
@@ -219,7 +218,7 @@ input:focus{
 }
 .absolute{
     position            : absolute;
-    left                : 24px;
+    left                : 15px;
     top                 : 11px;
     width               : 0px;
     font-size           : 1.4em;
@@ -261,16 +260,20 @@ a.fav, a.fav:visited{
 .panelButton:hover{
     background-color: rgba(0, 0, 0, 0.08);
 }
-footer{
-    height: 5%;
+#footer{
+    height: 48px;
     background-color: white;
     width: 100%;
     text-align: center;
     line-height: 48px;
+    margin-top: -48px;
 }
-article{
-    height: 90%;
+.webpage{
+    min-height: -webkit-calc(100% - 48px);
+    min-height: -moz-calc(100% - 48px);
+    padding-bottom: 48px;
 }
+
 .uploadMaterial {
     float: right;
     font-family: 'Courgette', cursive;
@@ -302,11 +305,10 @@ a.lists, a.lists:visited{
     color: rgba(241, 146, 21, 0.94);
     text-decoration: none;
 }
-.new_material{
+.new_material, .edit_material{
     display: table;
     margin-right: auto;
     margin-left: auto;
-    margin-top: 42px;
     width: 69%;
 }
 label{
@@ -452,3 +454,67 @@ important{
     color: rgb(0, 197, 0);
 }
 
+.tag{
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 10px;
+    background-color: rgb(0, 193, 255);
+    border-radius: 10px;
+    color: white;
+    font-weight: 900;
+    line-height: 19px;
+    margin-top: 10px;
+}
+
+.tag:hover{
+    cursor: pointer;
+    background-color: rgba(0, 0, 255, 0.59);
+
+}
+.tagName{
+    display: inline-block;
+}
+.selectedTag{
+    display: inline-block;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 10px;
+    border-radius: 10px;
+    font-weight: 900;
+    line-height: 19px;
+    color: rgba(0, 0, 0, 0.51);
+    background-color: rgba(0, 0, 0, 0.25);
+}
+.selectedTag:hover{
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.37);
+}
+input[type="submit"] {
+    border-radius: 7px;
+    font-size: 2em;
+    font-family: 'Courgette',cursive;
+    background-color: rgba(5, 91, 202, 0.74);
+    color: white;
+    float: right;
+    cursor: pointer;
+    padding: 8px;
+}
+input[type="submit"]:hover{
+    background-color: rgba(5, 91, 202, 0.84); 
+}
+.showless{
+    text-align: center;
+    font-size: 2em;
+    margin-top: 19px;
+    color: grey;
+    width: 36px;
+    margin-right: auto;
+    margin-left: auto;
+    height: 29px;
+    padding-top: 7px;
+    cursor: pointer;
+}
+.showless:hover{
+    color: silver;
+}

@@ -8,23 +8,29 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<header class="header">
-			<div class="logo"><%= link_to "Logo", root_path%></div>
-			<div class="asignaturas">Asignaturas</div>
+<div class="webpage">
+	<header class="header">
+		<div class="logo"><%= link_to "Logo", root_path%></div>
+		<div class="asignaturas">Asignaturas</div>
 			
-			<% if !user_signed_in? %>
-				<%= render '/aplication/no_user.html.erb' %>
-			<% else%>
-				<%= render '/aplication/user_buttons.html.erb' %>
-				
-			<% end %>
-			<%= link_to new_material_path, class: "uploadMaterial" do %>
-				<div class="upploadMaterial">¡Publicar!</div>
-			<% end %>
-		</header>
-<%= yield %>
-<footer>
+		<% if !user_signed_in? %>
+			<%= render '/aplication/no_user.html.erb' %>
+		<% else%>
+			<%= render '/aplication/user_buttons.html.erb' %>
+		<% end %>
+
+		<%= link_to new_material_path, class: "uploadMaterial" do %>
+			<div class="upploadMaterial">¡Publicar!</div>
+		<% end %>
+
+	</header>
+
+	<%= yield %>
+</div>
+
+<div id="footer">
 	Contacto | Sobre appName | ¡Ayúdanos! | Política y Privacidad
-</footer>
+</div>
+
 </body>
 </html>

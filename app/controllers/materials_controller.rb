@@ -23,6 +23,8 @@ class MaterialsController < ApplicationController
 
   # GET /materials/1/edit
   def edit
+    @subjects = ["Matematicas" , "Biologia", "Quimica", "Fisica"];
+    @Maths = File.read('clasifications/Math.json');
   end
 
   # POST /materials
