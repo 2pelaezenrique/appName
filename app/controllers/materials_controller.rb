@@ -15,7 +15,7 @@ class MaterialsController < ApplicationController
 
   # GET /materials/new
   def new
-  
+    
     @subjects = ["Matematicas" , "Biologia", "Quimica", "Fisica"];
     @Maths = File.read('clasifications/Math.json');
     @material = Material.new
@@ -31,7 +31,7 @@ class MaterialsController < ApplicationController
   # POST /materials.json
   def create
     @material = Material.new(material_params)
-
+    byebug
     respond_to do |format|
       if @material.save
         format.html { redirect_to @material, notice: 'Material was successfully created.' }
@@ -48,6 +48,9 @@ class MaterialsController < ApplicationController
   def update
     respond_to do |format|
       if @material.update(material_params)
+        @material.account = current_user.id
+        @material.uploadDate = DateTime.now
+        @material.username = current_user.username
         format.html { redirect_to @material, notice: 'Material was successfully updated.' }
         format.json { render :show, status: :ok, location: @material }
       else
@@ -75,6 +78,8 @@ class MaterialsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def material_params
-      params.require(:material).permit(:name, :description, :uploadDate, :type, :category, :format)
+      params[:material][:authors] = params[:material][:authors].split(",")
+      params[:material][:tags] = params[:material][:tags].split(",")
+      params.require(:material).permit(:name, :description, :type, :format, :link, :authors, :youtubeChannel, :tags, :subject, :searchable)
     end
 end
