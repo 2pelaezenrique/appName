@@ -9,11 +9,12 @@ class Material
   field :link, type: String
   field :authors, type: Array
   field :youtubeChannel, type: String
-  field :account, type: String
   field :searchable, type: Boolean
   field :tags, type: Array
+  field :schools, type: Array
   field :subject, type: String
   field :username, type: String
+  field :updateDate, type: Date
   belongs_to :user
   embeds_many :comments
 end

@@ -1,0 +1,9 @@
+{
+	"Andalucía" : ["Industriales","Informatica"],
+	"Cataluña" : ["Biomedica","Matemáticas"],
+	"Madrid" : {
+		"UPM" : ["ETSIT","Industriales","Agronomos","Aeroespaciales"],
+		"UCM" : ["Medicina","Química","Fisica"],
+		"UAM" : ["Medio Ambiente" , "Informatica"]
+		}
+}

@@ -18,6 +18,7 @@ class MaterialsController < ApplicationController
     
     @subjects = ["Matematicas" , "Biologia", "Quimica", "Fisica"];
     @Maths = File.read('clasifications/Math.json');
+    @Schools = File.read('clasifications/Schools.json');
     @material = Material.new
   end
 
@@ -31,7 +32,11 @@ class MaterialsController < ApplicationController
   # POST /materials.json
   def create
     @material = Material.new(material_params)
-    byebug
+    @material.authors = params[:material][:authors]
+    @material.tags = params[:material][:tags]
+    @material.user_id = current_user.id
+    @material.uploadDate = DateTime.now
+    @material.username = current_user.username
     respond_to do |format|
       if @material.save
         format.html { redirect_to @material, notice: 'Material was successfully created.' }
@@ -48,9 +53,9 @@ class MaterialsController < ApplicationController
   def update
     respond_to do |format|
       if @material.update(material_params)
-        @material.account = current_user.id
-        @material.uploadDate = DateTime.now
-        @material.username = current_user.username
+        @material.authors = params[:material][:authors]
+        @material.tags = params[:material][:tags]
+        @material.updateDate = DateTime.now
         format.html { redirect_to @material, notice: 'Material was successfully updated.' }
         format.json { render :show, status: :ok, location: @material }
       else

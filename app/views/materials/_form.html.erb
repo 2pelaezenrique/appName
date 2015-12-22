@@ -68,6 +68,17 @@
           <%= f.label :link %><br>
           <%= f.url_field :link , required: true %>
         </div>
+        <div class="field block standarMargin searchable">
+          <%= f.label :searchable, "¿Quién lo puede ver?" %><br>
+          <%= f.select(:searchable) do %>
+                <%= content_tag(:option, "", value: "", :disabled => true, :selected => true) %>
+                
+                <% [['Público', true],["Oculto (No aparecerá en las búsquedas)", false]].each do |c| -%>
+                  <%= content_tag(:option, c[0], value: c[1]) %>
+                <% end %>
+            
+          <% end %> 
+        </div>
         
         <div class="field block secundario standarMargin youtubeChannel">
           <%= f.label :youtubeChannel %><br>
@@ -86,11 +97,17 @@
 
   </div>
 
-  <div class="field clasification">
+  <div class="field clasification block">
     <%= f.label :tags, "Clasificación:" %><br>
     <div class="tags tagName"></div>
     <%= f.hidden_field :tags %>
 
+  </div>
+
+  <div class="field clasification block">
+    <%= f.label :schools, "Escuela (Opcional):" %><br>
+    <div class="schools tagName"></div>
+    <%= f.hidden_field :schools %>
   </div>
 
   <div class="actions">
@@ -103,6 +120,9 @@
 
 <script>
 $(document).ready(function () {
+  String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+  }
   $("select").prop('required',true);
 
   $(".uploadMaterial").toggleClass("invisible");
@@ -133,12 +153,104 @@ $(document).ready(function () {
       }; 
   
   }).trigger("change");
-  var resetValueOfTagsInput = function(){
+  var setClasification = function(){
+    window.clasification = [];
+    var MathsJSON = <%= raw @Maths %>;
+    if ($( ".subjectSelector select option:selected").text() == "Matematicas") {
+      window.clasification = MathsJSON;
+    };
+  };
+
+  var setSchools = function(){
+    window.schools = <%= raw @Schools %>;
+  }
+  var update = function(typeOfElement){
+    if (typeOfElement == "tags") {
+      setClasification();
+      $("div[type='tags']").not(".noselected").each(function(){
+        window.clasification = window.clasification[$(this).children().text()];
+      })
+    }else{
+      setSchools();
+      $("div[type='schools']").not(".noselected").each(function(){
+        window.schools = window.schools[$(this).children().text()];
+      });
+    };
+  };
+
+  var showNew = function(typeOfElement){
+    var newElements = [];
+    var position = "";
+    if (typeOfElement == "schools") {
+      if (!Array.isArray(window.schools)) {
+        $.each(window.schools,function(key , value){newElements.push(key)})
+      }else{
+        position = "last";
+        $.each(window.schools,function(key , value){newElements.push(value)})
+      };
+    }else{
+      if (!Array.isArray(window.clasification)) {
+        $.each(window.clasification, function(key , value){newElements.push(key)});
+      }else{
+        position = "last";
+        $.each(window.clasification, function(key , value){newElements.push(value)})
+      };
+    };
+    $.each(newElements, function(key, value){
+      $("." + typeOfElement).append('<div class="element '+position+' noselected"  type="' + typeOfElement + '"><div class="tagName">' + value + '</div> +</div>');
+    });
+  };
+  var selectElement= function(element){
+    typeOfElement = element.attr("type");
+    
+    $("div[type="+typeOfElement+"]").not(".noselected").last().toggleClass("index");
+    element.toggleClass("selected");
+    element.toggleClass("index");
+    element.toggleClass("noselected");
+    element.html(element.html().replace("+","-"));
+    $('div[type='+typeOfElement+']').not(".selected").remove();
+    if (!element.hasClass("last")) {
+      update(typeOfElement);
+      showNew(typeOfElement);
+    };
+  };
+  var resetValueOfInput = function(typeOfElement){
     var value = [];
-    $(".selectedTag").each(function(){
+    $('div[type='+typeOfElement+']').not(".noselected").each(function(){
       value.push($(this).children().text());
     });
-    $("#material_tags").attr("value",value);
+    $("#material_" + typeOfElement).attr("value",value);
+  }
+
+  $(".subjectSelector select").change(function() {
+      setClasification();
+      $('div[type="tags"]').remove();
+      showNew("tags");
+  }).trigger("change");
+  
+  $(document).delegate( '.noselected', "click", function() {
+    selectElement($(this));
+    resetValueOfInput(typeOfElement);
+  });
+
+  $(document).delegate( '.index', "click", function() {
+    typeOfElement = $(this).attr("type");
+    $(this).remove();
+    $('div[type='+typeOfElement+']').not(".selected").remove();
+    $('div[type='+typeOfElement+']').last().toggleClass("index");
+    update(typeOfElement);
+    showNew(typeOfElement);
+    resetValueOfInput(typeOfElement);
+  });
+  setSchools();
+  showNew("schools");
+  /*
+  var resetValueOfInput = function(nameOfInput){
+      var value = [];
+      $(".selected" + nameOfInput.capitalize()).each(function(){
+        value.push($(this).children().text());
+      });
+      $("#material_" + nameOfInput).attr("value",value);
   }
   var resetClasifications = function(){
     window.clasification = [];
@@ -147,49 +259,46 @@ $(document).ready(function () {
       window.clasification = MathsJSON;
     };
   }
-  var addNewTags = function(){
-    
+  var addNewTags = function(typeOfTag){
     if ($(".last").length == 0) {
       resetClasifications();
       $.each( window.clasification, function( key, value ) {
-        addTag(key, "tag", "+");
-      });
-      
-    
+        addTag("tags",key, "tag", "+");
+    });
+          
     }else{
-    
       if(!Array.isArray(window.clasification)){
         window.clasification = window.clasification[$(".last").children().text()];
         
         if(!Array.isArray(window.clasification)){
           
           $.each(window.clasification, function(key , value){
-            addTag(key,"tag","+");
+            addTag("tags",key,"tag","+");
           });
         
         }else{
          
           $.each(window.clasification, function(key , value){
-            addTag(value,"tag","+");
+            addTag("tags",value,"tag","+");
           })
         
         };
       };
     };
-    resetValueOfTagsInput();
+    resetValueOfInput("tags");
   };
 
   var unselectTag = function(){
-    if ($(".selectedTag").length == 1) {
+    if ($(".selectedTags").length == 1) {
       createTags();
     }else{
 
       resetClasifications();
       $(".last").remove();
       $(".tag").remove();
-      $(".selectedTag").last().addClass("last");
+      $(".selectedTags").last().addClass("last");
       $(".last").append(" -")
-      $(".selectedTag").not(".last").each(function(){
+      $(".selectedTags").not(".last").each(function(){
         window.clasification = window.clasification[$(this).children().text()];
       });
       
@@ -199,21 +308,21 @@ $(document).ready(function () {
     };
   };
   var selectTag = function(selected){
-    var alreadySelected = $(".selectedTag");
+    var alreadySelected = $(".selectedTags");
     $(".tags").html("");
     $.each(alreadySelected, function(){
-      addTag($(this).children().text(),"selectedTag", "");
+      addTag("tags",$(this).children().text(),"selectedTags", "");
     })
-    addTag(selected, "selectedTag last","-")
+    addTag("tags" , selected, "selectedTags last","-")
   }
   
-  var addTag = function(tagName, appearence, lastIcon){
-    $('.tags').append('<div class="'+ appearence +'"><div class="tagName">' + tagName + '</div> '+lastIcon+'</div>');
+  var addTag = function(tagsOrSchools, tagName, appearence, lastIcon){
+    $('.' + tagsOrSchools).append('<div class="'+ appearence +'"><div class="tagName">' + tagName + '</div> '+lastIcon+'</div>');
   };
   var createTags = function(){
     var subject = $( ".subjectSelector select option:selected").text();
     $(".tags").html("");
-    addNewTags(subject);
+    addNewTags("subject");
   };
   $(".subjectSelector select").change(function() {
       createTags();
@@ -226,15 +335,16 @@ $(document).ready(function () {
     selectTag(clicked);
     addNewTags();
   });
-  $(document).delegate( '.selectedTag', "click", function() {
+  $(document).delegate( '.selectedTags', "click", function() {
     clicked = $(this).children().text();
     unselectTag(clicked);
+  }); */
+  $(".showless").on("click",function(){
+    $(".centered").toggleClass("invisible");
+    $(this).toggleClass("upload-circle");
+    $(this).toggleClass("download-circle");
   });
-});
-$(".showless").on("click",function(){
-  $(".centered").toggleClass("invisible");
-  $(this).toggleClass("upload-circle");
-  $(this).toggleClass("download-circle");
+
 });
 
   

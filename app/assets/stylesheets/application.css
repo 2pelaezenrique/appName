@@ -370,9 +370,7 @@ select:focus{
 .block{
     display: block;
 }
-.invisible{
-    display: none;
-}
+
 .info{
     display: inline-block;
     vertical-align: top;
@@ -454,7 +452,7 @@ important{
     color: rgb(0, 197, 0);
 }
 
-.tag{
+.element{
     display: inline-block;
     padding-left: 10px;
     padding-right: 10px;
@@ -467,7 +465,7 @@ important{
     margin-top: 10px;
 }
 
-.tag:hover{
+.element:hover{
     cursor: pointer;
     background-color: rgba(0, 0, 255, 0.59);
 
@@ -475,7 +473,7 @@ important{
 .tagName{
     display: inline-block;
 }
-.selectedTag{
+.selected{
     display: inline-block;
     padding-left: 10px;
     padding-right: 10px;
@@ -486,7 +484,7 @@ important{
     color: rgba(0, 0, 0, 0.51);
     background-color: rgba(0, 0, 0, 0.25);
 }
-.selectedTag:hover{
+.selected:hover{
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.37);
 }
@@ -517,4 +515,11 @@ input[type="submit"]:hover{
 }
 .showless:hover{
     color: silver;
+}
+.searchable, .youtubeChannel{
+    display: inline-block;
+    width: 40%;
+}
+.invisible{
+    display: none;
 }
