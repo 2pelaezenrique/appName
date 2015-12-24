@@ -1,35 +1,40 @@
-<p id="notice"><%= notice %></p>
+<article class ="materials_index">
+<%= render 'filter' %>
+<div class="materials">
+  <p id="notice"><%= notice %></p>
 
-<h1>Listing Materials</h1>
+  <h1>Listing Materials</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Uploaddate</th>
-      <th>Type</th>
-      <th>Category</th>
-      <th>Format</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @materials.each do |material| %>
+  <table>
+    <thead>
       <tr>
-        <td><%= material.name %></td>
-        <td><%= material.description %></td>
-        <td><%= material.type %></td>
-        <td><%= material.format %></td>
-        <td><%= link_to 'Show', material %></td>
-        <td><%= link_to 'Edit', edit_material_path(material) %></td>
-        <td><%= link_to 'Destroy', material, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Uploaddate</th>
+        <th>Type</th>
+        <th>Category</th>
+        <th>Format</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @materials.each do |material| %>
+        <tr>
+          <td><%= material.name %></td>
+          <td><%= material.description %></td>
+          <td><%= material.type %></td>
+          <td><%= material.format %></td>
+          <td><%= link_to 'Show', material %></td>
+          <td><%= link_to 'Edit', edit_material_path(material) %></td>
+          <td><%= link_to 'Destroy', material, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'New Material', new_material_path %>
+  <br>
+
+  <%= link_to 'New Material', new_material_path %>
+</div>
+</article>

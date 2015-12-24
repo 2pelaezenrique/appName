@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>AppName</title>
-  <link href="https://fonts.googleapis.com/css?family=Courgette" rel="stylesheet" type="text/css">
-  <%= stylesheet_link_tag    'application', media: 'all'%>
-  <%= javascript_include_tag 'application' %>
-  <%= csrf_meta_tags %>
+	<title>AppName</title>
+	<link href="https://fonts.googleapis.com/css?family=Courgette" rel="stylesheet" type="text/css">
+	<%= stylesheet_link_tag 'application', media: "all"%>
+	<%= javascript_include_tag 'application', media: "all" %>
+	<% if @welcomePage %>
+		<%= stylesheet_link_tag 'welcome', media: "all"%>
+	<% else %>
+	<% end %>
 </head>
 <body>
 <div class="webpage">

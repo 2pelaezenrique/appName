@@ -5,7 +5,19 @@ class MaterialsController < ApplicationController
   # GET /materials
   # GET /materials.json
   def index
-    @materials = Material.all
+     @subjects = ["Matematicas" , "Biologia", "Quimica", "Fisica"];
+     if request.query_parameters
+        query = {}
+        request.query_parameters.each do  |key,value|
+          if key != "utf8" && key != "commit" && value != ""
+            query[key] = value
+          end
+        end
+        query[:searchable] = true
+        @materials = Material.where(query)
+     else
+        @materials = Material.where(:searchable => true)
+     end
   end
 
   # GET /materials/1
@@ -26,6 +38,7 @@ class MaterialsController < ApplicationController
   def edit
     @subjects = ["Matematicas" , "Biologia", "Quimica", "Fisica"];
     @Maths = File.read('clasifications/Math.json');
+    @Schools = File.read('clasifications/Schools.json');
   end
 
   # POST /materials
@@ -34,6 +47,7 @@ class MaterialsController < ApplicationController
     @material = Material.new(material_params)
     @material.authors = params[:material][:authors]
     @material.tags = params[:material][:tags]
+    @material.schools = params[:material][:schools]
     @material.user_id = current_user.id
     @material.uploadDate = DateTime.now
     @material.username = current_user.username
@@ -85,6 +99,7 @@ class MaterialsController < ApplicationController
     def material_params
       params[:material][:authors] = params[:material][:authors].split(",")
       params[:material][:tags] = params[:material][:tags].split(",")
-      params.require(:material).permit(:name, :description, :type, :format, :link, :authors, :youtubeChannel, :tags, :subject, :searchable)
+      params[:material][:schools] = params[:material][:schools].split(",")
+      params.require(:material).permit(:name, :description, :type, :format, :link, :authors, :youtubeChannel, :tags, :subject, :searchable, :schools)
     end
 end

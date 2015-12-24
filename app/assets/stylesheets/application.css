@@ -29,7 +29,7 @@ html, body{
  	background-color 	: #F6F6F6;
 }
 
- .header{.
+ .header{
  	height 				: 48px;
     width 				: 100%;
     background-color 	: white;
@@ -269,8 +269,9 @@ a.fav, a.fav:visited{
     margin-top: -48px;
 }
 .webpage{
-    min-height: -webkit-calc(100% - 48px);
-    min-height: -moz-calc(100% - 48px);
+    height: -webkit-calc(100% - 48px);
+    height: -moz-calc(100% - 48px);
+
     padding-bottom: 48px;
 }
 
@@ -522,4 +523,19 @@ input[type="submit"]:hover{
 }
 .invisible{
     display: none;
+}
+aside{
+    float: left;
+    background-color: white;
+    width: 14%;
+    height: 100%;
+}
+article{
+        height: -webkit-calc(100% - 48px);
+    height: -moz-calc(100% - 48px);
+    overflow-y: visible; 
+}
+.materials{
+    height: 100%;
+    overflow: auto;
 }

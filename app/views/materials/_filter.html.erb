@@ -1,0 +1,11 @@
+<aside>Filtro
+
+	<%= form_tag '', :method  => :get do |f| %>
+	  
+	    <%= select_tag(:subject, options_for_select(@subjects), { :include_blank => 'Asignatura ...' })%>
+	    <%= select_tag(:type, options_for_select(['Apuntes / Teoría', 'Ejercicios', 'Exámenes', 'Otro']), { :include_blank => 'Tipo...' })%>
+	    
+	  <%= submit_tag("Aplicar Filtro") %>
+	<% end %>
+
+</aside>
