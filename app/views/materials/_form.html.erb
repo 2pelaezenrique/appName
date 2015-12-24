@@ -64,10 +64,7 @@
 
       <div class="info extra">
         
-        <div class="field block standarMargin secundario link">
-          <%= f.label :link %><br>
-          <%= f.url_field :link , required: true %>
-        </div>
+        
         <div class="field block standarMargin searchable">
           <%= f.label :searchable, "¿Quién lo puede ver?" %><br>
           <%= f.select(:searchable) do %>
@@ -80,9 +77,17 @@
           <% end %> 
         </div>
         
+        <div class="uploadButton standarMargin icon cloud-upload">
+           | <sentence class="nameOfFile"> Subir Archivo </sentence>
+          <%= f.file_field :file %>
+        </div>
         <div class="field block secundario standarMargin youtubeChannel">
           <%= f.label :youtubeChannel %><br>
           <%= f.url_field :youtubeChannel %>
+        </div>
+        <div class="field block standarMargin secundario link">
+          <%= f.label :link %><br>
+          <%= f.url_field :link , required: true %>
         </div>
       
       </div>
@@ -138,18 +143,10 @@ $(document).ready(function () {
         $(".link input").attr("placeholder" , "https://www.youtube.com/watch?v=........");
         $(".youtubeChannel label").html("Enlace al canal de youtube:");
         $(".youtubeChannel input").attr("placeholder", "https://www.youtube.com/channel/......");
-      }else if (selected == 'Imagen') {
-        $(".link label").html("URL de la imagen:");
-        $(".link input").attr("placeholder", "URL");
-        $(".link").removeClass("invisible");
-      }else if (selected == 'Texto Plano (Código)' || selected == "Otro"){
-        $(".link").removeClass("invisible");
-        $(".link input").attr("placeholder", "URL");
-        $(".link label").html("Enlace al archivo:");
-      }else{
-        $(".link").removeClass("invisible");
-        $(".link input").attr("placeholder", "https://docs.google.com/.........");
-        $(".link label").html("Enlace al documento (Google Drive):");
+        $("input[type='file']").val("");
+        $(".uploadButton").addClass("invisible")
+      }else {
+        $(".uploadButton").removeClass("invisible");
       }; 
   
   }).trigger("change");
@@ -244,6 +241,15 @@ $(document).ready(function () {
   });
   setSchools();
   showNew("schools");
+  $('input[type=file]').change(function(e){
+    var file = $(this).val().split("\\");
+    var nameOfFile = file[file.length - 1]
+    if (nameOfFile == "") {
+      $(".nameOfFile").text("Subir Archivo");
+    }else{
+      $(".nameOfFile").text(nameOfFile);
+    };
+  });
   /*
   var resetValueOfInput = function(nameOfInput){
       var value = [];

@@ -46,3 +46,5 @@ end
 gem 'mongoid', github: "mongoid/mongoid"
 gem 'bson_ext'
 gem 'devise'
+gem "mongoid-paperclip", :require => "mongoid_paperclip"
+gem 'aws-sdk', '~> 1.3.4'

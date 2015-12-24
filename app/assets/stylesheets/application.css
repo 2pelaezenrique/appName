@@ -390,14 +390,7 @@ select:focus{
     border-left: none;
     font-family: 'Courgette', cursive;
 
-    background: rgba(255,255,255,1);
-    background: -moz-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(181, 181, 181, 0.65) 100%);
-    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(255,255,255,1)), color-stop(100%, rgba(181, 181, 181, 0.65)));
-    background: -webkit-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(181, 181, 181, 0.65) 100%);
-    background: -o-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(181, 181, 181, 0.65) 100%);
-    background: -ms-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(181, 181, 181, 0.65) 100%);
-    background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(181, 181, 181, 0.65) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=1 );
+    
 }
 .subjectSelector{
         width: 15%;
@@ -458,17 +451,18 @@ important{
     padding-left: 10px;
     padding-right: 10px;
     margin-right: 10px;
-    background-color: rgb(0, 193, 255);
-    border-radius: 10px;
-    color: white;
+    background-color: rgba(216, 216, 216, 0.83);
+    /* border-radius: 10px; */
+    color: #3A3A3A;
     font-weight: 900;
     line-height: 19px;
     margin-top: 10px;
+    border-top: 6px solid rgb(0, 0, 0);
 }
 
 .element:hover{
     cursor: pointer;
-    background-color: rgba(0, 0, 255, 0.59);
+    background-color: rgba(134, 134, 134, 0.59);
 
 }
 .tagName{
@@ -479,11 +473,12 @@ important{
     padding-left: 10px;
     padding-right: 10px;
     margin-right: 10px;
-    border-radius: 10px;
+    /* border-radius: 10px; */
     font-weight: 900;
     line-height: 19px;
     color: rgba(0, 0, 0, 0.51);
     background-color: rgba(0, 0, 0, 0.25);
+    border: 0px;
 }
 .selected:hover{
     cursor: pointer;
@@ -520,6 +515,10 @@ input[type="submit"]:hover{
 .searchable, .youtubeChannel{
     display: inline-block;
     width: 40%;
+
+}
+.link{
+    margin-top: 2px;
 }
 .invisible{
     display: none;
@@ -538,4 +537,45 @@ article{
 .materials{
     height: 100%;
     overflow: auto;
+}
+.uploadButton{
+    text-align: center;
+    height: 37px;
+    position: relative;
+    width: 288px;
+    font-size: 1.6em;
+    line-height: 38px;
+    font-family: 'Courgette';
+    background-color: rgb(66, 130, 212);
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    white-space: nowrap;
+    margin-left: 0px;
+    margin-top: 32px;
+}
+input[type="file"]{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    margin: 0;
+    opacity: 0;
+    padding: 0px;
+    cursor: pointer;
+}
+.uploadButton:hover{
+    background-color: rgba(5, 91, 202, 0.84);
+        cursor: pointer;
+
+}
+sentence{
+        vertical-align: top;
+    width: 82%;
+    /* display: inline-block; */
+    /* white-space: nowrap; */
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }

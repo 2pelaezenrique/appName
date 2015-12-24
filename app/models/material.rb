@@ -1,5 +1,8 @@
 class Material
   include Mongoid::Document
+  include Mongoid::Paperclip
+
+  has_mongoid_attached_file :file
   field :name, type: String
   field :description, type: String
   field :format, type: String
