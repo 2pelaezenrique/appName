@@ -77,8 +77,9 @@
           <% end %> 
         </div>
         
-        <div class="uploadButton standarMargin icon cloud-upload">
-           | <sentence class="nameOfFile"> Subir Archivo </sentence>
+        <div class="uploadButton standarMargin">
+          <div class="icon cloud-upload uploadIcon"></div>
+          <div class="nameOfFile"> Subir Archivo </div>
           <%= f.file_field :file %>
         </div>
         <div class="field block secundario standarMargin youtubeChannel">
@@ -128,8 +129,21 @@ $(document).ready(function () {
   String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
   }
+  var resetFile = function(){
+    $("input[type='file']").val("");
+    $(".nameOfFile").text("Subir Archivo");
+    $(".removeIcon").removeClass("removeIcon");
+    $(".inputWithFile").removeClass("inputWithFile")
+    $(".nameOfFileWithFile").removeClass("nameOfFileWithFile")
+    $(".uploadIcon").addClass("cloud-upload");
+    $(".uploadIcon").removeClass("remove");
+    $(".uploadButton").removeClass("largeUploadButton");
+  };
+  $(document).delegate( '.removeIcon', "click",function(){
+    resetFile();
+  });
+  $("input[type='file']").prop('required',true);
   $("select").prop('required',true);
-
   $(".uploadMaterial").toggleClass("invisible");
   $( ".formato select" ).change(function() {
       var selected = $( ".formato select option:selected" ).text();
@@ -143,10 +157,12 @@ $(document).ready(function () {
         $(".link input").attr("placeholder" , "https://www.youtube.com/watch?v=........");
         $(".youtubeChannel label").html("Enlace al canal de youtube:");
         $(".youtubeChannel input").attr("placeholder", "https://www.youtube.com/channel/......");
-        $("input[type='file']").val("");
+        resetFile();
+        $("input[type='file']").prop('required',false);
         $(".uploadButton").addClass("invisible")
       }else {
         $(".uploadButton").removeClass("invisible");
+        $("input[type='file']").prop('required',true);
       }; 
   
   }).trigger("change");
@@ -245,106 +261,18 @@ $(document).ready(function () {
     var file = $(this).val().split("\\");
     var nameOfFile = file[file.length - 1]
     if (nameOfFile == "") {
-      $(".nameOfFile").text("Subir Archivo");
+      resetFile();
     }else{
+      $(".uploadIcon").removeClass("cloud-upload");
+      $(".uploadIcon").addClass("remove");
+      $(".uploadIcon").addClass("removeIcon")
       $(".nameOfFile").text(nameOfFile);
+      $(".nameOfFile").addClass("nameOfFileWithFile");
+      $(this).addClass("inputWithFile");
+      $(".uploadButton").addClass("largeUploadButton")
     };
   });
-  /*
-  var resetValueOfInput = function(nameOfInput){
-      var value = [];
-      $(".selected" + nameOfInput.capitalize()).each(function(){
-        value.push($(this).children().text());
-      });
-      $("#material_" + nameOfInput).attr("value",value);
-  }
-  var resetClasifications = function(){
-    window.clasification = [];
-    var MathsJSON = <%= raw @Maths %>;
-    if ($( ".subjectSelector select option:selected").text() == "Matematicas") {
-      window.clasification = MathsJSON;
-    };
-  }
-  var addNewTags = function(typeOfTag){
-    if ($(".last").length == 0) {
-      resetClasifications();
-      $.each( window.clasification, function( key, value ) {
-        addTag("tags",key, "tag", "+");
-    });
-          
-    }else{
-      if(!Array.isArray(window.clasification)){
-        window.clasification = window.clasification[$(".last").children().text()];
-        
-        if(!Array.isArray(window.clasification)){
-          
-          $.each(window.clasification, function(key , value){
-            addTag("tags",key,"tag","+");
-          });
-        
-        }else{
-         
-          $.each(window.clasification, function(key , value){
-            addTag("tags",value,"tag","+");
-          })
-        
-        };
-      };
-    };
-    resetValueOfInput("tags");
-  };
-
-  var unselectTag = function(){
-    if ($(".selectedTags").length == 1) {
-      createTags();
-    }else{
-
-      resetClasifications();
-      $(".last").remove();
-      $(".tag").remove();
-      $(".selectedTags").last().addClass("last");
-      $(".last").append(" -")
-      $(".selectedTags").not(".last").each(function(){
-        window.clasification = window.clasification[$(this).children().text()];
-      });
-      
-      addNewTags();
-
-
-    };
-  };
-  var selectTag = function(selected){
-    var alreadySelected = $(".selectedTags");
-    $(".tags").html("");
-    $.each(alreadySelected, function(){
-      addTag("tags",$(this).children().text(),"selectedTags", "");
-    })
-    addTag("tags" , selected, "selectedTags last","-")
-  }
   
-  var addTag = function(tagsOrSchools, tagName, appearence, lastIcon){
-    $('.' + tagsOrSchools).append('<div class="'+ appearence +'"><div class="tagName">' + tagName + '</div> '+lastIcon+'</div>');
-  };
-  var createTags = function(){
-    var subject = $( ".subjectSelector select option:selected").text();
-    $(".tags").html("");
-    addNewTags("subject");
-  };
-  $(".subjectSelector select").change(function() {
-      createTags();
-  }).trigger("change");
-  
-
-
-  $(document).delegate( '.tag', "click", function() {
-    clicked = $(this).children().text();
-    selectTag(clicked);
-    addNewTags();
-  });
-  $(document).delegate( '.selectedTags', "click", function() {
-    clicked = $(this).children().text();
-    unselectTag(clicked);
-  }); */
   $(".showless").on("click",function(){
     $(".centered").toggleClass("invisible");
     $(this).toggleClass("upload-circle");
