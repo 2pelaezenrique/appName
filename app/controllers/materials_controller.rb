@@ -51,6 +51,11 @@ class MaterialsController < ApplicationController
     @material.user_id = current_user.id
     @material.uploadDate = DateTime.now
     @material.username = current_user.username
+    byebug 
+    if params[:material][:format] == 
+      
+    end
+    @material.file = params[:material][:file]
     respond_to do |format|
       if @material.save
         format.html { redirect_to @material, notice: 'Material was successfully created.' }
@@ -101,5 +106,29 @@ class MaterialsController < ApplicationController
       params[:material][:tags] = params[:material][:tags].split(",")
       params[:material][:schools] = params[:material][:schools].split(",")
       params.require(:material).permit(:name, :description, :type, :format, :link, :authors, :youtubeChannel, :tags, :subject, :searchable, :schools)
+    end
+    def check_file
+      format = params[:material][:format]
+      file = params[:material][:file]
+      case format
+      when "pdf"
+         if file.content_type == 'application/pdf'
+          return true           
+         end
+      when "image"
+        
+         case file.content_type
+         when "mage/gif","image/bmp","image/jpeg",'image/png','image/x-icon','image/x-xbitmap'
+           return true
+         else
+          return false
+         end
+      
+      when "word"
+      
+      else
+        return false
+      end
+
     end
 end

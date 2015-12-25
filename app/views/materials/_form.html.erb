@@ -53,8 +53,8 @@
             
                 <%= content_tag(:option, "", value: "", :disabled => true, :selected => true) %>
                 
-                <% ['Vídeo', 'PDF', 'Documento de Texto', 'Imagen', 'Diapositivas', 'Hoja de Calculo','Texto Plano (Código)', 'Otro'].each do |c| -%>
-                  <%= content_tag(:option, c, value: c) %>
+                <% [['Vídeo', 'video'], ['PDF', 'pdf'], ['Documento de Texto', 'word'], ['Imagen', 'image'], ['Diapositivas','ppt'], ['Hoja de Calculo','xls'],['Texto Plano (Código)','txt'], ['Archivo Compimido','rar']].each do |c| -%>
+                  <%= content_tag(:option, c[0], value: c[1]) %>
                 <% end %>
             
             <% end %> 
@@ -88,7 +88,7 @@
         </div>
         <div class="field block standarMargin secundario link">
           <%= f.label :link %><br>
-          <%= f.url_field :link , required: true %>
+          <%= f.url_field :link %>
         </div>
       
       </div>
@@ -126,9 +126,11 @@
 
 <script>
 $(document).ready(function () {
+  
   String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
   }
+  
   var resetFile = function(){
     $("input[type='file']").val("");
     $(".nameOfFile").text("Subir Archivo");
@@ -139,12 +141,17 @@ $(document).ready(function () {
     $(".uploadIcon").removeClass("remove");
     $(".uploadButton").removeClass("largeUploadButton");
   };
+  
   $(document).delegate( '.removeIcon', "click",function(){
     resetFile();
   });
+  
   $("input[type='file']").prop('required',true);
+  
   $("select").prop('required',true);
+  
   $(".uploadMaterial").toggleClass("invisible");
+  
   $( ".formato select" ).change(function() {
       var selected = $( ".formato select option:selected" ).text();
       
@@ -158,14 +165,17 @@ $(document).ready(function () {
         $(".youtubeChannel label").html("Enlace al canal de youtube:");
         $(".youtubeChannel input").attr("placeholder", "https://www.youtube.com/channel/......");
         resetFile();
+        $(".link input").prop('required',true);
         $("input[type='file']").prop('required',false);
         $(".uploadButton").addClass("invisible")
       }else {
+        $(".link input").prop('required',false);
         $(".uploadButton").removeClass("invisible");
         $("input[type='file']").prop('required',true);
       }; 
   
   }).trigger("change");
+  
   var setClasification = function(){
     window.clasification = [];
     var MathsJSON = <%= raw @Maths %>;
@@ -177,6 +187,7 @@ $(document).ready(function () {
   var setSchools = function(){
     window.schools = <%= raw @Schools %>;
   }
+  
   var update = function(typeOfElement){
     if (typeOfElement == "tags") {
       setClasification();
@@ -213,9 +224,9 @@ $(document).ready(function () {
       $("." + typeOfElement).append('<div class="element '+position+' noselected"  type="' + typeOfElement + '"><div class="tagName">' + value + '</div> +</div>');
     });
   };
+  
   var selectElement= function(element){
     typeOfElement = element.attr("type");
-    
     $("div[type="+typeOfElement+"]").not(".noselected").last().toggleClass("index");
     element.toggleClass("selected");
     element.toggleClass("index");
@@ -227,6 +238,7 @@ $(document).ready(function () {
       showNew(typeOfElement);
     };
   };
+  
   var resetValueOfInput = function(typeOfElement){
     var value = [];
     $('div[type='+typeOfElement+']').not(".noselected").each(function(){
@@ -255,8 +267,11 @@ $(document).ready(function () {
     showNew(typeOfElement);
     resetValueOfInput(typeOfElement);
   });
+  
   setSchools();
+  
   showNew("schools");
+  
   $('input[type=file]').change(function(e){
     var file = $(this).val().split("\\");
     var nameOfFile = file[file.length - 1]
