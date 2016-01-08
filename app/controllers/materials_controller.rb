@@ -52,19 +52,19 @@ class MaterialsController < ApplicationController
     @material.uploadDate = DateTime.now
     @material.username = current_user.username
     byebug 
-    if params[:material][:format] == 
-      
+    if check_file
+      @material.file = params[:material][:file]
+      respond_to do |format|
+        if @material.save
+          format.html { redirect_to @material, notice: 'Material was successfully created.' }
+          format.json { render :show, status: :created, location: @material }
+        else
+          format.html { render :new }
+          format.json { render json: @material.errors, status: :unprocessable_entity }
+        end
+      end  
     end
-    @material.file = params[:material][:file]
-    respond_to do |format|
-      if @material.save
-        format.html { redirect_to @material, notice: 'Material was successfully created.' }
-        format.json { render :show, status: :created, location: @material }
-      else
-        format.html { render :new }
-        format.json { render json: @material.errors, status: :unprocessable_entity }
-      end
-    end
+    
   end
 
   # PATCH/PUT /materials/1
@@ -125,10 +125,51 @@ class MaterialsController < ApplicationController
          end
       
       when "word"
+        
+        case file.content_type
+        when "text/plain","application/msword","application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/vnd.oasis.opendocument.text","application/vnd.sun.xml.writer","application/vnd.sun.xml.writer.global"
+          return true
+        else
+          return false
+        end
+      
+      when "video"
+      
+        if file == nil
+          return true
+        else
+          return false
+        end
+      
+      when "ppt"
+      
+        case file.content_type
+        when "application/vnd.openxmlformats-officedocument.presentationml.presentation","application/vnd.ms-powerpoint","application/vnd.ms-powerpoint.presentation.macroenabled.12"," application/vnd.sun.xml.impress","  application/vnd.sun.xml.impress.template","application/vnd.openxmlformats-officedocument.presentationml.slideshow","application/vnd.ms-powerpoint.presentation.macroenabled.12","application/vnd.oasis.opendocument.presentation"," application/vnd.oasis.opendocument.presentation-template"
+          return true 
+        else
+          return false
+        end
+      
+      when "xls"
+      
+        case file.content_type
+        when "application/vnd.ms-excel","application/vnd.ms-excel.sheet.binary.macroenabled.12","application/vnd.ms-excel.sheet.macroenabled.12","  application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","application/vnd.sun.xml.calc"," application/vnd.oasis.opendocument.spreadsheet"
+          return true
+        else
+          return false
+        end
+      
+      when "rar"
+      
+        case file.content_type
+        when "application/x-rar-compressed","application/x-tar","application/x-7z-compressed","application/zip"
+          return true
+        else
+          return false
+        end          
       
       else
         return false
       end
-
     end
 end

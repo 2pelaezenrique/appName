@@ -532,7 +532,8 @@ aside{
 article{
         height: -webkit-calc(100% - 48px);
     height: -moz-calc(100% - 48px);
-    overflow-y: visible; 
+    overflow-y: auto;
+    width: 100%;
 }
 .materials{
     height: 100%;

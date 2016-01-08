@@ -53,7 +53,7 @@
             
                 <%= content_tag(:option, "", value: "", :disabled => true, :selected => true) %>
                 
-                <% [['Vídeo', 'video'], ['PDF', 'pdf'], ['Documento de Texto', 'word'], ['Imagen', 'image'], ['Diapositivas','ppt'], ['Hoja de Calculo','xls'],['Texto Plano (Código)','txt'], ['Archivo Compimido','rar']].each do |c| -%>
+                <% [['Vídeo', 'video'], ['PDF', 'pdf'], ['Documento de Texto', 'word'], ['Imagen', 'image'], ['Diapositivas','ppt'], ['Hoja de Calculo','xls'], ['Archivo Compimido','rar']].each do |c| -%>
                   <%= content_tag(:option, c[0], value: c[1]) %>
                 <% end %>
             
