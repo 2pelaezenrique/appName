@@ -22,6 +22,9 @@
       <% @materials.each do |material| %>
         <tr>
           <td><%= material.name %></td>
+          <% if material.format == 'Vídeo' %>
+          <td><%= image_tag(material.link, :class => "youtubeThumbnail") %></td>
+          <%end %>
           <td><%= material.description %></td>
           <td><%= material.type %></td>
           <td><%= material.format %></td>
@@ -38,3 +41,16 @@
   <%= link_to 'New Material', new_material_path %>
 </div>
 </article>
+
+<script type="text/javascript">
+  var youtubeVideoIdRX = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
+  function videoId (youtubeUrl) {
+    return youtubeUrl.match(youtubeVideoIdRX);  
+  }
+  $(document).ready(function(){
+    $(".youtubeThumbnail").each(function(){
+      $(this).attr("src" ,"http://img.youtube.com/vi/" + videoId($(this).attr("src"))[1] + "/0.jpg");
+    })
+
+  });
+</script>

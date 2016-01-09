@@ -16,8 +16,9 @@
 
 html, body{
     background-image    : image-url("background1.jpg");
-    color: white;
-    background-size: cover;
+    color               : white;
+    background-size     : cover;
+    background-repeat   : no-repeat;
 }
 
 .header{
@@ -33,7 +34,7 @@ html, body{
     border-radius       : 0px;
 }
 .login:hover{
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color    : rgba(255, 255, 255, 0.1);
 }
 a.logintext{
     color               : white;
@@ -64,25 +65,25 @@ a.logintext:hover{
     color               : white;
 }
 .showmore:hover{
-    color: white;
-    font-size: 17px;
+    color               : white;
+    font-size           : 17px;
 }
 a.signout, a.signout:visited{
     color               : red;
 }
 #footer{
-    background-color: transparent;
+    background-color    : transparent;
     -webkit-transition  : background-color 0.5s;
 }
 #footer:hover{
-    background-color: rgba(255, 255, 255, 0.22);
+    background-color    : rgba(255, 255, 255, 0.22);
 }
 
 .uploadMaterial {
-    background-color: rgba(0, 194, 255, 0.54);
-    border-radius: 0px;
+    background-color    : rgba(0, 194, 255, 0.54);
+    border-radius       : 0px;
 }
 .uploadMaterial:hover{
-    background-color: rgba(0, 194, 255, 0.87);
+    background-color    : rgba(0, 194, 255, 0.87);
 
 }
