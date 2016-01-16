@@ -107,10 +107,12 @@ class MaterialsController < ApplicationController
       params[:material][:schools] = params[:material][:schools].split(",")
       params.require(:material).permit(:name, :description, :type, :format, :link, :authors, :youtubeChannel, :tags, :subject, :searchable, :schools)
     end
+   
     def check_file
       format = params[:material][:format]
       file = params[:material][:file]
       case format
+      
       when "pdf"
          if file.content_type == 'application/pdf'
           return true           
