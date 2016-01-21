@@ -18,6 +18,7 @@ class Material
   field :subject, type: String
   field :username, type: String
   field :updateDate, type: Date
+  field :file_type, type: String
   belongs_to :user
   embeds_many :comments
 end

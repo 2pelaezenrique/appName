@@ -51,9 +51,13 @@ class MaterialsController < ApplicationController
     @material.user_id = current_user.id
     @material.uploadDate = DateTime.now
     @material.username = current_user.username
-    byebug 
-    if check_file
+    if params[:material][:format] == "file"
       @material.file = params[:material][:file]
+      if file_type != "unsupported_File"
+        @material.file_type = file_type
+      end
+    end
+    if validate_format
       respond_to do |format|
         if @material.save
           format.html { redirect_to @material, notice: 'Material was successfully created.' }
@@ -107,71 +111,45 @@ class MaterialsController < ApplicationController
       params[:material][:schools] = params[:material][:schools].split(",")
       params.require(:material).permit(:name, :description, :type, :format, :link, :authors, :youtubeChannel, :tags, :subject, :searchable, :schools)
     end
-   
-    def check_file
+
+    
+    def validate_format
       format = params[:material][:format]
-      file = params[:material][:file]
       case format
-      
-      when "pdf"
-         if file.content_type == 'application/pdf'
-          return true           
-         end
-      when "image"
-        
-         case file.content_type
-         when "mage/gif","image/bmp","image/jpeg",'image/png','image/x-icon','image/x-xbitmap'
-           return true
-         else
-          return false
-         end
-      
-      when "word"
-        
-        case file.content_type
-        when "text/plain","application/msword","application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/vnd.oasis.opendocument.text","application/vnd.sun.xml.writer","application/vnd.sun.xml.writer.global"
-          return true
-        else
-          return false
-        end
-      
       when "video"
-      
-        if file == nil
+        return true      
+      when "file"
+        if file_type = "unsupported_File"
+          return false
+        else
           return true
-        else
-          return false
         end
-      
-      when "ppt"
-      
-        case file.content_type
-        when "application/vnd.openxmlformats-officedocument.presentationml.presentation","application/vnd.ms-powerpoint","application/vnd.ms-powerpoint.presentation.macroenabled.12"," application/vnd.sun.xml.impress","  application/vnd.sun.xml.impress.template","application/vnd.openxmlformats-officedocument.presentationml.slideshow","application/vnd.ms-powerpoint.presentation.macroenabled.12","application/vnd.oasis.opendocument.presentation"," application/vnd.oasis.opendocument.presentation-template"
-          return true 
-        else
-          return false
-        end
-      
-      when "xls"
-      
-        case file.content_type
-        when "application/vnd.ms-excel","application/vnd.ms-excel.sheet.binary.macroenabled.12","application/vnd.ms-excel.sheet.macroenabled.12","  application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","application/vnd.sun.xml.calc"," application/vnd.oasis.opendocument.spreadsheet"
-          return true
-        else
-          return false
-        end
-      
-      when "rar"
-      
-        case file.content_type
-        when "application/x-rar-compressed","application/x-tar","application/x-7z-compressed","application/zip"
-          return true
-        else
-          return false
-        end          
-      
       else
         return false
       end
     end
+      
+
+
+    def file_type
+        file = params[:material][:file]
+        case file.content_type
+            when 'application/pdf'
+              return "pdf"           
+            when "mage/gif","image/bmp","image/jpeg",'image/png','image/x-icon','image/x-xbitmap'
+              return "image"
+            when "text/plain"
+              return "plain_Text"
+            when "application/msword","application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/vnd.oasis.opendocument.text","application/vnd.sun.xml.writer","application/vnd.sun.xml.writer.global"
+              return "text"
+            when "application/vnd.openxmlformats-officedocument.presentationml.presentation","application/vnd.ms-powerpoint","application/vnd.ms-powerpoint.presentation.macroenabled.12"," application/vnd.sun.xml.impress","  application/vnd.sun.xml.impress.template","application/vnd.openxmlformats-officedocument.presentationml.slideshow","application/vnd.ms-powerpoint.presentation.macroenabled.12","application/vnd.oasis.opendocument.presentation"," application/vnd.oasis.opendocument.presentation-template"
+             return "slides"
+            when "application/vnd.ms-excel","application/vnd.ms-excel.sheet.binary.macroenabled.12","application/vnd.ms-excel.sheet.macroenabled.12","  application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","application/vnd.sun.xml.calc"," application/vnd.oasis.opendocument.spreadsheet"
+              return "excel"
+            when "application/x-rar-compressed","application/x-tar","application/x-7z-compressed","application/zip"
+              return "compressed_File"
+            else
+              return "unsupported_File"
+        end                
+    end 
 end
