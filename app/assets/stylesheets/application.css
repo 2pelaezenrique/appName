@@ -604,3 +604,6 @@ input[type="file"]{
 .largeUploadButton{
     width: 92%;
 }
+.ytp-color-white .ytp-swatch-background-color{
+    background-color: #198400 !important;
+}

@@ -3,13 +3,16 @@
 <head>
 	<title>AppName</title>
 	<link href="https://fonts.googleapis.com/css?family=Courgette" rel="stylesheet" type="text/css">
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,300,300italic,500italic,700,700italic,900,100italic,100,900italic' rel='stylesheet' type='text/css'>
 	<%= stylesheet_link_tag 'application', media: "all"%>
 	<%= javascript_include_tag 'application', media: "all" %>
 	<% if @welcomePage %>
 		<%= stylesheet_link_tag 'welcome', media: "all"%>
 	<% end %>
+	<% if @show_video %>
+		<%= stylesheet_link_tag 'show_video', media: "all"%>
+	<% end %>
 	<% if @search %>
-		<link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,300,300italic,500italic,700,700italic,900,100italic,100,900italic' rel='stylesheet' type='text/css'>
 		<%= stylesheet_link_tag 'search', media: "all"%>
 	<% end %>
 </head>

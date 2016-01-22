@@ -24,6 +24,12 @@ class MaterialsController < ApplicationController
   # GET /materials/1
   # GET /materials/1.json
   def show
+    if @material.format == "video"
+      @show_video = true
+      @iframe = %Q'<iframe src="http://www.youtube.com/embed/#{@material.youtube_id}?&rel=0&theme=light&showinfo=0&color=white" frameborder="0" allowfullscreen></iframe>'.html_safe
+      render 'show_video'
+
+    end
   end
 
   # GET /materials/new
