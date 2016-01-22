@@ -57,6 +57,8 @@ class MaterialsController < ApplicationController
       if file_type != "unsupported_File"
         @material.file_type = file_type
       end
+    else
+      @material.youtube_id = youtubeIdFrom(params[:material][:youtube_id])
     end
     if validate_format
       respond_to do |format|
@@ -110,7 +112,7 @@ class MaterialsController < ApplicationController
       params[:material][:authors] = params[:material][:authors].split(",")
       params[:material][:tags] = params[:material][:tags].split(",")
       params[:material][:schools] = params[:material][:schools].split(",")
-      params.require(:material).permit(:name, :description, :type, :format, :link, :authors, :youtubeChannel, :tags, :subject, :searchable, :schools)
+      params.require(:material).permit(:name, :description, :type, :format, :authors, :youtubeChannel, :tags, :subject, :searchable, :schools)
     end
     #Returns the Id of the youtube video url.
     def youtubeIdFrom(url)

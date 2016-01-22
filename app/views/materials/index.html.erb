@@ -10,7 +10,7 @@
             <%= link_to material , :class => "thumbnail" do %>
               
                 <% if material.format == 'video' %>
-                  <%= image_tag(material.link, :class => "youtubeThumbnail") %>
+                  <%= image_tag("http://i.ytimg.com/vi_webp/" + material.youtube_id + "/mqdefault.webp", :class => "youtubeThumbnail") %>
                 <% else %>
                   <%= material.file_type %> 
                 <%end %>
@@ -57,10 +57,10 @@
   function videoId (youtubeUrl) {
     return youtubeUrl.match(youtubeVideoIdRegEx)[1];  
   }
-  $(document).ready(function(){
-    $(".youtubeThumbnail").each(function(){
-      $(this).attr("src" ,"http://i.ytimg.com/vi_webp/" + videoId($(this).attr("src")) + "/mqdefault.webp");
-    })
+  //$(document).ready(function(){
+   // $(".youtubeThumbnail").each(function(){
+    //  $(this).attr("src" ,"http://i.ytimg.com/vi_webp/" + videoId($(this).attr("src")) + "/mqdefault.webp");
+    //})
 
-  });
+  //});
 </script>
