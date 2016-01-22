@@ -1,4 +1,30 @@
-<div class="name">
-	<%= @material.name %>
+<div class="material">
+	<%= @iframe %>	
+	<div class="info">
+		<div class="name">
+			<%= @material.name %>
+			<hr>
+			<div class="light">
+				<%= @material.uploadDate %> <br>
+				<% @material.authors.each do |author| %>
+					<%= author %> <br>
+				<% end %>
+				
+			</div>
+		</div>
+		<div class="description">
+			<%= @material.description %>
+			<div class="light">
+				<%= @material.tags[@material.tags.length - 1] %> <br>
+				<%= @material.schools[@material.schools.length - 2] %>: 
+				<%= @material.schools[@material.schools.length - 1] %> <br>
+				Subido por: <%= @material.user.username %>
+			</div>
+		</div>
+	</div>
 </div>
-<%= @iframe %>
+
+<div class="coments"></div>
+<div class="related"></div>
+
+
