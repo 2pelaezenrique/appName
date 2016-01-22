@@ -1,0 +1,63 @@
+.materials{
+	padding-left: 15px;
+	margin-top: 15px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 738px;
+	background-color: white;
+	height: initial;
+    overflow: initial;
+    padding-top: 1px;
+}
+.thumbnail{
+	display: inline-block;
+	vertical-align: top;
+		width: 196px;
+	height: 110px;
+}
+.youtubeThumbnail{
+	width: 100%;
+}
+a , a:hover , a:visited {
+	color: #167ac6;
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: underline;
+	background-color: transparent;
+}
+.block1{
+    width: 527px;
+    margin-left: 10px;
+    display: inline-block;
+    height: 110px;
+}
+.name{
+	font-family: Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.description {
+    font-family: Roboto,sans-serif;
+    font-size: 11px;
+    max-height: 3.9em;
+    color: #767676;
+    overflow: hidden;
+    line-height: 1.3em;
+	position: relative;
+
+}
+.description:after {
+  content: "";
+  text-align: right;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 70%;
+  height: 1.3em;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+}
+.material{
+	margin-top: 19px;
+}

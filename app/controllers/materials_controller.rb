@@ -5,6 +5,7 @@ class MaterialsController < ApplicationController
   # GET /materials
   # GET /materials.json
   def index
+     @search = true;
      @subjects = ["Matematicas" , "Biologia", "Quimica", "Fisica"];
      if request.query_parameters
         query = {}
@@ -111,8 +112,13 @@ class MaterialsController < ApplicationController
       params[:material][:schools] = params[:material][:schools].split(",")
       params.require(:material).permit(:name, :description, :type, :format, :link, :authors, :youtubeChannel, :tags, :subject, :searchable, :schools)
     end
-
-    
+    #Returns the Id of the youtube video url.
+    def youtubeIdFrom(url)
+      regex = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/
+      result = regex.match(url)
+      return result[1]
+    end
+    #Check if it is a supported file type or if it is a video
     def validate_format
       format = params[:material][:format]
       case format
@@ -128,9 +134,8 @@ class MaterialsController < ApplicationController
         return false
       end
     end
-      
-
-
+    
+    #Check MIME Type and returns the type of the file (pdf, excel, slides, etc)
     def file_type
         file = params[:material][:file]
         case file.content_type
@@ -152,4 +157,7 @@ class MaterialsController < ApplicationController
               return "unsupported_File"
         end                
     end 
+
+
+    
 end

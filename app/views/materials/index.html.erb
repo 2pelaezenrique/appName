@@ -3,53 +3,63 @@
 <div class="materials">
   <p id="notice"><%= notice %></p>
 
-  <h1>Listing Materials</h1>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Uploaddate</th>
-        <th>Type</th>
-        <th>Category</th>
-        <th>Format</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
 
-    <tbody>
       <% @materials.each do |material| %>
-        <tr>
-          <td><%= material.name %></td>
-          <% if material.format == 'Vídeo' %>
-            <td><%= image_tag(material.link, :class => "youtubeThumbnail") %></td>
-          <%end %>
-          <td><%= material.description %></td>
-          <td><%= material.type %></td>
-          <td><%= material.format %></td>
-          <td><%= link_to 'Show', material %></td>
-          <td><%= link_to 'Edit', edit_material_path(material) %></td>
-          <td><%= link_to 'Destroy', material, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
+          <div class="material">
+            <%= link_to material , :class => "thumbnail" do %>
+              
+                <% if material.format == 'video' %>
+                  <%= image_tag(material.link, :class => "youtubeThumbnail") %>
+                <% else %>
+                  <%= material.file_type %> 
+                <%end %>
+              
+            <% end %>
+            <div class="block1">  
+              <%= link_to material do %>
+                <div class="name">
+                  <%= material.name %>
+                </div>
+              <% end %>
+
+              <div class="description">
+                <% material.authors.each do |author| %>
+                  <%= author %>
+                <% end %>
+                <br>
+                <%= material.description %>
+              </div>
+            </div>
+            <!--
+            <%= material.type %>
+            <%= material.username %>
+            
+            
+            
+            <%= link_to 'Edit', edit_material_path(material) %>
+            
+            <%= link_to 'Destroy', material, method: :delete, data: { confirm: 'Are you sure?' } %>
+              -->          
+          </div>
       <% end %>
     </tbody>
   </table>
 
   <br>
 
-  <%= link_to 'New Material', new_material_path %>
+
 </div>
 </article>
 
 <script type="text/javascript">
-  var youtubeVideoIdRX = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
+  var youtubeVideoIdRegEx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
   function videoId (youtubeUrl) {
-    return youtubeUrl.match(youtubeVideoIdRX);  
+    return youtubeUrl.match(youtubeVideoIdRegEx)[1];  
   }
   $(document).ready(function(){
     $(".youtubeThumbnail").each(function(){
-      $(this).attr("src" ,"http://img.youtube.com/vi/" + videoId($(this).attr("src"))[1] + "/0.jpg");
+      $(this).attr("src" ,"http://i.ytimg.com/vi_webp/" + videoId($(this).attr("src")) + "/mqdefault.webp");
     })
 
   });
