@@ -4,15 +4,27 @@
 <div class="material">
 	<%= @iframe %>	
 	<div class="info">
-		<div class="name">
+		<div class="head_info">
 			<%= @material.name %>
-			<hr>
+			
 			<div class="light">
-				<%= @material.uploadDate %> <br>
-				<% @material.authors.each do |author| %>
-					<%= author %> <br>
-				<% end %>
+				 <br>
 				
+				<div class="avatar">
+					<% if @material.user.avatar_file_size %>
+
+						<%= image_tag @material.user.avatar.url %>
+					<% else %>
+						<%= image_tag 'default.png' %>
+					<% end %>
+				</div>
+				<div class="user_info">
+				<bold><%= @material.user.username %></bold><br>
+
+				Posts: <%= Material.where(user_id: @material.user_id).count%>
+				</div>
+			<hr>	
+			Publicado el <%= @material.uploadDate %>
 			</div>
 		</div>
 		<div class="description">
@@ -21,7 +33,10 @@
 				<%= @material.tags[@material.tags.length - 1] %> <br>
 				<%= @material.schools[@material.schools.length - 2] %>: 
 				<%= @material.schools[@material.schools.length - 1] %> <br>
-				Subido por: <%= @material.user.username %>
+				
+				Por: <% @material.authors.each do |author| %>
+					<%= author %> <br>
+				<% end %>
 			</div>
 		</div>
 	</div>

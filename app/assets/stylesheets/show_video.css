@@ -7,7 +7,7 @@ div{
 	font-size: 1.2em;
 	line-height: 1.2em;
 }
-.name{
+.head_info{
 	font-weight: 400;
 	background-color: white;
     margin-top: 0px;
@@ -38,9 +38,29 @@ div{
 }
 .light{
 	font-weight: 300;
-    font-size: 14px;
+    font-size: 13px;
 }
 hr{
 	border-top: 0px solid black;
     border-bottom: 1px solid #D4D2D2;
+}
+.avatar{
+    width: 55px;
+    height: 54px;
+    background-color: #A4D1FF;
+    padding: 4px;
+    border-radius: 3px;
+    display: inline-block;
+    vertical-align: top;
+}
+.avatar img{
+    width: 105%;
+    height: 99%;
+}
+bold{
+    font-weight: 500;
+}
+.user_info{
+    margin-left: 8px;
+    display: inline-block;
 }

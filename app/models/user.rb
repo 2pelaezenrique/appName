@@ -1,5 +1,8 @@
 class User
   include Mongoid::Document
+  include Mongoid::Paperclip
+
+  
   has_and_belongs_to_many :classrooms
   has_many :materials
   embeds_many :favorites
@@ -7,6 +10,9 @@ class User
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  # Extra Info
+    has_mongoid_attached_file :avatar
 
   ## Database authenticatable
   field :username,           type: String
