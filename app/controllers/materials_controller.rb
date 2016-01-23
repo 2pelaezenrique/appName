@@ -5,7 +5,6 @@ class MaterialsController < ApplicationController
   # GET /materials
   # GET /materials.json
   def index
-     @search = true;
      @subjects = ["Matematicas" , "Biologia", "Quimica", "Fisica"];
      if request.query_parameters
         query = {}
@@ -25,7 +24,6 @@ class MaterialsController < ApplicationController
   # GET /materials/1.json
   def show
     if @material.format == "video"
-      @show_video = true
       @iframe = %Q'<iframe src="http://www.youtube.com/embed/#{@material.youtube_id}?&rel=0&theme=light&showinfo=0&color=white" frameborder="0" allowfullscreen></iframe>'.html_safe
       render 'show_video'
 

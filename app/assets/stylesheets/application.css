@@ -10,18 +10,20 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
+ *= require reset
+ *= require tuktuk-icons
+ *= require scaffolds
  *= require_self
  */
- @font-face {
-      font-family: 'iconos';
-      src: url('/font/iconos.eot?7492551');
-      src: url('/font/iconos.eot?7492551#iefix') format('embedded-opentype'),
-           url('/font/iconos.woff?7492551') format('woff'),
-           url('/font/iconos.ttf?7492551') format('truetype'),
-           url('/font/iconos.svg?7492551#fontello') format('svg');
-      font-weight: normal;
-      font-style: normal;
+@font-face {
+    font-family: 'iconos';
+    src: url('/font/iconos.eot?7492551');
+    src: url('/font/iconos.eot?7492551#iefix') format('embedded-opentype'),
+         url('/font/iconos.woff?7492551') format('woff'),
+         url('/font/iconos.ttf?7492551') format('truetype'),
+         url('/font/iconos.svg?7492551#fontello') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
 html, body{
  	height 				: 100%;
