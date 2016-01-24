@@ -19,6 +19,7 @@ class Material
   field :username, type: String
   field :updateDate, type: Date
   field :file_type, type: String
+  field :favs, type: Integer, default: 0
   belongs_to :user
   embeds_many :comments
 end

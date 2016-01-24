@@ -9,20 +9,26 @@
 			
 			<div class="light">
 				 <br>
-				
+					
 				<div class="avatar">
-					<% if @material.user.avatar_file_size %>
+					<%= link_to edit_user_registration_path(@material.user_id) do %>
+						<% if @material.user.avatar_file_size %>
 
-						<%= image_tag @material.user.avatar.url %>
-					<% else %>
-						<%= image_tag 'default.png' %>
+							<%= image_tag @material.user.avatar.url %>
+						<% else %>
+							<%= image_tag 'default.png' %>
+						<% end %>
 					<% end %>
 				</div>
+				
 				<div class="user_info">
-				<bold><%= @material.user.username %></bold><br>
+					<%= link_to edit_user_registration_path(@material.user_id) do %>
+						<bold><%= @material.user.username %></bold><br>
+					<% end %>
 
-				Posts: <%= Material.where(user_id: @material.user_id).count%>
+					Posts: <%= Material.where(user_id: @material.user_id).count%>
 				</div>
+				<div class="favs"><%= @material.favs %></div>
 			<hr>	
 			Publicado el <%= @material.uploadDate %>
 			</div>
