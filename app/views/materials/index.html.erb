@@ -13,7 +13,7 @@
             <%= link_to material , :class => "thumbnail" do %>
               
                 <% if material.format == 'video' %>
-                  <%= image_tag("http://i.ytimg.com/vi_webp/" + material.youtube_id + "/mqdefault.webp", :class => "youtubeThumbnail") %>
+                  <%= image_tag("http://i.ytimg.com/vi/" + material.youtube_id + "/mqdefault.jpg", :class => "youtubeThumbnail") %>
                 <% else %>
                   <%= material.file_type %> 
                 <%end %>

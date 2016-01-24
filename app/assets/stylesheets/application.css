@@ -201,6 +201,10 @@ a.signuptext:hover{
     height              : 53px;
     position            : relative;
 }
+.searchbox form{
+    width: 100%;
+    height: 100%;
+}
 .searchinput{
     float               : right;
     height              : 78%;

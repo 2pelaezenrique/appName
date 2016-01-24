@@ -5,12 +5,26 @@ class MaterialsController < ApplicationController
   # GET /materials
   # GET /materials.json
   def index
-     @subjects = ["Matematicas" , "Biologia", "Quimica", "Fisica"];
+     @subjects = ["Matematicas" , "Biologia", "Quimica", "Fisica"]
      if request.query_parameters
         query = {}
         request.query_parameters.each do  |key,value|
-          if key != "utf8" && key != "commit" && value != ""
+          if key != "utf8" && key != "commit" && value != "" && key != "search"
             query[key] = value
+          end
+          
+          if key == "search"
+            valueSplitted = value.split(" ")
+            regepxString = String
+            valueSplitted.each_with_index do  |word , index|
+              regepxString = "(?=.*" + word + ")"
+
+              if index == valueSplitted.length - 1
+                regepxString += ".*"
+              end
+            end            
+            regexp = Regexp.new(regepxString, true) 
+            query["name"] = regexp 
           end
         end
         query[:searchable] = true
@@ -33,17 +47,17 @@ class MaterialsController < ApplicationController
   # GET /materials/new
   def new
     
-    @subjects = ["Matematicas" , "Biologia", "Quimica", "Fisica"];
-    @Maths = File.read('clasifications/Math.json');
-    @Schools = File.read('clasifications/Schools.json');
+    @subjects = ["Matematicas" , "Biologia", "Quimica", "Fisica"]
+    @Maths = File.read('clasifications/Math.json')
+    @Schools = File.read('clasifications/Schools.json')
     @material = Material.new
   end
 
   # GET /materials/1/edit
   def edit
-    @subjects = ["Matematicas" , "Biologia", "Quimica", "Fisica"];
-    @Maths = File.read('clasifications/Math.json');
-    @Schools = File.read('clasifications/Schools.json');
+    @subjects = ["Matematicas" , "Biologia", "Quimica", "Fisica"]
+    @Maths = File.read('clasifications/Math.json')
+    @Schools = File.read('clasifications/Schools.json')
   end
 
   # POST /materials

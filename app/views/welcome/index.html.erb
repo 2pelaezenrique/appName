@@ -40,7 +40,10 @@
 		</div>
 	</div>
 	<div class="searchbox">
-		<input class="searchinput" placeholder="Videos, apuntes, exámenes...">	
+		<%= form_tag '/materials', :method  => :get do |f| %>
+		    <%= text_field_tag(:search,"",placeholder: "Videos, apuntes, exámenes...", :class => "searchinput")%>
+		<% end %>
+		<!-- <input class="searchinput" placeholder="Videos, apuntes, exámenes...">	 -->
 		<i class="icon search absolute"></i>
 		
 	</div>
