@@ -2,17 +2,16 @@ Rails.application.routes.draw do
   resources :lists
   resources :classrooms
   resources :materials do
+    resources :favorites
     resources :comments
   end
-  devise_for :users do
-    resources :favorites
-  end
+  devise_for :users 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
-
+  delete 'materials/:material_id/favorites' => "favorites#destroy"
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

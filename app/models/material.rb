@@ -8,7 +8,6 @@ class Material
   field :format, type: String
   field :uploadDate, type: Date
   field :type, type: String
-  # field :category, type: Hash
   field :youtube_id, type: String
   field :authors, type: Array
   field :youtubeChannel, type: String
@@ -16,10 +15,9 @@ class Material
   field :tags, type: Array
   field :schools, type: Array
   field :subject, type: String
-  field :username, type: String
   field :updateDate, type: Date
   field :file_type, type: String
-  field :favs, type: Integer, default: 0
   belongs_to :user
   embeds_many :comments
+  embeds_many :favorites
 end

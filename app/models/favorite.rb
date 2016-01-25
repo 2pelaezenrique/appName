@@ -1,4 +1,5 @@
 class Favorite
   include Mongoid::Document
-  embedded_in :user, :inverse_of => :favorites
+  embedded_in :material, :inverse_of => :favorites
+  belongs_to :user
 end

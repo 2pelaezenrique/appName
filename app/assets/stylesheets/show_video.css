@@ -29,13 +29,25 @@ div{
     margin-left: 18px;
 }
 .description{
-	font-size: 14px;
-    font-weight: 400;
     margin-top: 16px;
     margin-bottom: 16px;
-    padding: 11px;
     background-color: white;
-    padding-top: 28px;
+    padding: 12px;
+    height: 299px;
+    position: relative;
+}
+.description p{
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 16px;
+    max-height: 207px;
+    overflow: auto;
+
+}
+.description .light{
+    position: absolute;
+    bottom: 12px;
 }
 .light{
 	font-weight: 300;
@@ -80,4 +92,23 @@ a{
     right: 15px;
     font-weight: 500;
     font-size: 20px;
+    color: black;
+    text-align: right;
 }
+.favs .icon:hover, .active{
+    color: #FFC500 !important;
+    cursor: pointer;
+}
+.favs .icon{
+    color: grey;
+    float: left;
+    margin-right: 7px;
+    font-size: 100%;
+}
+/*
+.description:before {
+    content: "Descripción";
+    font-weight: 500;
+    font-size: 100%; 
+}
+*/

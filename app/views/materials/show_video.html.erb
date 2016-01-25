@@ -1,54 +1,115 @@
 <% content_for :head do %>
 	<%= stylesheet_link_tag 'show_video', media: "all"%>
 <% end %>
-<div class="material">
-	<%= @iframe %>	
-	<div class="info">
-		<div class="head_info">
-			<%= @material.name %>
-			
-			<div class="light">
-				 <br>
-					
-				<div class="avatar">
-					<%= link_to edit_user_registration_path(@material.user_id) do %>
-						<% if @material.user.avatar_file_size %>
+<article>
+	<div class="material">
+		<%= @iframe %>	
+		<div class="info">
+			<div class="head_info">
+				<%= @material.name %>
+				
+				<div class="light">
+					 <br>
+						
+					<div class="avatar">
+						<%= link_to edit_user_registration_path(@material.user_id) do %>
+							<% if @material.user.avatar_file_size %>
 
-							<%= image_tag @material.user.avatar.url %>
-						<% else %>
-							<%= image_tag 'default.png' %>
+								<%= image_tag @material.user.avatar.url %>
+							<% else %>
+								<%= image_tag 'default.png' %>
+							<% end %>
 						<% end %>
-					<% end %>
-				</div>
-				
-				<div class="user_info">
-					<%= link_to edit_user_registration_path(@material.user_id) do %>
-						<bold><%= @material.user.username %></bold><br>
-					<% end %>
+					</div>
+					
+					<div class="user_info">
+						<%= link_to edit_user_registration_path(@material.user_id) do %>
+							<bold><%= @material.user.username %></bold><br>
+						<% end %>
 
-					Posts: <%= Material.where(user_id: @material.user_id).count%>
+						Posts: <%= Material.where(user_id: @material.user_id).count%>
+					</div>
+					<div class="favs"><div class="icon star favoriteAjax"></div> <number><%= @material.favorites.count %></number></div>
+				<hr>	
+				Publicado el <%= @material.uploadDate %>
 				</div>
-				<div class="favs"><%= @material.favs %></div>
-			<hr>	
-			Publicado el <%= @material.uploadDate %>
 			</div>
-		</div>
-		<div class="description">
-			<%= @material.description %>
-			<div class="light">
-				<%= @material.tags[@material.tags.length - 1] %> <br>
-				<%= @material.schools[@material.schools.length - 2] %>: 
-				<%= @material.schools[@material.schools.length - 1] %> <br>
-				
-				Por: <% @material.authors.each do |author| %>
-					<%= author %> <br>
-				<% end %>
+			<div class="description">
+				<p>
+				<%= @material.description %></p><br>
+				<div class="light">
+					<%= @material.tags[@material.tags.length - 1] %> <br>
+					<%= @material.schools[@material.schools.length - 2] %>: 
+					<%= @material.schools[@material.schools.length - 1] %> <br>
+					
+					Por: <% @material.authors.each do |author| %>
+						<%= author %> <br>
+					<% end %>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
-<div class="coments"></div>
-<div class="related"></div>
+	<div class="coments"></div>
+	<div class="related"></div>
+</article>
+
+<script type="text/javascript">
+<% if user_signed_in? %>
+window.method = <% if Material.find(params[:id]).favorites.where({user_id: current_user.id}).count >= 1 %> <%= raw '"DELETE"' %> <% else %><%= raw '"POST"' %><% end %>;
 
 
+var changeMethod = function () {
+	if (window.method == "DELETE") {
+		window.method = "POST";
+	} else {
+		window.method = "DELETE";
+	};
+}
+var updateNumberOfFavs = function(){
+	numberOfFavs = parseInt($("number").html())
+	if (window.method == "POST") {
+		$("number").html(numberOfFavs - 1)
+	} else {
+		$("number").html(numberOfFavs + 1)
+	};
+}
+var favMaterial = function (method){
+    
+	    $.ajax({
+	    			 
+	                 url: "<%= material_favorites_path(params[:id]) %>", // Route to favorite
+	                type: method, // Controller create or destroy method
+	            dataType: "json",
+	                data: {}, // This goes to Controller in params hash, i.e. params[:file_name]
+	            complete: function() {},
+	             success: function(data, textStatus, xhr) {
+	                        // Do something with the response here
+	                      $(".favs .icon").toggleClass("favoriteAjax")
+	    				  $(".favoriteAjax").toggleClass("active");
+	    				  updateNumberOfFavs();
+
+	                      },
+	               error: function() {
+	                        alert("Ajax error!")
+	                      	$(".favoriteAjax").toggleClass("favoriteAjax")
+	                      }
+	    });
+}
+$(document).ready(function(){
+	$(document).on("click", '.favoriteAjax', function() {
+		$(".favoriteAjax").toggleClass("favoriteAjax")
+		favMaterial(window.method);
+	  	changeMethod();
+	});
+	if (window.method == "DELETE") {
+		$(".favoriteAjax").toggleClass("active");
+	};	
+});
+
+<% else %>
+$(document).on("click", '.favoriteAjax', function() {
+ 	showBanner();
+});
+<% end %>
+</script>

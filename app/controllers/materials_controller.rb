@@ -1,10 +1,12 @@
 class MaterialsController < ApplicationController
   before_action :set_material, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-
+  skip_before_action :authenticate_user!, only: [:index, :show]
   # GET /materials
+ 
   # GET /materials.json
   def index
+     #favorites of a user Material.where(:'favorites.user_id' => current_user.id)
      @subjects = ["Matematicas" , "Biologia", "Quimica", "Fisica"]
      if request.query_parameters
         query = {}
@@ -13,7 +15,7 @@ class MaterialsController < ApplicationController
             query[key] = value
           end
           
-          if key == "search"
+          if key == "search" && value != ""
             valueSplitted = value.split(" ")
             regepxString = String
             valueSplitted.each_with_index do  |word , index|
@@ -69,7 +71,7 @@ class MaterialsController < ApplicationController
     @material.schools = params[:material][:schools]
     @material.user_id = current_user.id
     @material.uploadDate = DateTime.now
-    @material.username = current_user.username
+    # @material.username = current_user.username
     if params[:material][:format] == "file"
       @material.file = params[:material][:file]
       if file_type != "unsupported_File"
