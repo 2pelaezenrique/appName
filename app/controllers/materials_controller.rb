@@ -6,6 +6,7 @@ class MaterialsController < ApplicationController
  
   # GET /materials.json
   def index
+
      #favorites of a user Material.where(:'favorites.user_id' => current_user.id)
      @subjects = ["Matematicas" , "Biologia", "Quimica", "Fisica"]
      if request.query_parameters
@@ -65,8 +66,9 @@ class MaterialsController < ApplicationController
   # POST /materials
   # POST /materials.json
   def create
+
     @material = Material.new(material_params)
-    @material.authors = params[:material][:authors]
+    
     @material.tags = params[:material][:tags]
     @material.schools = params[:material][:schools]
     @material.user_id = current_user.id
@@ -74,12 +76,14 @@ class MaterialsController < ApplicationController
     # @material.username = current_user.username
     if params[:material][:format] == "file"
       @material.file = params[:material][:file]
+      @material.authors = params[:material][:authors]
       if file_type != "unsupported_File"
         @material.file_type = file_type
       end
     else
-      @material.youtube_id = youtubeIdFrom(params[:material][:youtube_id])
+      set_youtube_data()
     end
+    
     if validate_format
       respond_to do |format|
         if @material.save
@@ -126,13 +130,27 @@ class MaterialsController < ApplicationController
     def set_material
       @material = Material.find(params[:id])
     end
+    def set_youtube_data
+      byebug
+      videoId = youtubeIdFrom(params[:material][:youtube_id])
+      video = Yt::Video.new id: videoId
+      @material.authors = []
+      @material.youtube_id = videoId
+      @material.video_duration = video.duration
+      # @material.thumbnail_url = video.thumbnail_url
+      @material.authors[0] = video.channel_title
+      @material.youtubeChannel_id = video.channel_id
+      channel = Yt::Channel.new id:  video.channel_id
+      @material.youtubeChannel_avatar_url = channel.thumbnail_url
+    end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def material_params
       params[:material][:authors] = params[:material][:authors].split(",")
       params[:material][:tags] = params[:material][:tags].split(",")
       params[:material][:schools] = params[:material][:schools].split(",")
-      params.require(:material).permit(:name, :description, :type, :format, :authors, :youtubeChannel, :tags, :subject, :searchable, :schools)
+      params.require(:material).permit(:name, :description, :type, :format, :authors, :tags, :subject, :searchable, :schools)
     end
     #Returns the Id of the youtube video url.
     def youtubeIdFrom(url)

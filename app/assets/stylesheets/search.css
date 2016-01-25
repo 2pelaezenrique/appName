@@ -12,8 +12,10 @@
 .thumbnail{
 	display: inline-block;
 	vertical-align: top;
-		width: 196px;
+	width: 196px;
 	height: 110px;
+  position: relative;
+
 }
 .youtubeThumbnail{
 	width: 100%;
@@ -60,4 +62,17 @@ a:hover{
 }
 .material{
 	margin-top: 19px;
+}
+.duration{
+    position: absolute;
+    color: rgb(255, 255, 255);
+    font-weight: 400;
+    background-color: rgba(0, 0, 0, 0.72);
+    border-radius: 0px;
+    padding-left: 5px;
+    padding-right: 5px;
+    bottom: 3px;
+    right: 5px;
+    line-height: 16px;
+    font-size: 11px;
 }

@@ -10,10 +10,22 @@
 
       <% @materials.each do |material| %>
           <div class="material">
+           
             <%= link_to material , :class => "thumbnail" do %>
               
                 <% if material.format == 'video' %>
+
+                  <div class="duration">
+                    <% if material.video_duration > 3600 %>
+                        <%= Time.at(material.video_duration).utc.strftime("%H:%M:%S") %>
+                    <% else %>
+                        <%= Time.at(material.video_duration).utc.strftime("%M:%S") %>
+                    <% end %>
+                  </div>
+
                   <%= image_tag("http://i.ytimg.com/vi/" + material.youtube_id + "/mqdefault.jpg", :class => "youtubeThumbnail") %>
+                
+
                 <% else %>
                   <%= material.file_type %> 
                 <%end %>

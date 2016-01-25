@@ -82,10 +82,7 @@
           <div class="nameOfFile"> Subir Archivo </div>
           <%= f.file_field :file %>
         </div>
-        <div class="field block secundario standarMargin youtubeChannel">
-          <%= f.label :youtubeChannel %><br>
-          <%= f.url_field :youtubeChannel %>
-        </div>
+       
         <div class="field block standarMargin secundario link">
           <%= f.label :youtube_id %><br>
           <%= f.url_field :youtube_id %>
@@ -159,18 +156,20 @@ $(document).ready(function () {
       if (selected == ''){
         $(".secundario").addClass("invisible")
       }else if (selected == 'Vídeo') {
-        $(".youtubeChannel , .link").removeClass("invisible");
+        $(".link").removeClass("invisible");
+        $(".autor input").prop('required',false);
         $(".link label").html("Enlace al vídeo (Youtube):");
         $(".link input").attr("placeholder" , "https://www.youtube.com/watch?v=........");
-        $(".youtubeChannel label").html("Enlace al canal de youtube:");
-        $(".youtubeChannel input").attr("placeholder", "https://www.youtube.com/channel/......");
+        //$(".youtubeChannel label").html("Enlace al canal de youtube:");
+        //$(".youtubeChannel input").attr("placeholder", "https://www.youtube.com/channel/......");
         resetFile();
         $(".link input").prop('required',true);
         $("input[type='file']").prop('required',false);
-        $(".uploadButton").addClass("invisible")
+        $(".autor , .uploadButton").addClass("invisible")
       }else {
+        $(".autor input").prop('required',true);
         $(".link input").prop('required',false);
-        $(".uploadButton").removeClass("invisible");
+        $(".autor , .uploadButton").removeClass("invisible");
         $("input[type='file']").prop('required',true);
       }; 
   

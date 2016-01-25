@@ -2,6 +2,11 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   protect_from_forgery with: :exception
   skip_before_filter :verify_authenticity_token 
+
+  Yt.configuration.api_key = ENV["YOUTUBE_API_KEY"]
+  Yt.configure do |config| 
+    config.log_level = :debug 
+  end
   protected
   
   def configure_permitted_parameters
