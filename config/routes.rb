@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
   delete 'materials/:material_id/favorites' => "favorites#destroy"
+  post 'materials/:material_id/comments' => "comments#create"
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
