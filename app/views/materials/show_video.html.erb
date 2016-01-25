@@ -47,11 +47,15 @@
 	</div>
 
 	<div class="comments">
-	
+		<% if user_signed_in? %>
 		<%= form_tag material_comments_path(params[:id]), :method  => :post, :class => "comments_form" do %>
 		   <%= image_tag current_user.avatar.url , :class => "comment_avatar" %>
 		   <%= text_area_tag(:body, "", size: "60x5", required: true, placeholder: "Añade un comentario... " ) %>
 		   <%= submit_tag("Enviar comentario") %>
+		<% end %>
+		<% else %>
+		<br>
+			<p class="centered"><%= link_to "Inicia sesión", new_user_session_path%> para enviar un comentario</p>
 		<% end %>
 
 		<hr class="hr_after_form">
@@ -63,10 +67,11 @@
 		<br>
 	<% else %>
 		<% @material.comments.each do |comment| %>
+			
 			<%= image_tag User.find(comment.user_id).avatar.url , :class => "comment_avatar" %>
 			<div class="comment">
 				<username><%= User.find(comment.user_id).username %></username>
-				<div class="light">Hace <%= time_ago_in_words(comment.created_at).gsub(/less/, "menos").gsub(/than/, "de").gsub(/ a /, " un ").gsub(/minute/, "minuto").gsub(/day/, "día").gsub(/hour/, "hora").gsub(/year/,"año") %></div>
+				<div class="light">Hace <%= time_ago_in_words(comment.created_at).gsub(/less/, "menos").gsub(/than/, "de").gsub(/about/, "").gsub(/ a /, " un ").gsub(/minute/, "minuto").gsub(/day/, "día").gsub(/hour/, "hora").gsub(/year/,"año") %></div>
 				<br>
 				<%=  simple_format(comment.body) %>
 			</div>
@@ -74,7 +79,48 @@
 	<% end %>
 	</div>
 
-	<div class="related"></div>
+	<div class="related">
+	Material relacionado <br><hr>
+	<% Material.where(tags: @material.tags).ne(id: @material.id).each do |material| %>
+		<div class="recomended_material">
+           
+            <%= link_to material , :class => "thumbnail" do %>
+              
+                <% if material.format == 'video' %>
+
+                    <div class="duration">
+                        <% if material.video_duration > 3600 %>
+                            <%= Time.at(material.video_duration).utc.strftime("%H:%M:%S") %>
+                        <% else %>
+                            <%= Time.at(material.video_duration).utc.strftime("%M:%S") %>
+                        <% end %>
+                    </div>
+
+                    <%= image_tag("http://i.ytimg.com/vi/" + material.youtube_id + "/mqdefault.jpg", :class => "youtubeThumbnail") %>
+                
+
+                <% else %>
+                    <%= material.file_type %> 
+                <%end %>
+            <% end %>
+            
+            <div class="block1">  
+                <%= link_to material do %>
+	                <div class="name">
+	                    <%= material.name %>
+	                </div>
+                <% end %>
+
+                <div class="author">
+	                <% material.authors.each do |author| %>
+	                  <%= author %>
+	                <% end %>
+                </div>
+            </div>
+                      
+        </div>
+	<% end %>
+	</div>
 </article>
 
 <script type="text/javascript">
@@ -120,6 +166,7 @@ var favMaterial = function (method){
 	    });
 }
 $(document).ready(function(){
+	showLinksOnDescription();
 	$(document).on("click", '.favoriteAjax', function() {
 		$(".favoriteAjax").toggleClass("favoriteAjax")
 		favMaterial(window.method);
@@ -131,8 +178,24 @@ $(document).ready(function(){
 });
 
 <% else %>
-$(document).on("click", '.favoriteAjax', function() {
- 	showBanner();
-});
+$(document).ready(function(){
+	$(document).on("click", '.favoriteAjax', function() {
+	 	showBanner();
+	});	
+	showLinksOnDescription();
+})
+
 <% end %>
+function linkify(text) {
+    var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+    return text.replace(urlRegex, function(url) {
+        return '<a href="' + url + '">' + url + '</a>';
+    });
+}
+function showLinksOnDescription(){
+	description = $(".description").html();
+	description_with_links = linkify(description)
+	$(".description").html(description_with_links);
+}
+
 </script>

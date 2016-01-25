@@ -118,6 +118,8 @@ a{
     margin-left: 5%;
     padding: 12px;
     background-color: white;
+    display: inline-block;
+    vertical-align: top;
 }
 .comments_form textarea {
     width: 750px;
@@ -156,7 +158,7 @@ a{
     display: inline-block;
     padding: 8px;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 400;
 }
 p{
     margin-bottom: 13px;
@@ -165,6 +167,7 @@ p{
 .comment username {
     color: #167ac6;
     cursor: pointer;
+    font-weight: 500;
 }
 .comment username:hover{
     text-decoration: underline;
@@ -172,4 +175,77 @@ p{
 .comment .light {
     display: inline-block;
     color: grey;
+}
+p a, p a:visited{
+    color: #167ac6;
+    font-weight: 500;
+}
+p a:hover{
+    text-decoration: underline;
+}
+p,a{
+    font-family: Roboto, sans-serif;
+}
+.related {
+    width: 580px;
+    display: inline-block;
+    background-color: white;
+    padding: 19px;
+    margin-left: 18px;
+        font-size: 15px;
+    font-weight: 500;
+}
+.recomended_material {
+    font-size: 12px;
+    font-family: Roboto, sans-serif;
+}
+
+
+.thumbnail{
+    display: inline-block;
+    vertical-align: top;
+    width: 158px;
+    height: 86px;
+  position: relative;
+
+}
+.youtubeThumbnail{
+    width: 100%;
+}
+.related a ,.related a:hover ,.related a:visited {
+    color: #167ac6;
+    text-decoration: none;
+}
+.related a:hover{
+    text-decoration: underline;
+    background-color: transparent;
+}
+.block1{
+    width: 405px;
+    margin-left: 10px;
+    display: inline-block;
+    height: 110px;
+}
+.name{
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+.duration{
+    position: absolute;
+    color: rgb(255, 255, 255);
+    font-weight: 400;
+    background-color: rgba(0, 0, 0, 0.72);
+    border-radius: 0px;
+    padding-left: 5px;
+    padding-right: 5px;
+    bottom: 3px;
+    right: 5px;
+    line-height: 16px;
+    font-size: 11px;
+}
+.author{
+        font-weight: 200;
 }
