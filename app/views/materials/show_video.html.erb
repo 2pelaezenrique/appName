@@ -3,7 +3,7 @@
 <% end %>
 <article>
 	<div class="material">
-		<%= @iframe %>	
+		<div id="player"></div>	
 		<div class="info">
 			<div class="head_info">
 				<div class="name"> <%= @material.name %> </div>
@@ -59,6 +59,34 @@
 
 
 <script type="text/javascript">
+	// 2. This code loads the IFrame Player API code asynchronously.
+	var tag = document.createElement('script');
+
+	tag.src = "https://www.youtube.com/iframe_api";
+	var firstScriptTag = document.getElementsByTagName('script')[0];
+	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+	// 3. This function creates an <iframe> (and YouTube player)
+	//    after the API code downloads.
+	var player;
+	function onYouTubeIframeAPIReady() {
+		player = new YT.Player('player', {
+	        videoId: "<%= @material.youtube_id %>",
+	        playerVars: { 'rel': 0, 'showinfo': 0 },
+	        events: {
+		        'onReady': onPlayerReady,
+		        'onStateChange': onPlayerStateChange,
+		    }
+	    });
+	}
+	function onPlayerStateChange(event) {        
+   		if(event.data === 0) {          
+           console.log("end");
+    	}
+    }
+    function onPlayerReady(event){
+    	console.log("Ready");
+    }
 
 // Linkify
 $(document).ready(function(){

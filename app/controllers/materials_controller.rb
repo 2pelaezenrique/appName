@@ -41,7 +41,7 @@ class MaterialsController < ApplicationController
   # GET /materials/1.json
   def show
     if @material.format == "video"
-      @iframe = %Q'<iframe src="http://www.youtube.com/embed/#{@material.youtube_id}?&rel=0&theme=light&showinfo=0&color=white" frameborder="0" allowfullscreen></iframe>'.html_safe
+      @iframe = %Q'<iframe id="player" src="http://www.youtube.com/embed/#{@material.youtube_id}?&rel=0&theme=light&showinfo=0&color=white" frameborder="0" allowfullscreen></iframe>'.html_safe
       render 'show_video'
     elsif @material.file_type == "pdf"
       render 'show_pdf'
