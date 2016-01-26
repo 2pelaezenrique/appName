@@ -2,7 +2,6 @@ class Material
   include Mongoid::Document
   include Mongoid::Paperclip
   include Mongoid::Timestamps
-  attr_accessible :file
   has_mongoid_attached_file :file
   do_not_validate_attachment_file_type :file
   field :name, type: String
