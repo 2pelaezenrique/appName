@@ -19,7 +19,7 @@
 					
 					<div class="user_info">
 						<%= link_to @material.youtubeChannel_avatar_url do %>
-							<bold><%= @material.authors[0] %></bold><br>
+							<bold><%= @material.authors %></bold><br>
 						<% end %>
 
 						Posts: <%= Material.where(youtubeChannel_id: @material.youtubeChannel_id).count%>
@@ -33,10 +33,10 @@
 				<text>
 				<%= simple_format(@material.description) %></text><br>
 				<div class="light">
-					<%= @material.tags[@material.tags.length - 1] %> <br>
-					<% if @material.schools.length > 1 %>
-						<%= @material.schools[@material.schools.length - 2] %>: 
-						<%= @material.schools[@material.schools.length - 1] %> <br>
+					<%= @material.tags.split(",")[@material.tags.split(",").length - 1] %> <br>
+					<% if @material.schools.split(",").length > 1 %>
+						<%= @material.schools.split(",")[@material.schools.split(",").length - 2] %>: 
+						<%= @material.schools.split(",")[@material.schools.split(",").length - 1] %> <br>
 					<% end %>
 					Publicado por: 
 						<%= @material.user.username %> <br>

@@ -39,14 +39,14 @@
 			<%= simple_format(@material.description) %></text><br>
 			<div class="light">
 
-				<bold>Categoría: </bold><%= @material.tags[@material.tags.length - 1] %> <br>
-				<% if @material.schools.length > 1 %>
+				<bold>Categoría: </bold><%= @material.tags.split(",")[@material.tags.split(",").length - 1] %> <br>
+				<% if @material.schools.split(",").length > 1 %>
 					<bold>Escuela: </bold>
-					<%= @material.schools[@material.schools.length - 2] %>: 
-					<%= @material.schools[@material.schools.length - 1] %> <br>
+					<%= @material.schools.split(",")[@material.schools.split(",").length - 2] %>: 
+					<%= @material.schools.split(",")[@material.schools.split(",").length - 1] %> <br>
 				<% end %>
 					<bold>Autores:</bold> 
-					<% @material.authors.each do |author| %>
+					<% @material.authors.split(",").each do |author| %>
 						<%= author %>. 
 					<% end %>
 					<br>
@@ -70,7 +70,7 @@
 	                <% end %></i>
 	                <br>
                     <div class="light">
-		                <% @material.authors.each do |author| %>
+		                <% @material.authors.split(",").each do |author| %>
 		                  <%= author %>
 		                <% end %>
                 	</div>

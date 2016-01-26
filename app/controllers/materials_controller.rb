@@ -86,7 +86,7 @@ class MaterialsController < ApplicationController
     else
       set_youtube_data()
     end
-    byebug
+    
     if validate_format
       respond_to do |format|
         if @material.save
@@ -136,11 +136,10 @@ class MaterialsController < ApplicationController
     def set_youtube_data
       videoId = youtubeIdFrom(params[:material][:youtube_id])
       video = Yt::Video.new id: videoId
-      @material.authors = []
       @material.youtube_id = videoId
       @material.video_duration = video.duration
       # @material.thumbnail_url = video.thumbnail_url
-      @material.authors[0] = video.channel_title
+      @material.authors = video.channel_title
       @material.youtubeChannel_id = video.channel_id
       channel = Yt::Channel.new id:  video.channel_id
       @material.youtubeChannel_avatar_url = channel.thumbnail_url
@@ -149,9 +148,7 @@ class MaterialsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def material_params
-      params[:material][:authors] = params[:material][:authors].split(",")
-      params[:material][:tags] = params[:material][:tags].split(",")
-      params[:material][:schools] = params[:material][:schools].split(",")
+
       params.require(:material).permit(:name, :description, :type, :format, :authors, :tags, :subject, :searchable, :schools)
     end
     #Returns the Id of the youtube video url.
@@ -167,7 +164,7 @@ class MaterialsController < ApplicationController
       when "video"
         return true      
       when "file"
-        byebug
+        
         if file_type == "unsupported_File"
           return false
         else

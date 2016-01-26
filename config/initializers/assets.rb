@@ -6,7 +6,7 @@ Rails.application.config.assets.precompile += %w( welcome.css )
 Rails.application.config.assets.precompile += %w( search.css )
 Rails.application.config.assets.precompile += %w( show_video.css )
 Rails.application.config.assets.precompile += %w( favorites.js )
-Rails.application.config.assets.precompile += %w( /.png/ )
+Rails.application.config.assets.precompile += ['images/avatars/*']
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
 

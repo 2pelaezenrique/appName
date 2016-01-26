@@ -1,6 +1,11 @@
 <div class="related">
 	Material relacionado <br><hr>
-	<% Material.where(tags: @material.tags).ne(id: @material.id).each do |material| %>
+    <% if Material.where(tags: Regexp.new(@material.tags, true)).ne(id: @material.id).count == 0 %>
+        <br>
+        No hay material similar
+        <br>
+    <% end %>
+	<% Material.where(tags: Regexp.new(@material.tags, true)).ne(id: @material.id).each do |material| %>
 		<div class="recomended_material">
            
             <%= link_to material , :class => "thumbnail" do %>
@@ -31,7 +36,7 @@
                 <% end %>
 
                 <div class="author">
-	                <% material.authors.each do |author| %>
+	                <% material.authors.split(",").each do |author| %>
 	                  <%= author %>
 	                <% end %>
                 </div>

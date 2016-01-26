@@ -172,7 +172,7 @@ a{
     margin-top: 50px;
 }
 .comment{
-    width: 763px;
+    width: 90%;
     display: inline-block;
     padding: 8px;
     font-size: 14px;
@@ -297,6 +297,7 @@ article{
         margin-top: 10px;
     padding-top: 10px;
     background-color: white;
+    position: relative;
 }
 .element_image{
         width: 80px;
@@ -327,4 +328,58 @@ i {
 .elementThumbnail {
     height: 86px;
     float: right;
+}
+.buttons a{
+    margin-left: 10px;
+}
+.buttons a div.icon.download-circle{
+    line-height: 79px;
+}
+
+.hr{
+    margin: 5px;
+    width: 100%;
+}
+.file_element {
+    padding: 10px;
+    padding-bottom: 0px;
+    width: 70%;
+    display: inline-block;
+    height: 122px;
+}
+.file_head_info{
+    width: 24%;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 10px;
+    height: 124px;
+    padding-top: 0px;
+    margin-bottom: 0px;
+    padding-right: 12px;
+}
+.no_margin_left{
+    margin-left: 0px;
+}
+comments .comments{
+    width: 100%;
+    margin-left: inherit;
+
+}
+comments .comments form textarea{
+    width: 689px;
+}
+.related_container {
+    width: 667px;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 10px;
+    padding-top: 16px;
+}
+.file_and_comments{
+        display: inline-block;
+    width: 792px;
+    padding-left: 5%;
+}
+.info.no_margin_left{
+    width: 103%;
 }

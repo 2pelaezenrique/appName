@@ -9,10 +9,10 @@ class Material
   field :format, type: String
   field :uploadDate, type: Date
   field :type, type: String
-  field :authors, type: Array
+  field :authors, type: String
   field :searchable, type: Boolean
-  field :tags, type: Array
-  field :schools, type: Array
+  field :tags, type: String
+  field :schools, type: String
   field :subject, type: String
   field :updateDate, type: Date
   field :file_type, type: String

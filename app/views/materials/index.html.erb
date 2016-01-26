@@ -39,7 +39,7 @@
               <% end %>
 
               <div class="description">
-                <% material.authors.each do |author| %>
+                <% material.authors.split(",").each do |author| %>
                   <%= author %>
                 <% end %>
                 <br>

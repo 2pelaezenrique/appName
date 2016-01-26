@@ -1,0 +1,100 @@
+<% content_for :head do %>
+	<%= stylesheet_link_tag 'show_video', media: "all"%>
+<% end %>
+
+<article >
+	<div class="file_and_comments">
+		<div class="info pdf_info no_margin_left">
+			<div class="pdf_element file_element">
+				
+					<%= image_tag @material.file_type + ".png" , class: "element_image"%> 
+		            
+		             <div class="pdf_element_info">
+
+		                <%= @material.name %> 
+		                <% sizeLength = @material.file_file_size.to_s.length %>
+		                <i><% if sizeLength > 6 %>
+		                	<%= "(" + (@material.file_file_size/1000000).to_s + " MB)" %>
+		                <% elsif sizeLength > 3 %>
+		                	<%= "(" + (@material.file_file_size/1000).to_s + " KB)" %>
+		                <% else %>
+		                	<%= "(" + @material.file_file_size.to_s + " Bytes)" %>
+		                <% end %></i>
+		                <br>
+		                <div class="light">
+			                <% @material.authors.split(",").each do |author| %>
+			                  <%= author %>
+			                <% end %>
+		            	</div>
+		            	
+		            </div>
+		            <div class="buttons">
+		            	<%= link_to @material.file.url, :download => @material.file_file_name do %>
+		            		<div class="icon download-circle"></div>
+		            	<% end %>
+		            	<div class="favs"><div class="icon star favoriteAjax"></div> <number><%= @material.favorites.count %></number></div>
+		            </div>
+		            <hr  class="hr">
+		            <div class="light">
+		            		
+						Publicado el <%= @material.uploadDate %>
+		        	</div>
+			</div>
+			<div class="head_info  file_head_info">
+				
+				<div class="light">
+					 <br>
+						
+					<div class="avatar">
+						<%= link_to @material.user.avatar.url do %>
+								<%= image_tag @material.user.avatar.url %>
+						<% end %>
+					</div>
+					
+					<div class="user_info">
+						<%= link_to @material.user.avatar.url do %>
+							<bold>
+								<%= @material.user.username%>
+							</bold>
+							<br>
+						<% end %>
+
+						Posts: <%= Material.where(user_id: @material.user_id).count%>
+					</div>
+					
+				
+					
+				</div>
+			</div>
+
+			<div class="description pdf">
+				<text>
+				<%= simple_format(@material.description) %></text><br>
+				<div class="light">
+
+					<bold>Categoría: </bold><%= @material.tags.split(",")[@material.tags.split(",").length - 1] %> <br>
+					<% if @material.schools.split(",").length > 1 %>
+						<bold>Escuela: </bold>
+						<%= @material.schools.split(",")[@material.schools.split(",").length - 2] %>: 
+						<%= @material.schools.split(",")[@material.schools.split(",").length - 1] %> <br>
+					<% end %>
+						<bold>Autores:</bold> 
+						<% @material.authors.split(",").each do |author| %>
+							<%= author + ". "%> 
+						<% end %>
+						<br>
+					
+				</div>
+			</div>
+			
+		</div>
+		<comments>
+			<%= render '/materials/comments.html.erb' %>
+		</comments>
+	</div>
+<div class="related_container">
+<%= render '/materials/related.html.erb' %>
+</div>
+
+</article>
+<%= render '/materials/favorites_script.html.erb' %>
