@@ -1,0 +1,92 @@
+<% content_for :head do %>
+	<%= stylesheet_link_tag 'show_video', media: "all"%>
+<% end %>
+<article class="article_of_pdf">
+	<!-- <div class="document"> -->
+	<embed src="<%= @material.file.url %>" width="500" height="375" type='<%= @material.file.instance.file_content_type %>'>
+
+	<div class="info pdf_info">
+		<div class="head_info">
+			<div class="name"> <%= @material.name %></div>
+			
+			<div class="light">
+				 <br>
+					
+				<div class="avatar">
+					<%= link_to @material.user.avatar.url do %>
+							<%= image_tag @material.user.avatar.url %>
+					<% end %>
+				</div>
+				
+				<div class="user_info">
+					<%= link_to @material.user.avatar.url do %>
+						<bold>
+							<%= @material.user.username%>
+						</bold>
+						<br>
+					<% end %>
+
+					Posts: <%= Material.where(user_id: @material.user_id).count%>
+				</div>
+				<div class="favs"><div class="icon star favoriteAjax"></div> <number><%= @material.favorites.count %></number></div>
+			<hr>	
+			Publicado el <%= @material.uploadDate %>
+				
+			</div>
+		</div>
+		<div class="description pdf">
+			<text>
+			<%= simple_format(@material.description) %></text><br>
+			<div class="light">
+
+				<bold>Categoría: </bold><%= @material.tags[@material.tags.length - 1] %> <br>
+				<% if @material.schools.length > 1 %>
+					<bold>Escuela: </bold>
+					<%= @material.schools[@material.schools.length - 2] %>: 
+					<%= @material.schools[@material.schools.length - 1] %> <br>
+				<% end %>
+					<bold>Autores:</bold> 
+					<% @material.authors.each do |author| %>
+						<%= author %>. 
+					<% end %>
+					<br>
+				
+			</div>
+		</div>
+		<div class="pdf_element">
+			
+				<%= image_tag @material.file_type + ".png" , class: "element_image"%> 
+                
+	             <div class="pdf_element_info">
+
+	                <%= @material.name %> 
+	                <% sizeLength = @material.file_file_size.to_s.length %>
+	                <i><% if sizeLength > 6 %>
+	                	<%= "(" + (@material.file_file_size/1000000).to_s + " MB)" %>
+	                <% elsif sizeLength > 3 %>
+	                	<%= "(" + (@material.file_file_size/1000).to_s + " KB)" %>
+	                <% else %>
+	                	<%= "(" + @material.file_file_size.to_s + " Bytes)" %>
+	                <% end %></i>
+	                <br>
+                    <div class="light">
+		                <% @material.authors.each do |author| %>
+		                  <%= author %>
+		                <% end %>
+                	</div>
+                	
+                </div>
+                <div class="element_buttons">
+                	<%= link_to @material.file.url, :download => @material.file_file_name do %>
+                		<div class="icon download-circle"></div>
+                	<% end %>
+                </div>
+            
+		</div>
+	</div>
+
+	
+<%= render '/materials/comments.html.erb' %>
+<%= render '/materials/related.html.erb' %>
+</article>
+<%= render '/materials/favorites_script.html.erb' %>

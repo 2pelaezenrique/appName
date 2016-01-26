@@ -1,0 +1,32 @@
+<div class="comments">
+		<% if user_signed_in? %>
+		<%= form_tag material_comments_path(params[:id]), :method  => :post, :class => "comments_form" do %>
+		   <%= image_tag current_user.avatar.url , :class => "comment_avatar" %>
+		   <%= text_area_tag(:body, "", size: "60x5", required: true, placeholder: "Añade un comentario... " ) %>
+		   <%= submit_tag("Enviar comentario") %>
+		<% end %>
+		<% else %>
+		<br>
+			<p class="centered"><%= link_to "Inicia sesión", new_user_session_path%> para enviar un comentario</p>
+		<% end %>
+
+		<hr class="hr_after_form">
+	<% if @material.comments.count == 0 %>
+		<br>
+		<br>
+		<p class="centered"> No hay comentarios. ¡Sé el primero en comentar!</p>
+		<br>
+		<br>
+	<% else %>
+		<% @material.comments.each do |comment| %>
+			
+			<%= image_tag User.find(comment.user_id).avatar.url , :class => "comment_avatar" %>
+			<div class="comment">
+				<username><%= User.find(comment.user_id).username %></username>
+				<div class="light">Hace <%= time_ago_in_words(comment.created_at).gsub(/less/, "menos").gsub(/than/, "de").gsub(/about/, "").gsub(/ a /, " un ").gsub(/minute/, "minuto").gsub(/day/, "día").gsub(/hour/, "hora").gsub(/year/,"año") %></div>
+				<br>
+				<%=  simple_format(comment.body) %>
+			</div>
+		<% end %>
+	<% end %>
+	</div>

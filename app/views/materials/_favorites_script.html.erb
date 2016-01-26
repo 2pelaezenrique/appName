@@ -1,0 +1,78 @@
+<script type="text/javascript">
+// FAVORITES 
+
+<% if user_signed_in? %>
+// window.methos helps to now what method use. 
+window.method = <% if Material.find(params[:id]).favorites.where({user_id: current_user.id}).count >= 1 %> <%= raw '"DELETE"' %> <% else %><%= raw '"POST"' %><% end %>;
+
+
+var changeMethod = function () {
+	if (window.method == "DELETE") {
+		window.method = "POST";
+	} else {
+		window.method = "DELETE";
+	};
+}
+var updateNumberOfFavs = function(){
+	numberOfFavs = parseInt($("number").html())
+	if (window.method == "POST") {
+		$("number").html(numberOfFavs - 1)
+	} else {
+		$("number").html(numberOfFavs + 1)
+	};
+}
+
+var favMaterial = function (method){
+	    $.ajax({
+	                 url: "<%= material_favorites_path(params[:id]) %>", // Route to favorite
+	                type: method, // Controller create or destroy method
+	            dataType: "json",
+	                data: {}, // This goes to Controller in params hash, i.e. params[:file_name]
+	            complete: function() {},
+	             success: function(data, textStatus, xhr) {
+	                      
+	                      // Se añade la clase para poder realizar otra vez la peticion ajax
+	                      $(".favs .icon").toggleClass("favoriteAjax")
+	    				  // Se queda en amarillo o se quita el amarillo del icono.
+	    				  $(".favoriteAjax").toggleClass("active");
+	    				  // Se actualiza en pantalla el numero de favoritos que tiene el material
+	    				  updateNumberOfFavs();
+
+	                      },
+	               error: function() {
+	                        alert("Error al añadir/eleminar de favoritos")
+	                        // Se añade la clase para poder realizar otra vez la peticion ajax
+	                      	$(".favoriteAjax").toggleClass("favoriteAjax")
+	                      }
+	    });
+}
+
+$(document).ready(function(){
+
+	$(document).on("click", '.favoriteAjax', function() {
+		// Se quita la clase para evitar mandar otra peticion ajax mientras una esta ya en proceso.
+		$(".favoriteAjax").toggleClass("favoriteAjax");
+		// Se envía la petición ajax
+		favMaterial(window.method);
+		// Se cambia el metodo de POST a DELETE o viceversa, para no repetir favoritos,.
+	  	changeMethod();
+	});
+	
+	//Al cargar la pagina añadir la clase active si ya esta en favoritos
+	if (window.method == "DELETE") {
+		$(".favoriteAjax").toggleClass("active");
+	};	
+});
+
+<% else %>
+// En caso de no estar logueado se muestra un mensaje para que inicie sesion
+$(document).ready(function(){
+	$(document).on("click", '.favoriteAjax', function() {
+	 	showBanner();
+	});	
+})
+
+<% end %>
+// END
+
+</script>

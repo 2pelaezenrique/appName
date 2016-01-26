@@ -76,3 +76,7 @@ a:hover{
     line-height: 16px;
     font-size: 11px;
 }
+.elementThumbnail {
+    height: 110px;
+    float: right;
+}

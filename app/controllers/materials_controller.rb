@@ -43,7 +43,10 @@ class MaterialsController < ApplicationController
     if @material.format == "video"
       @iframe = %Q'<iframe src="http://www.youtube.com/embed/#{@material.youtube_id}?&rel=0&theme=light&showinfo=0&color=white" frameborder="0" allowfullscreen></iframe>'.html_safe
       render 'show_video'
-
+    elsif @material.file_type == "pdf"
+      render 'show_pdf'
+    else
+      render 'show'
     end
   end
 
@@ -83,7 +86,7 @@ class MaterialsController < ApplicationController
     else
       set_youtube_data()
     end
-    
+    byebug
     if validate_format
       respond_to do |format|
         if @material.save
@@ -131,7 +134,6 @@ class MaterialsController < ApplicationController
       @material = Material.find(params[:id])
     end
     def set_youtube_data
-      byebug
       videoId = youtubeIdFrom(params[:material][:youtube_id])
       video = Yt::Video.new id: videoId
       @material.authors = []
@@ -165,7 +167,8 @@ class MaterialsController < ApplicationController
       when "video"
         return true      
       when "file"
-        if file_type = "unsupported_File"
+        byebug
+        if file_type == "unsupported_File"
           return false
         else
           return true
@@ -187,9 +190,9 @@ class MaterialsController < ApplicationController
               return "plain_Text"
             when "application/msword","application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/vnd.oasis.opendocument.text","application/vnd.sun.xml.writer","application/vnd.sun.xml.writer.global"
               return "text"
-            when "application/vnd.openxmlformats-officedocument.presentationml.presentation","application/vnd.ms-powerpoint","application/vnd.ms-powerpoint.presentation.macroenabled.12"," application/vnd.sun.xml.impress","  application/vnd.sun.xml.impress.template","application/vnd.openxmlformats-officedocument.presentationml.slideshow","application/vnd.ms-powerpoint.presentation.macroenabled.12","application/vnd.oasis.opendocument.presentation"," application/vnd.oasis.opendocument.presentation-template"
+            when "application/vnd.openxmlformats-officedocument.presentationml.presentation","application/vnd.ms-powerpoint","application/vnd.ms-powerpoint.presentation.macroenabled.12","application/vnd.sun.xml.impress","application/vnd.sun.xml.impress.template","application/vnd.openxmlformats-officedocument.presentationml.slideshow","application/vnd.ms-powerpoint.presentation.macroenabled.12","application/vnd.oasis.opendocument.presentation","application/vnd.oasis.opendocument.presentation-template"
              return "slides"
-            when "application/vnd.ms-excel","application/vnd.ms-excel.sheet.binary.macroenabled.12","application/vnd.ms-excel.sheet.macroenabled.12","  application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","application/vnd.sun.xml.calc"," application/vnd.oasis.opendocument.spreadsheet"
+            when "application/vnd.ms-excel","application/vnd.ms-excel.sheet.binary.macroenabled.12","application/vnd.ms-excel.sheet.macroenabled.12","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","application/vnd.sun.xml.calc","application/vnd.oasis.opendocument.spreadsheet"
               return "excel"
             when "application/x-rar-compressed","application/x-tar","application/x-7z-compressed","application/zip"
               return "compressed_File"

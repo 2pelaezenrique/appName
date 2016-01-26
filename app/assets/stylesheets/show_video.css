@@ -2,6 +2,13 @@ iframe{
 	width: 864px;
 	height: 486px;
 }
+embed{
+    min-width: 818px;
+    width: 47%;
+    height: 90%;
+    margin-top: 2%;
+    margin-left: 5%;
+}
 div{
 	font-family: Roboto, arial, sans-serif;
 	font-size: 1.2em;
@@ -29,21 +36,31 @@ div{
     width: 44%;
     margin-left: 18px;
 }
+.name{
+    font-size: inherit;
+    font-weight: inherit;
+    font-family: inherit;
+    white-space: nowrap;
+    width: 96%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
 .description{
     margin-top: 16px;
-    margin-bottom: 16px;
     background-color: white;
     padding: 12px;
-    height: 299px;
+    max-height: 305px;
     position: relative;
 }
-.description p{
+.description text{
     font-family: inherit;
     font-size: 13px;
     font-weight: 400;
     line-height: 16px;
-    max-height: 207px;
+    max-height: 255px;
     overflow: auto;
+    display: block;
+    margin-bottom: 18px;
 
 }
 .description .light{
@@ -120,6 +137,7 @@ a{
     background-color: white;
     display: inline-block;
     vertical-align: top;
+    margin-top: 10px;
 }
 .comments_form textarea {
     width: 750px;
@@ -194,6 +212,7 @@ p,a{
     margin-left: 18px;
         font-size: 15px;
     font-weight: 500;
+        margin-top: 10px;
 }
 .recomended_material {
     font-size: 12px;
@@ -226,7 +245,7 @@ p,a{
     display: inline-block;
     height: 110px;
 }
-.name{
+.related_name{
     font-family: Roboto, sans-serif;
     font-size: 14px;
     font-weight: 500;
@@ -248,4 +267,64 @@ p,a{
 }
 .author{
         font-weight: 200;
+}
+.right{
+    float: right;
+    font-size: inherit;
+}
+.pdf_info{
+    margin-top: 2%;
+}
+.document{
+    min-height: 100%;
+    margin-right: auto;
+    margin-left: auto;
+}
+article{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+.description.pdf{
+    max-height: 429px;
+}
+.description.pdf text{
+    max-height: 400px;
+
+
+}
+.pdf_element{
+        margin-top: 10px;
+    padding-top: 10px;
+    background-color: white;
+}
+.element_image{
+        width: 80px;
+}
+.pdf_element div {
+    display: inline-block;
+    vertical-align: top;
+}
+.pdf_element_info{
+        font-size: 14px;
+    font-weight: 500;
+}
+.element_buttons{
+        float: right;
+    margin-right: 18px;
+    margin-top: 19px;
+}
+.icon.download-circle{
+    color: #979797;
+}
+.icon.download-circle:hover{
+    color: #167ac6;
+}
+i {
+    color: #797676;
+    font-size: 90%;
+}
+.elementThumbnail {
+    height: 86px;
+    float: right;
 }

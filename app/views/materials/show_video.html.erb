@@ -6,7 +6,7 @@
 		<%= @iframe %>	
 		<div class="info">
 			<div class="head_info">
-				<%= @material.name %>
+				<div class="name"> <%= @material.name %> </div>
 				
 				<div class="light">
 					 <br>
@@ -30,8 +30,8 @@
 				</div>
 			</div>
 			<div class="description">
-				<p>
-				<%= simple_format(@material.description) %></p><br>
+				<text>
+				<%= simple_format(@material.description) %></text><br>
 				<div class="light">
 					<%= @material.tags[@material.tags.length - 1] %> <br>
 					<% if @material.schools.length > 1 %>
@@ -46,156 +46,38 @@
 		</div>
 	</div>
 
-	<div class="comments">
-		<% if user_signed_in? %>
-		<%= form_tag material_comments_path(params[:id]), :method  => :post, :class => "comments_form" do %>
-		   <%= image_tag current_user.avatar.url , :class => "comment_avatar" %>
-		   <%= text_area_tag(:body, "", size: "60x5", required: true, placeholder: "Añade un comentario... " ) %>
-		   <%= submit_tag("Enviar comentario") %>
-		<% end %>
-		<% else %>
-		<br>
-			<p class="centered"><%= link_to "Inicia sesión", new_user_session_path%> para enviar un comentario</p>
-		<% end %>
+	
+<%= render '/materials/comments.html.erb' %>
+<%= render '/materials/related.html.erb' %>
 
-		<hr class="hr_after_form">
-	<% if @material.comments.count == 0 %>
-		<br>
-		<br>
-		<p class="centered"> No hay comentarios. ¡Sé el primero en comentar!</p>
-		<br>
-		<br>
-	<% else %>
-		<% @material.comments.each do |comment| %>
-			
-			<%= image_tag User.find(comment.user_id).avatar.url , :class => "comment_avatar" %>
-			<div class="comment">
-				<username><%= User.find(comment.user_id).username %></username>
-				<div class="light">Hace <%= time_ago_in_words(comment.created_at).gsub(/less/, "menos").gsub(/than/, "de").gsub(/about/, "").gsub(/ a /, " un ").gsub(/minute/, "minuto").gsub(/day/, "día").gsub(/hour/, "hora").gsub(/year/,"año") %></div>
-				<br>
-				<%=  simple_format(comment.body) %>
-			</div>
-		<% end %>
-	<% end %>
-	</div>
 
-	<div class="related">
-	Material relacionado <br><hr>
-	<% Material.where(tags: @material.tags).ne(id: @material.id).each do |material| %>
-		<div class="recomended_material">
-           
-            <%= link_to material , :class => "thumbnail" do %>
-              
-                <% if material.format == 'video' %>
 
-                    <div class="duration">
-                        <% if material.video_duration > 3600 %>
-                            <%= Time.at(material.video_duration).utc.strftime("%H:%M:%S") %>
-                        <% else %>
-                            <%= Time.at(material.video_duration).utc.strftime("%M:%S") %>
-                        <% end %>
-                    </div>
-
-                    <%= image_tag("http://i.ytimg.com/vi/" + material.youtube_id + "/mqdefault.jpg", :class => "youtubeThumbnail") %>
-                
-
-                <% else %>
-                    <%= material.file_type %> 
-                <%end %>
-            <% end %>
-            
-            <div class="block1">  
-                <%= link_to material do %>
-	                <div class="name">
-	                    <%= material.name %>
-	                </div>
-                <% end %>
-
-                <div class="author">
-	                <% material.authors.each do |author| %>
-	                  <%= author %>
-	                <% end %>
-                </div>
-            </div>
-                      
-        </div>
-	<% end %>
-	</div>
 </article>
 
+
+<%= render '/materials/favorites_script.html.erb' %>
+
+
 <script type="text/javascript">
-<% if user_signed_in? %>
-window.method = <% if Material.find(params[:id]).favorites.where({user_id: current_user.id}).count >= 1 %> <%= raw '"DELETE"' %> <% else %><%= raw '"POST"' %><% end %>;
 
-
-var changeMethod = function () {
-	if (window.method == "DELETE") {
-		window.method = "POST";
-	} else {
-		window.method = "DELETE";
-	};
-}
-var updateNumberOfFavs = function(){
-	numberOfFavs = parseInt($("number").html())
-	if (window.method == "POST") {
-		$("number").html(numberOfFavs - 1)
-	} else {
-		$("number").html(numberOfFavs + 1)
-	};
-}
-var favMaterial = function (method){
-    
-	    $.ajax({
-	    			 
-	                 url: "<%= material_favorites_path(params[:id]) %>", // Route to favorite
-	                type: method, // Controller create or destroy method
-	            dataType: "json",
-	                data: {}, // This goes to Controller in params hash, i.e. params[:file_name]
-	            complete: function() {},
-	             success: function(data, textStatus, xhr) {
-	                        // Do something with the response here
-	                      $(".favs .icon").toggleClass("favoriteAjax")
-	    				  $(".favoriteAjax").toggleClass("active");
-	    				  updateNumberOfFavs();
-
-	                      },
-	               error: function() {
-	                        alert("Ajax error!")
-	                      	$(".favoriteAjax").toggleClass("favoriteAjax")
-	                      }
-	    });
-}
+// Linkify
 $(document).ready(function(){
-	showLinksOnDescription();
-	$(document).on("click", '.favoriteAjax', function() {
-		$(".favoriteAjax").toggleClass("favoriteAjax")
-		favMaterial(window.method);
-	  	changeMethod();
-	});
-	if (window.method == "DELETE") {
-		$(".favoriteAjax").toggleClass("active");
-	};	
-});
-
-<% else %>
-$(document).ready(function(){
-	$(document).on("click", '.favoriteAjax', function() {
-	 	showBanner();
-	});	
 	showLinksOnDescription();
 })
 
-<% end %>
+// Expresion regular que añade la etiqueta "a" a los enlaces del texto
 function linkify(text) {
     var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
     return text.replace(urlRegex, function(url) {
         return '<a href="' + url + '">' + url + '</a>';
     });
 }
+// Utilizar la expresion regular linkify para añadir los enlaces de la descripcion. 
 function showLinksOnDescription(){
 	description = $(".description").html();
-	description_with_links = linkify(description)
+	description_with_links = linkify(description);
 	$(".description").html(description_with_links);
 }
+
 
 </script>

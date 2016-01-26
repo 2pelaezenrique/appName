@@ -3,6 +3,7 @@ class Material
   include Mongoid::Paperclip
 
   has_mongoid_attached_file :file
+  do_not_validate_attachment_file_type :file
   field :name, type: String
   field :description, type: String
   field :format, type: String
