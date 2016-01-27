@@ -2,18 +2,32 @@
 	<%= link_to destroy_user_session_path, method: :delete,class: "signout"  do %>
 		<div class="panelButton icon signout"></div>
 	<% end %>
+
+	<div class="fav panelButton icon angle-down">
+		<div class="invisible user_menu">
+			<ul>
+				<li>Aulas</li>
+				<li>Listas</li>
+				<li>Favoritos</li>
+				<li>Mis Materiales</li>
+				<br>
+
+				<li>Cerrar Sesión</li>
+			</ul>
+		</div>
+
+	</div>
 	<div class="panelButton username">
 		<%= current_user.username %>		
 	</div>
-	<%= link_to destroy_user_session_path, method: :delete, class: "fav" do %>
-		<div class="panelButton icon star"></div>
-	<% end %>
-	<%= link_to destroy_user_session_path, method: :delete, class: "lists" do %>
-		<div class="panelButton icon list-alt"></div>
-	<% end %>
-	<%= link_to destroy_user_session_path, method: :delete, class: "classrooms" do %>
-		<div class="panelButton iconos">&#xe807;</div>
-	<% end %>
-	
-	
+		
+
 </div>
+<script type="text/javascript">
+	$(document).ready(function  () {
+		$(".fav.angle-down").on("click", function(){
+			$(".user_menu").toggleClass("invisible");
+			$(this).toggleClass("active_menu");
+		})
+	})
+</script>

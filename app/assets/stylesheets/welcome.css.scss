@@ -48,6 +48,9 @@ a.logintext:hover{
     background-color    : rgba(93, 199, 92, 0.7);
     border-radius       : 0px;
 }
+.fav{
+    color: rgb(255, 199, 0);
+}
 .header:hover{
     background-color    : rgba(255, 255, 255, 0.22);
 }
@@ -68,7 +71,11 @@ a.logintext:hover{
     font-size           : 17px;
 }
 a.signout, a.signout:visited{
-    color               : red;
+    color               : white;
+}
+a.signout:hover{
+    background-color: transparent;
+    color: rgba(255, 0, 0, 0.53);
 }
 #footer{
     background-color    : transparent;

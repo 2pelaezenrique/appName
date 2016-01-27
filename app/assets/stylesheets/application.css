@@ -249,9 +249,10 @@ input:focus{
     text-align: center;
 }
 a.signout, a.signout:visited{
-    color               : #696969;
+    color               : grey;
     text-decoration     : none;
 }
+
 a.signout:hover{
     background-color: transparent;
     color: rgba(255, 0, 0, 0.53);
@@ -260,11 +261,15 @@ a.signout:hover{
     border-right: 1px solid rgba(128, 128, 128, 0.25);
     border-left: 1px solid rgba(128, 128, 128, 0.25);
 }
-a.fav, a.fav:visited{
-    color: rgb(255, 199, 0);
+.fav{
+    color: grey;
 }
-.panelButton:hover{
+
+.panelButton:hover, .active_menu{
     background-color: rgba(0, 0, 0, 0.08);
+}
+.active_menu{
+    position: relative;
 }
 #footer{
     height: 48px;
@@ -431,7 +436,7 @@ low {
     font-family: 'Courgette',cursive;
     font-size: 1.9em;
 }
-li {
+.estandarFont li {
     padding-left: 50px;
     
     line-height: 30px;
@@ -610,6 +615,23 @@ input[type="file"]{
 .largeUploadButton{
     width: 92%;
 }
-.ytp-color-white .ytp-swatch-background-color{
-    background-color: #198400 !important;
+
+.user_menu{
+    position: absolute;
+    right: 0px;
+    top: 48px;
+    color: black;
+    background-color: white;
+    padding: 10px;
+    padding-right: 15px;
+    -webkit-box-shadow: 0px 5px 11px 0px rgba(143,143,143,1);
+    -moz-box-shadow: 0px 5px 11px 0px rgba(143,143,143,1);
+    box-shadow: 0px 5px 11px 0px rgba(143,143,143,1);
+    padding-left: 38px;
+    width: 130px;
+    text-align: left;
+    font-family: Roboto, sans-serif;
+}
+.user_menu ul li {
+    line-height: 30px;
 }

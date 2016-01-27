@@ -27,6 +27,7 @@ class Material
 
   #Relations
   belongs_to :user
+  belongs_to :list
   embeds_many :comments
   embeds_many :favorites
 end
