@@ -4,6 +4,7 @@
 	<% end %>
 
 	<div class="fav panelButton icon angle-down">
+		<div class="triangulo_sup invisible"></div>
 		<div class="invisible user_menu">
 			<ul>
 				<li>Aulas</li>
@@ -11,8 +12,9 @@
 				<li>Favoritos</li>
 				<li>Mis Materiales</li>
 				<br>
-
-				<li><%= link_to "Cerrar Sesión", destroy_user_session_path, method: :delete%></li>
+				<%= link_to destroy_user_session_path, method: :delete do %>
+				<li> Cerrar Sesión </li>
+				<% end %>
 			</ul>
 		</div>
 
@@ -27,6 +29,7 @@
 	$(document).ready(function  () {
 
 		$('html').click(function() {
+				$(".triangulo_sup").addClass("invisible");
 			    $(".visible_menu").addClass("invisible");
 			    $(".visible_menu").removeClass("visible_menu");
 			    $(".active_menu").removeClass("active_menu");
@@ -36,16 +39,21 @@
 		});
 		$(".fav.angle-down").on("click", function(){
 			if (!$(".user_menu").hasClass("visible_menu")){
-			setTimeout(function(){			
+			setTimeout(function(){
+				$(".triangulo_sup").toggleClass("invisible");			
 				$(".user_menu").toggleClass("invisible");
 				$(".user_menu").toggleClass("visible_menu");
 				$(this).toggleClass("active_menu");
 			}, 1);
 			};
 		});
-
+		$('.triangulo_sup').click(function(e){
+		    
+		    /* Mostrar nuestro menú*/
+		    e.stopPropagation();
+		});
 		 
-		$('.visible_menu').click(function(e){
+		$('.user_menu').click(function(e){
 		    
 		    /* Mostrar nuestro menú*/
 		    e.stopPropagation();

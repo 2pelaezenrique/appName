@@ -621,7 +621,7 @@ input[type="file"]{
 .user_menu{
     position: absolute;
     right: 0px;
-    top: 48px;
+    top: 58px;
     color: black;
     background-color: white;
     -webkit-box-shadow: 0px 5px 11px 0px rgba(143,143,143,1);
@@ -645,10 +645,20 @@ input[type="file"]{
     color: white;
     font-weight: 600;
 }
-ul li a, ul li a:visited,ul li a:hover{
+ul a, ul a:visited,ul a:hover{
     text-decoration: none;
     color: inherit;
     font-family: inherit;
     font-weight: inherit;
     background-color: inherit;
+}
+.triangulo_sup {
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 10px solid #fff;
+    position: absolute;
+    right: 10px;
+    z-index: 2;
 }
