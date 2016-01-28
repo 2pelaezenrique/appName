@@ -1,3 +1,4 @@
+
 <div class="panel">
 	<%= link_to destroy_user_session_path, method: :delete,class: "signout"  do %>
 		<div class="panelButton icon signout"></div>
@@ -20,7 +21,10 @@
 
 	</div>
 	<div class="panelButton username">
-		<%= current_user.username %>		
+		<%= link_to user_index_path do %>
+			<%= current_user.username %>
+			<%= image_tag(current_user.avatar.url, class: "header_avatar") %>		
+		<% end %>
 	</div>
 		
 

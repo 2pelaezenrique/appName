@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+  
   resources :lists
+  resources :user
   resources :classrooms
   resources :materials do
     resources :favorites

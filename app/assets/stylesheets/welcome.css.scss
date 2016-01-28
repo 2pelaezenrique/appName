@@ -24,7 +24,10 @@ html, body{
     background-color    : transparent;
     -webkit-transition  : background-color 0.5s;
 }
-
+.username a {
+    color: inherit;
+    text-decoration: inherit;
+}
 .asignaturas{
     color               : white;
 }

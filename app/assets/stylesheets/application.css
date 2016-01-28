@@ -32,7 +32,7 @@ html, body{
     font-family: Roboto, sans-serif;
 }
 
- .header{
+.header{
  	height 				: 48px;
     width 				: 100%;
     background-color 	: white;
@@ -254,6 +254,13 @@ a.signout, a.signout:visited{
     color               : grey;
     text-decoration     : none;
 }
+.header_avatar{
+    width: 28px;
+    padding: 3px;
+    background-color: white;
+    border-radius: 50%;
+    vertical-align: middle;
+}
 
 a.signout:hover{
     background-color: transparent;
@@ -262,6 +269,15 @@ a.signout:hover{
 .username{
     border-right: 1px solid rgba(128, 128, 128, 0.25);
     border-left: 1px solid rgba(128, 128, 128, 0.25);
+}
+.username a{
+    color: black !important;  
+    text-decoration: none !important;
+    cursor: pointer;
+}
+.username a:hover{
+    background-color: transparent;
+    text-decoration: none !important;
 }
 .fav{
     color: grey;

@@ -6,7 +6,8 @@
         <br>
     <% end %>
 	<% Material.where(tags: Regexp.new(@material.tags, true)).ne(id: @material.id).each do |material| %>
-		<div class="recomended_material">
+		
+        <div class="recomended_material">
            
             <%= link_to material , :class => "thumbnail" do %>
               
