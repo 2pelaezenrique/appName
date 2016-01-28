@@ -248,6 +248,7 @@ input:focus{
     float: right;
     padding-right: 7px;
     text-align: center;
+    position: relative;
 }
 a.signout, a.signout:visited{
     color               : grey;
@@ -639,8 +640,15 @@ input[type="file"]{
     /* background-color: #878793; */
     line-height: 23px;
 }
-.user_menu ul li:hover{
+.user_menu ul li:hover {
     background-color: #167AC6;
     color: white;
     font-weight: 600;
+}
+ul li a, ul li a:visited,ul li a:hover{
+    text-decoration: none;
+    color: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+    background-color: inherit;
 }

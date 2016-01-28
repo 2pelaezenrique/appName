@@ -25,9 +25,30 @@
 </div>
 <script type="text/javascript">
 	$(document).ready(function  () {
+
+		$('html').click(function() {
+			    $(".visible_menu").addClass("invisible");
+			    $(".visible_menu").removeClass("visible_menu");
+			    $(".active_menu").removeClass("active_menu");
+		
+			
+			 /* Aqui se esconden los menus que esten visibles*/
+		});
 		$(".fav.angle-down").on("click", function(){
-			$(".user_menu").toggleClass("invisible");
-			$(this).toggleClass("active_menu");
-		})
-	})
+			if (!$(".user_menu").hasClass("visible_menu")){
+			setTimeout(function(){			
+				$(".user_menu").toggleClass("invisible");
+				$(".user_menu").toggleClass("visible_menu");
+				$(this).toggleClass("active_menu");
+			}, 1);
+			};
+		});
+
+		 
+		$('.visible_menu').click(function(e){
+		    
+		    /* Mostrar nuestro menú*/
+		    e.stopPropagation();
+		});
+	});
 </script>
