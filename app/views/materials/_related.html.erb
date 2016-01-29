@@ -6,43 +6,15 @@
         <br>
     <% end %>
 	<% Material.where(tags: Regexp.new(@material.tags, true)).ne(id: @material.id).each do |material| %>
-		
-        <div class="recomended_material">
-           
-            <%= link_to material , :class => "thumbnail" do %>
-              
-                <% if material.format == 'video' %>
-
-                    <div class="duration">
-                        <% if material.video_duration > 3600 %>
-                            <%= Time.at(material.video_duration).utc.strftime("%H:%M:%S") %>
-                        <% else %>
-                            <%= Time.at(material.video_duration).utc.strftime("%M:%S") %>
-                        <% end %>
-                    </div>
-
-                    <%= image_tag("http://i.ytimg.com/vi/" + material.youtube_id + "/mqdefault.jpg", :class => "youtubeThumbnail") %>
-                
-
-                <% else %>
-                     <%= image_tag(material.file_type + ".png", :class => "elementThumbnail") %> 
-                <%end %>
-            <% end %>
-            
-            <div class="block1">  
-                <%= link_to material do %>
-	                <div class="related_name">
-	                    <%= material.name %>
-	                </div>
-                <% end %>
-
-                <div class="author">
-	                <% material.authors.split(",").each do |author| %>
-	                  <%= author %>
-	                <% end %>
-                </div>
-            </div>
-                      
-        </div>
-	<% end %>
+	<div class="recomended_material">
+		<%= render partial: "material", locals: {material: material} %>
+			 <div class="author">
+	            <% material.authors.split(",").each do |author| %>
+	              <%= author %>
+	            <% end %>
+	        </div>
+	    </div>
 	</div>
+	        
+	<% end %>
+</div>

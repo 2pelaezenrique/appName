@@ -3,67 +3,29 @@
 <% end %>
 <article class ="materials_index">
 <%= render 'filter' %>
-<div class="materials">
-  <p id="notice"><%= notice %></p>
+  <div class="materials">
+    <p id="notice"><%= notice %></p>
 
 
 
-      <% @materials.each do |material| %>
-          <div class="material">
-           
-            <%= link_to material , :class => "thumbnail" do %>
-              
-                <% if material.format == 'video' %>
-
-                  <div class="duration">
-                    <% if material.video_duration > 3600 %>
-                        <%= Time.at(material.video_duration).utc.strftime("%H:%M:%S") %>
-                    <% else %>
-                        <%= Time.at(material.video_duration).utc.strftime("%M:%S") %>
-                    <% end %>
-                  </div>
-
-                  <%= image_tag("http://i.ytimg.com/vi/" + material.youtube_id + "/mqdefault.jpg", :class => "youtubeThumbnail") %>
-                
-
-                <% else %>
-                  <%= image_tag(material.file_type + ".png", :class => "elementThumbnail") %> 
-                <%end %>
-              
-            <% end %>
-            <div class="block1">  
-              <%= link_to material do %>
-                <div class="name">
-                  <%= material.name %>
-                </div>
+    <% @materials.each do |material| %>
+        <div class="material">
+          <%= render partial: "material", locals: {material: material} %>
+            <div class="description">
+              <% material.authors.split(",").each do |author| %>
+                <%= author + ". "%>
               <% end %>
-
-              <div class="description">
-                <% material.authors.split(",").each do |author| %>
-                  <%= author + ". "%>
-                <% end %>
-                <br>
-                <%= material.description %>
-              </div>
+              <br>
+              <%= material.description %>
             </div>
-            <!--
-            <%= material.type %>
-            
-            
-            
-            <%= link_to 'Edit', edit_material_path(material) %>
-            
-            <%= link_to 'Destroy', material, method: :delete, data: { confirm: 'Are you sure?' } %>
-              -->          
           </div>
-      <% end %>
-    </tbody>
-  </table>
+        </div>
+    <% end %>
 
   <br>
 
 
-</div>
+  </div>
 </article>
 
 <script type="text/javascript">

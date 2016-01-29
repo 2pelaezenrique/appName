@@ -259,7 +259,7 @@ a.signout, a.signout:visited{
     padding: 3px;
     background-color: white;
     border-radius: 50%;
-    vertical-align: middle;
+    vertical-align: sub;
 }
 
 a.signout:hover{
