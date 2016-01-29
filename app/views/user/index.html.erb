@@ -1,1 +1,10 @@
-Hi
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'user', media: "all"%>
+<% end %>
+<section class="user_page">
+<div class="user_info">
+	<%= image_tag(current_user.avatar.url, class: "user_avatar")%>
+	<div class="user_name"> <%= current_user.username%></div>
+
+</section>
+</div>

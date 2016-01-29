@@ -378,7 +378,6 @@ a.signout:hover{
     width: 100%;
     text-align: center;
     line-height: 48px;
-    margin-top: -48px;
 }
 .webpage{
     height: -webkit-calc(100% - 48px);
@@ -642,8 +641,8 @@ aside{
     height: 100%;
 }
 article{
-        height: -webkit-calc(100% - 48px);
-    height: -moz-calc(100% - 48px);
+    min-height: -webkit-calc(100% - 96px);
+    min-height: -moz-calc(100% - 96px);
     overflow-y: auto;
     width: 100%;
 }
