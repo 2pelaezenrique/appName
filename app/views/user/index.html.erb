@@ -1,10 +1,40 @@
 <% content_for :head do %>
   <%= stylesheet_link_tag 'user', media: "all"%>
+  <%= stylesheet_link_tag 'search', media: "all"%>
 <% end %>
-<section class="user_page">
-<div class="user_info">
-	<%= image_tag(current_user.avatar.url, class: "user_avatar")%>
-	<div class="user_name"> <%= current_user.username%></div>
+<div class="user_page">
+	<div class="user_info">
+		<%= image_tag(current_user.avatar.url, class: "user_avatar")%>
+		<div class="user_description">
+			<div class="user_name"> <%= current_user.username%></div>
+			<div class="light">
+				@<%= current_user.username %> <br>
+				Posts: <%= Material.where(user_id: current_user.id).count %>
 
-</section>
+			</div>
+
+		</div>
+		<%= link_to(edit_user_registration_path) do %>
+		<div class="edit_user icon pencil"></div>
+		<% end %>
+	</div>
+	<div class="user_favorites">
+		<div class="colum_title">Favoritos	</div>	
+		<div class="list">
+			<% Material.where('favorites.user_id' => current_user.id.to_s).limit(7).each do |material| %> 
+				<div class="material">
+		          <%= render partial: "materials/material", locals: {material: material} %>
+		            <div class="description">
+		              <% material.authors.split(",").each do |author| %>
+		                <%= author + ". "%>
+		              <% end %>
+		              <br>
+		              <%= material.description %>
+		            </div>
+		          </div>
+		        </div>
+			<% end %>
+		</div>
+		<a href="#"> Mostrar todos...</a>
+	</div>
 </div>

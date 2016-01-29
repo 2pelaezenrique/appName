@@ -1,4 +1,4 @@
-
+<%= javascript_include_tag 'clickOutside' %>
 <div class="panel">
 	<%= link_to destroy_user_session_path, method: :delete,class: "signout"  do %>
 		<div class="panelButton icon signout"></div>
@@ -14,7 +14,7 @@
 				<li>Mis Materiales</li>
 				<br>
 				<%= link_to destroy_user_session_path, method: :delete do %>
-				<li> Cerrar Sesión </li>
+					<li> Cerrar Sesión </li>
 				<% end %>
 			</ul>
 		</div>
@@ -32,35 +32,48 @@
 <script type="text/javascript">
 	$(document).ready(function  () {
 
-		$('html').click(function() {
-				$(".triangulo_sup").addClass("invisible");
-			    $(".visible_menu").addClass("invisible");
-			    $(".visible_menu").removeClass("visible_menu");
-			    $(".active_menu").removeClass("active_menu");
+		// $('html').click(function() {
+		// 		$(".triangulo_sup").addClass("invisible");
+		// 	    $(".visible_menu").addClass("invisible");
+		// 	    $(".visible_menu").removeClass("visible_menu");
+		// 	    $(".active_menu").removeClass("active_menu");
 		
 			
-			 /* Aqui se esconden los menus que esten visibles*/
-		});
+		// 	 /* Aqui se esconden los menus que esten visibles*/
+		// });
 		$(".fav.angle-down").on("click", function(){
-			if (!$(".user_menu").hasClass("visible_menu")){
-			setTimeout(function(){
-				$(".triangulo_sup").toggleClass("invisible");			
-				$(".user_menu").toggleClass("invisible");
-				$(".user_menu").toggleClass("visible_menu");
-				$(this).toggleClass("active_menu");
-			}, 1);
+			if (!$(".fav.panelButton").hasClass("active_menu")) {
+				setTimeout(function(){
+					$(".triangulo_sup").removeClass("invisible");			
+					$(".user_menu").removeClass("invisible");
+					$(".user_menu").addClass("visible_menu");
+					$(".fav.angle-down").addClass("active_menu");
+				},1)
 			};
 		});
-		$('.triangulo_sup').click(function(e){
+		// $('.triangulo_sup').click(function(e){
 		    
-		    /* Mostrar nuestro menú*/
-		    e.stopPropagation();
-		});
+		//     /* Mostrar nuestro menú*/
+		//     e.stopPropagation();
+		// });
 		 
-		$('.user_menu').click(function(e){
+		// $('.user_menu').click(function(e){
 		    
-		    /* Mostrar nuestro menú*/
-		    e.stopPropagation();
+		//     /* Mostrar nuestro menú*/
+		//     e.stopPropagation();
+		// });
+		$(".user_menu").bind( 'clickoutside', function(event){
+			console.log("estas pinchando fuera")
+			if ($(".fav.panelButton").hasClass("active_menu")) {
+				console.log("tiene la clase active menu")
+
+
+				$(".triangulo_sup").addClass("invisible");			
+				$(".user_menu").addClass("invisible");
+				$(".user_menu").removeClass("visible_menu");
+				$(".fav.angle-down").removeClass("active_menu");
+			};
+
 		});
 	});
 </script>
