@@ -27,8 +27,7 @@
 }
 @keyframes timeOut {
     0%{
-        transform-origin: 0px left 0px
-        display: block;
+
         width: 305px;
         height: 61px;
     }
