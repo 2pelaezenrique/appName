@@ -25,13 +25,97 @@
     font-weight: normal;
     font-style: normal;
 }
+@keyframes timeOut {
+    0%{
+        transform-origin: 0px left 0px
+        display: block;
+        width: 305px;
+        height: 61px;
+    }
+    
+    70%  {
+        width: 5px;
+        height: 61px;
+    }
+    95% {
+        height: 0px;
+        width: 5px;
+        transform: scale(1.0);
+        opacity: 1;
+        }
+    100%{
+        opacity: 0;
+        width: 305px;
+        transform: scale(0)
+    }
+}
+@keyframes shadow_timeOut {
+    
+    95% {
+
+        transform: scale(1.0);
+        opacity: 1;
+        }
+    100%{
+        opacity: 0;
+        transform: scale(0)
+    }
+}
 html, body{
  	height 				: 100%;
  	width 				: 100%;
  	background-color 	: #F1F1F1;
     font-family: Roboto, sans-serif;
 }
+.notice {
+    width: 305px;
+        height: 61px;
+    position: absolute;
 
+    background-color: #18A103;
+    color: black;
+    font-family: Roboto, sans-serif;
+    font-size: 15px;
+
+    animation-name: timeOut;
+    animation-duration: 10s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards; 
+
+}
+.notice_shadow{
+    width: 300px;
+    height: 56px;
+    bottom: 100px;
+    right: 50px;
+    position: absolute;
+    -webkit-box-shadow: 4px 2px 9px 1px rgba(143,143,143,1);
+    -moz-box-shadow: 4px 2px 9px 1px rgba(143,143,143,1);
+    box-shadow: 4px 2px 9px 1px rgba(143,143,143,1);    
+    animation-name: shadow_timeOut;
+    animation-duration: 10s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards; 
+}
+.notice_msg{
+    width: 273px;
+    background-color: white;
+    height: 56px;
+    margin-left: 5px;
+    position: relative;
+    padding-right: 18px;
+    padding-left: 10px;
+}
+.close_notice {
+    position: absolute;
+    right: 5px;
+    color: #AEACAC;
+    top: 5px;
+    cursor: pointer;
+}
+.close_notice:hover{
+    color: #5F5F5F;
+}
 .header{
  	height 				: 48px;
     width 				: 100%;
