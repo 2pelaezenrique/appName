@@ -3,7 +3,7 @@
 	<div class="list">
 		<% current_user.lists.limit(7).each do |list| %> 
 				
-			<div class="user_list">
+			<div class="user_list" list-id="<%= list.id %>">
 				<%= link_to "#" do %>
 					<b><%= list.name %></b> <%= list.description %>
 		    	<% end %>

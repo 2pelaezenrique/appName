@@ -1,5 +1,5 @@
-source 'https://rubygems.org'
-# gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
+source 'http://rubygems.org'
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 gem 'yt', '~> 0.25.6'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
@@ -46,5 +46,5 @@ end
 gem 'mongoid', github: "mongoid/mongoid"
 gem 'bson_ext'
 gem 'devise'
-gem "mongoid-paperclip", :require => "mongoid_paperclip"
+gem "mongoid-paperclip", github: '2pelaezenrique/mongoid-paperclip', :require => "mongoid_paperclip"
 gem 'aws-sdk', '< 2.0'
