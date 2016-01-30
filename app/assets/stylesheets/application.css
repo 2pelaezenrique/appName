@@ -36,27 +36,34 @@
         width: 5px;
         height: 61px;
     }
-    95% {
+    93% {
         height: 0px;
         width: 5px;
-        transform: scale(1.0);
         opacity: 1;
         }
-    100%{
+    99%{
+        height: 0px;
         opacity: 0;
+        transform: scale(1)
+    }
+    100%{
+        height: 0px;
         width: 305px;
         transform: scale(0)
     }
 }
 @keyframes shadow_timeOut {
     
-    95% {
-
-        transform: scale(1.0);
+    93% {
+        bottom: 100px;
         opacity: 1;
         }
-    100%{
+    99%{
+        bottom: 350px;
         opacity: 0;
+        transform: scale(1)
+    }
+    100%{
         transform: scale(0)
     }
 }
@@ -69,7 +76,7 @@ html, body{
 }
 .notice {
     width: 305px;
-        height: 61px;
+    height: 61px;
     position: absolute;
 
     background-color: #18A103;
@@ -78,7 +85,7 @@ html, body{
     font-size: 15px;
 
     animation-name: timeOut;
-    animation-duration: 10s;
+    animation-duration: 8s;
     animation-timing-function: linear;
     animation-fill-mode: forwards; 
 
@@ -93,7 +100,7 @@ html, body{
     -moz-box-shadow: 4px 2px 9px 1px rgba(143,143,143,1);
     box-shadow: 4px 2px 9px 1px rgba(143,143,143,1);    
     animation-name: shadow_timeOut;
-    animation-duration: 10s;
+    animation-duration: 8s;
     animation-timing-function: linear;
     animation-fill-mode: forwards; 
 }
