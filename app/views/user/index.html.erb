@@ -18,23 +18,9 @@
 		<div class="edit_user icon pencil"></div>
 		<% end %>
 	</div>
-	<div class="user_favorites">
-		<div class="colum_title">Favoritos	</div>	
-		<div class="list">
-			<% Material.where('favorites.user_id' => current_user.id.to_s).limit(7).each do |material| %> 
-				<div class="material">
-		          <%= render partial: "materials/material", locals: {material: material} %>
-		            <div class="description">
-		              <% material.authors.split(",").each do |author| %>
-		                <%= author + ". "%>
-		              <% end %>
-		              <br>
-		              <%= material.description %>
-		            </div>
-		          </div>
-		        </div>
-			<% end %>
-		</div>
-		<a href="#"> Mostrar todos...</a>
+	<div class="colum">
+		<%= render partial: "favorites" %>
+		<%= render partial: "user_lists" %>
+		
 	</div>
 </div>

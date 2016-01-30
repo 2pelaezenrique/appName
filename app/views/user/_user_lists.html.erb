@@ -1,0 +1,51 @@
+<div class="user_lists">
+	<div class="colum_title">Listas</div>	
+	<div class="list">
+		<% current_user.lists.limit(7).each do |list| %> 
+				
+			<div class="user_list">
+				<%= link_to "#" do %>
+					<b><%= list.name %></b> <%= list.description %>
+		    	<% end %>
+	        </div>
+		<% end %>
+	</div>
+	<a href="#"> Mostrar todas...</a>
+	<div class="add_list inactive_form">
+		
+		<div class="new_list_form invisible">
+			<div class="triangulo_der"></div>
+			<%= form_for List.new,:remote => true do |f| %>
+			   <%= f.text_field :name, required: true, placeholder: "Nombre"%>
+			   <%= f.text_field :description, placeholder: "Descripcion... " %>
+			   <%= f.submit "Crear" %>
+			<% end %>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function  () {
+
+
+		$(".add_list").on("click", function(){
+			if (!$(".add_list").hasClass("active_form")) {
+				setTimeout(function(){
+					$(".new_list_form").removeClass("invisible");			
+					$(".add_list").removeClass("inactive_form")
+					$(".add_list").addClass("active_form");
+
+				},1)
+			};
+		});
+		
+		$(".new_list_form").bind( 'clickoutside', function(event){
+			if ($(".add_list").hasClass("active_form")) {
+				
+				$(".new_list_form").addClass("invisible");
+				$(".add_list").removeClass("active_form");
+				$(".add_list").addClass("inactive_form");
+			};
+
+		});
+	});
+</script>

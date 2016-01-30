@@ -5,6 +5,7 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( welcome.css )
 Rails.application.config.assets.precompile += %w( search.css )
 Rails.application.config.assets.precompile += %w( show_video.css )
+Rails.application.config.assets.precompile += %w( materials_form.css )
 Rails.application.config.assets.precompile += %w( user.css )
 Rails.application.config.assets.precompile += %w( favorites.js )
 Rails.application.config.assets.precompile += %w( clickOutside.js )

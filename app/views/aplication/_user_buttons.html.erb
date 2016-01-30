@@ -31,16 +31,6 @@
 </div>
 <script type="text/javascript">
 	$(document).ready(function  () {
-
-		// $('html').click(function() {
-		// 		$(".triangulo_sup").addClass("invisible");
-		// 	    $(".visible_menu").addClass("invisible");
-		// 	    $(".visible_menu").removeClass("visible_menu");
-		// 	    $(".active_menu").removeClass("active_menu");
-		
-			
-		// 	 /* Aqui se esconden los menus que esten visibles*/
-		// });
 		$(".fav.angle-down").on("click", function(){
 			if (!$(".fav.panelButton").hasClass("active_menu")) {
 				setTimeout(function(){
@@ -51,29 +41,14 @@
 				},1)
 			};
 		});
-		// $('.triangulo_sup').click(function(e){
-		    
-		//     /* Mostrar nuestro menú*/
-		//     e.stopPropagation();
-		// });
-		 
-		// $('.user_menu').click(function(e){
-		    
-		//     /* Mostrar nuestro menú*/
-		//     e.stopPropagation();
-		// });
+		
 		$(".user_menu").bind( 'clickoutside', function(event){
-			console.log("estas pinchando fuera")
 			if ($(".fav.panelButton").hasClass("active_menu")) {
-				console.log("tiene la clase active menu")
-
-
 				$(".triangulo_sup").addClass("invisible");			
 				$(".user_menu").addClass("invisible");
 				$(".user_menu").removeClass("visible_menu");
 				$(".fav.angle-down").removeClass("active_menu");
 			};
-
 		});
 	});
 </script>

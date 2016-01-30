@@ -47,11 +47,16 @@
 .block1{
     width: 242px !important;
 }
-.user_favorites{
-    width: 400px;
+.user_favorites , .user_lists{
+    margin-bottom: 10px;
     background-color: white;
+    position: relative;
+
+}
+.colum{
+    vertical-align: top;
+    width: 400px;
     display: inline-block;
-    overflow: auto;
     text-align: right;
 }
 .material{
@@ -77,7 +82,83 @@
     color: #9E9D9D;
 }
 .list{
-    max-height: 450px;
+    max-height: 345px;
     overflow: auto;
     width: 100%;
+    text-align: left;
+}
+.add_list{
+    text-align: left;
+    line-height: 23px;
+    font-size: 1.2em;
+    color: #9E9E9E;
+    font-weight: 500;
+    height: 23px;
+    cursor: pointer;
+    padding-left: 10px;
+}
+.add_list:hover {
+    color: grey;
+}
+.new_list_form{
+    position: absolute;
+    bottom: 0px;
+    left: -251px;
+    width: 223px;
+    background-color: white;
+    padding: 9px;
+    -webkit-box-shadow: 1px 1px 13px 1px rgba(143, 143, 143, 0.67);
+    -moz-box-shadow: 1px 1px 13px 1px rgba(143, 143, 143, 0.67);
+    box-shadow: 1px 1px 13px 1px rgba(143, 143, 143, 0.67);
+}
+.new_list_form form input{
+    font-size: 1em;
+    display: block;
+    width: 218px;
+    padding-left: 5px;
+}
+.new_list_form form input[type="submit"]{
+    padding: 2px;
+    background-color: #4C9AD2;
+    width: 50px;
+
+}
+.triangulo_der{
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-left: 10px solid #fff;
+    border-bottom: 7px solid transparent;
+    z-index: 2;
+    position: absolute;
+    right: -10px;
+    bottom: 6px;
+}
+.add_list.inactive_form:before{
+    content: "+ Crear Lista";
+}
+.add_list.active_form:before{
+    content: "Cancelar";
+}
+
+.user_list a, .user_list a:visited{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: grey;
+    font-size: 15px;
+    margin-left: 10px;
+    margin-top: 4px;
+    margin-right: 23px;
+    display: block;
+}
+.user_list a b{
+    font-weight: 600;
+    color: black;
+}
+.user_list a:hover {
+    text-decoration: underline;
+    -webkit-text-decoration-color: #ABABAB;
+    -moz-text-decoration-color: #ABABAB; /* Code for Firefox */
+    text-decoration-color: #ABABAB;
 }
