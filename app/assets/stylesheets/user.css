@@ -171,6 +171,7 @@
 }
 .user_material{
     display: inline-block;
+    vertical-align: top;
 }
 .user_material .block1{
     width: 95px !important;

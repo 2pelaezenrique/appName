@@ -3,7 +3,7 @@
 
 <% if user_signed_in? %>
 // window.methos helps to now what method use. 
-window.method = <% if Material.find(params[:id]).favorites.where({user_id: current_user.id}).count >= 1 %> <%= raw '"DELETE"' %> <% else %><%= raw '"POST"' %><% end %>;
+window.method = <% if Favorite.and({ user_id: current_user.id }, { material_id: params[:id] }).count >= 1 %> <%= raw '"DELETE"' %> <% else %><%= raw '"POST"' %><% end %>;
 
 
 var changeMethod = function () {
