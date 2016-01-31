@@ -175,3 +175,9 @@
 .user_material .block1{
     width: 95px !important;
 }
+.related_name{
+    max-height: 18px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
