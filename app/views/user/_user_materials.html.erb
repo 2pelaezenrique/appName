@@ -1,0 +1,15 @@
+<div class="user_materials">
+	<% current_user.materials.order_by(:created_at => 'desc').limit(50).each do |material| %>
+		<div class="material user_material">
+	      <%= render partial: "materials/material", locals: {material: material} %>
+	        <div class="description">
+	          <% material.authors.split(",").each do |author| %>
+	            <%= author + ". "%>
+	          <% end %>
+	          <br>
+	          <%= material.description %>
+	        </div>
+	      </div>
+	    </div>
+	<% end %>
+</div>

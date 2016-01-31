@@ -20,6 +20,7 @@
 .user_page{
 	margin: auto;
 	min-height: -webkit-calc(100% - 64px);
+    min-height: -moz-calc(100% - 64px);
     width: 100%;
     padding-top: 16px;
 }
@@ -161,4 +162,16 @@
     -webkit-text-decoration-color: #ABABAB;
     -moz-text-decoration-color: #ABABAB; /* Code for Firefox */
     text-decoration-color: #ABABAB;
+}
+.user_materials{
+    display: inline-block;
+    width: -webkit-calc(100% - 679px);
+    width: -moz-calc(100% - 679px);
+    background-color: white;    
+}
+.user_material{
+    display: inline-block;
+}
+.user_material .block1{
+    width: 95px !important;
 }

@@ -1,5 +1,5 @@
 <div class="user_favorites">
-	<div class="colum_title">Favoritos	</div>	
+	<div class="colum_title">Favoritos</div>	
 	<div class="list">
 		<% Material.where('favorites.user_id' => current_user.id.to_s).limit(7).each do |material| %> 
 			<div class="material">
@@ -15,5 +15,5 @@
 	        </div>
 		<% end %>
 	</div>
-	<a href="#"> Mostrar todos...</a>
+	<a href="#"> Mostrar todos... </a>
 </div>
