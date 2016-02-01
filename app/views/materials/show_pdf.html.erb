@@ -87,7 +87,7 @@
 	                					<li><%= "No tienes ninguna lista" %></li>
 	                				<% else %>
 	                				    <% current_user.lists.each do |list| %>
-		                				    <li list-id="<%= list.id %>" class="relative	"><%= list.name %>
+		                				    <li list-id="<%= list.id %>" class="relative list_li" ><%= list.name %>
 			                				    <% if list.materials.include?(params[:id]) %>
 			                				    	<div class="icon check list_check"></div>
 			                				    <% else %>
@@ -127,6 +127,36 @@
 <%= render '/materials/favorites_script.html.erb' %>
 
 
+<script type="text/javascript">
+	$(".list_li").on("click",function(){
+		$(this).children().addClass("rotating");
+		addToList($(this).attr("list-id"));
+	})
+
+
+	var addToList = function (id){
+	    $.ajax({
+	                 url: "/list/" + "<%= params[:id] %>"+ "/" + id, // Route to favorite
+	                type: "GET", // Controller create or destroy method
+	            dataType: "json",
+	                data: {}, // This goes to Controller in params hash, i.e. params[:file_name]
+	            complete: function() {},
+	             success: function(data, textStatus, xhr) {
+	             		  $("li[list-id=" + id + "] .icon").removeClass("rotating")
+	                      $("li[list-id=" + id + "] .icon").toggleClass("check-empty")
+	                      $("li[list-id=" + id + "] .icon").toggleClass("check")
+
+	                      },
+	               error: function() {
+	                        alert("Error al añadir/eleminar de la lista")
+	                        // Se añade la clase para poder realizar otra vez la peticion ajax
+	                      	$(".favoriteAjax").toggleClass("favoriteAjax")
+	                      }
+	    });
+	}
+
+
+</script>
 <!-- New List -->
 <script type="text/javascript">
 	$(document).ready(function  () {

@@ -11,7 +11,29 @@ class ListsController < ApplicationController
   # GET /lists/1.json
   def show
   end
-
+  def materialToList
+    materialId = params[:material_id]
+    listId = params[:list_id]
+    if current_user.lists.where(id: listId).exists?
+      @list = List.find(listId)
+      if @list.materials.include?(materialId)
+        @list.materials.delete(materialId)
+        if @list.save
+          render json: {}, status: :ok
+        else
+          render json: {}, status: :conflict
+        end
+      else
+        if @list.push(materials: materialId)
+          render json: {}, status: :ok
+        else
+          render json: {}, status: :conflict
+        end
+      end
+    else
+      render json: {}, status: :conflict
+    end
+  end
   # GET /lists/new
   def new
     @list = List.new

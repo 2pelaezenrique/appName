@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get 'bye' => "welcome#bye"
   delete 'materials/:material_id/favorites' => "favorites#destroy"
   post 'materials/:material_id/comments' => "comments#create"
+  get 'list/:material_id/:list_id' => 'lists#materialToList'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

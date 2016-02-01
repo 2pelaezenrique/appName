@@ -458,7 +458,11 @@ comments .comments form textarea{
     margin-left: 18px;
     line-height: 19px;
     font-size: 15px;
+    cursor: pointer;
         margin-top: 9px;
+}
+.all_lists li:hover{
+        background-color: #E4E4E4;
 }
 .all_lists li .icon{
     position: absolute;
