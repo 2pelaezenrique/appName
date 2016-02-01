@@ -315,10 +315,11 @@ article{
     margin-right: 18px;
     margin-top: 19px;
 }
-.icon.download-circle{
+a .icon, div .icon{
     color: #979797;
+    cursor: pointer;
 }
-.icon.download-circle:hover{
+a .icon:hover,div .icon:hover{
     color: #167ac6;
 }
 i {
@@ -382,4 +383,73 @@ comments .comments form textarea{
 }
 .info.no_margin_left{
     width: 103%;
+}
+.add_list{
+    text-align: left;
+    line-height: 23px;
+    font-size: 1.2em;
+    color: #9E9E9E;
+    font-weight: 500;
+    height: 23px;
+    cursor: pointer;
+}
+.add_list:hover {
+    color: grey;
+}
+.new_list_form{
+    position: absolute;
+    bottom: 0px;
+    left: -251px;
+    width: 223px;
+    background-color: white;
+    padding: 9px;
+    -webkit-box-shadow: 1px 1px 13px 1px rgba(143, 143, 143, 0.67);
+    -moz-box-shadow: 1px 1px 13px 1px rgba(143, 143, 143, 0.67);
+    box-shadow: 1px 1px 13px 1px rgba(143, 143, 143, 0.67);
+}
+.new_list_form form input{
+    font-size: 1em;
+    display: block;
+    width: 218px;
+    padding-left: 5px;
+}
+.new_list_form form input[type="submit"]{
+    padding: 2px;
+    background-color: #4C9AD2;
+    width: 50px;
+
+}
+.triangulo_der{
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-left: 10px solid #fff;
+    border-bottom: 7px solid transparent;
+    z-index: 2;
+    position: absolute;
+    right: -10px;
+    bottom: 6px;
+}
+.add_list.inactive_form:before{
+    content: "+ Crear Lista";
+}
+.add_list.active_form:before{
+    content: "Cancelar";
+}
+.add_to_list{
+    position: absolute;
+    font-size: 13px;
+    width: 194px;
+    background-color: #FFFFFF;
+    right: 0;
+    top: 117%;
+    color: black;
+    font-weight: 500;
+    -webkit-box-shadow: 4px 0px 25px 2px rgba(143, 143, 143, 0.67);
+    -moz-box-shadow: 4px 0px 25px 2px rgba(143, 143, 143, 0.67);
+    box-shadow: 4px 0px 25px 2px rgba(143, 143, 143, 0.67);
+    padding: 2px 10px;
+}
+.add_to_list div{
+    display: block;
 }

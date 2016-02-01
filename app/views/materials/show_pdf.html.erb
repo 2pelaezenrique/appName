@@ -77,6 +77,25 @@
                 	
                 </div>
                 <div class="element_buttons">
+                	<div class="icon plus relative">
+                		<div class="add_to_list">
+                			<div class="triangulo_sup"></div>
+                			<div class="menu_header">Añadir a:</div>
+                			<div></div>
+                			
+                			<div class="add_list inactive_form">
+								<div class="new_list_form invisible">
+									<div class="triangulo_der"></div>
+									<%= form_for List.new,:remote => true do |f| %>
+									   <%= f.text_field :name, required: true, placeholder: "Nombre"%>
+									   <%= f.text_field :description, placeholder: "Descripcion... " %>
+									   <%= f.submit "Crear" %>
+									<% end %>
+								</div>
+							</div>
+                		
+                		</div>
+                	</div>
                 	<%= link_to @material.file.url, :download => @material.file_file_name do %>
                 		<div class="icon download-circle"></div>
                 	<% end %>
@@ -90,3 +109,32 @@
 <%= render '/materials/related.html.erb' %>
 </article>
 <%= render '/materials/favorites_script.html.erb' %>
+
+
+<!-- New List -->
+<script type="text/javascript">
+	$(document).ready(function  () {
+
+
+		$(".add_list").on("click", function(){
+			if (!$(".add_list").hasClass("active_form")) {
+				setTimeout(function(){
+					$(".new_list_form").removeClass("invisible");			
+					$(".add_list").removeClass("inactive_form")
+					$(".add_list").addClass("active_form");
+
+				},1)
+			};
+		});
+		
+		$(".new_list_form").bind( 'clickoutside', function(event){
+			if ($(".add_list").hasClass("active_form")) {
+				
+				$(".new_list_form").addClass("invisible");
+				$(".add_list").removeClass("active_form");
+				$(".add_list").addClass("inactive_form");
+			};
+
+		});
+	});
+</script>

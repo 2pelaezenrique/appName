@@ -5,8 +5,9 @@
 	<% end %>
 
 	<div class="fav panelButton icon angle-down">
-		<div class="triangulo_sup invisible"></div>
+		
 		<div class="invisible user_menu">
+		<div class="triangulo_sup"></div>
 			<ul>
 				<li>Aulas</li>
 				<li>Listas</li>
@@ -34,7 +35,6 @@
 		$(".fav.angle-down").on("click", function(){
 			if (!$(".fav.panelButton").hasClass("active_menu")) {
 				setTimeout(function(){
-					$(".triangulo_sup").removeClass("invisible");			
 					$(".user_menu").removeClass("invisible");
 					$(".user_menu").addClass("visible_menu");
 					$(".fav.angle-down").addClass("active_menu");
@@ -44,7 +44,6 @@
 		
 		$(".user_menu").bind( 'clickoutside', function(event){
 			if ($(".fav.panelButton").hasClass("active_menu")) {
-				$(".triangulo_sup").addClass("invisible");			
 				$(".user_menu").addClass("invisible");
 				$(".user_menu").removeClass("visible_menu");
 				$(".fav.angle-down").removeClass("active_menu");
