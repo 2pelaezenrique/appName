@@ -315,11 +315,11 @@ article{
     margin-right: 18px;
     margin-top: 19px;
 }
-a .icon, div .icon{
+.element_buttons a .icon, .element_buttons .icon{
     color: #979797;
     cursor: pointer;
 }
-a .icon:hover,div .icon:hover{
+.element_buttons a .icon:hover,.element_buttons .icon:hover{
     color: #167ac6;
 }
 i {
@@ -449,7 +449,32 @@ comments .comments form textarea{
     -moz-box-shadow: 4px 0px 25px 2px rgba(143, 143, 143, 0.67);
     box-shadow: 4px 0px 25px 2px rgba(143, 143, 143, 0.67);
     padding: 2px 10px;
+    cursor: default;
 }
 .add_to_list div{
     display: block;
+}
+.all_lists li {
+    margin-left: 18px;
+    line-height: 19px;
+    font-size: 15px;
+        margin-top: 9px;
+}
+.all_lists li .icon{
+    position: absolute;
+    top: 2px;
+    left: -19px;
+    font-size: 14px;
+}
+.all_lists{
+    margin-top: 10px;
+    margin-bottom: 11px;
+    padding-left: 5px;
+    border: 1px solid #E4DEDE;
+    padding-bottom: 5px;
+    max-height: 200px;
+    overflow: auto;
+}
+.menu_header{
+    margin-top: 4px;
 }
