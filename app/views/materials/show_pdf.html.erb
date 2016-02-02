@@ -78,11 +78,11 @@
                 </div>
                 <div class="element_buttons">
                 	<div class="icon plus relative">
-                		<div class="add_to_list">
-                			<div class="triangulo_sup"></div>
-                			<div class="menu_header">Añadir a:</div>
-                			<ul class="all_lists">
-                				<%if current_user %>
+                		<%if current_user %>
+                			<div class="add_to_list invisible">
+	                			<div class="triangulo_sup"></div>
+	                			<div class="menu_header">Añadir a:</div>
+	                			<ul class="all_lists">
 	                				<% if current_user.lists.count == 0 %>
 	                					<li><%= "No tienes ninguna lista" %></li>
 	                				<% else %>
@@ -96,21 +96,24 @@
 		                				    </li>
 	                				    <% end %>
 	                				<% end %>
-	                			<% end %>
-                			</ul>
-                			
-                			<div class="add_list inactive_form">
-								<div class="new_list_form invisible">
-									<div class="triangulo_der"></div>
-									<%= form_for List.new,:remote => true do |f| %>
-									   <%= f.text_field :name, required: true, placeholder: "Nombre"%>
-									   <%= f.text_field :description, placeholder: "Descripcion... " %>
-									   <%= f.submit "Crear" %>
-									<% end %>
+	                			</ul>
+	                			<div class="add_list inactive_form">
+									<div class="new_list_form invisible">
+										<div class="triangulo_der"></div>
+										<%= form_for List.new,:remote => true do |f| %>
+										   <%= f.text_field :name, required: true, placeholder: "Nombre"%>
+										   <%= f.text_field :description, placeholder: "Descripcion... " %>
+										   <%= f.submit "Crear" %>
+										<% end %>
+									</div>
 								</div>
-							</div>
-                		
-                		</div>
+                			</div>
+                		<% else %>
+                			<div class="add_to_list invisible">
+                				<div><%= link_to "Iniciar Sesión", new_user_session_path %>	</div>
+                			</div>
+                		<% end %>
+
                 	</div>
                 	<%= link_to @material.file.url, :download => @material.file_file_name do %>
                 		<div class="icon download-circle"></div>
@@ -126,12 +129,25 @@
 </article>
 <%= render '/materials/favorites_script.html.erb' %>
 
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#new_list").on("ajax:success", function (e, data, status, xhr) {
+			var newList = '<li list-id="' + data.id + '" class="relative list_li">' + data.name +'<div class="icon check-empty list_check"></div></li>';
+			$(".all_lists").append(newList);
+			$(".new_list_form").addClass("invisible");
+			$(".add_list").removeClass("active_form");
+			$(".add_list").addClass("inactive_form");
+			$('input[name="list[description]"]').val("");
+			$('input[name="list[name]"]').val("");
+		});
+	})
+</script>
 
 <script type="text/javascript">
-	$(".list_li").on("click",function(){
+	$(document).delegate( '.list_li', "click", function(){
 		$(this).children().addClass("rotating");
 		addToList($(this).attr("list-id"));
-	})
+	});
 
 
 	var addToList = function (id){
@@ -155,32 +171,56 @@
 	    });
 	}
 
-
 </script>
+
+
 <!-- New List -->
 <script type="text/javascript">
 	$(document).ready(function  () {
+		var button = $(".element_buttons .icon.plus");
+		var invisibleElement = $(".add_to_list");
 
-
-		$(".add_list").on("click", function(){
-			if (!$(".add_list").hasClass("active_form")) {
+		button.on("click", function(){
+			if (!button.hasClass("active_button")) {
 				setTimeout(function(){
-					$(".new_list_form").removeClass("invisible");			
-					$(".add_list").removeClass("inactive_form")
-					$(".add_list").addClass("active_form");
+					invisibleElement.removeClass("invisible");			
+					button.removeClass("inactive_button")
+					button.addClass("active_button");
 
 				},1)
 			};
 		});
 		
-		$(".new_list_form").bind( 'clickoutside', function(event){
-			if ($(".add_list").hasClass("active_form")) {
+		invisibleElement.bind( 'clickoutside', function(event){
+			if (button.hasClass("active_button")) {
 				
-				$(".new_list_form").addClass("invisible");
-				$(".add_list").removeClass("active_form");
-				$(".add_list").addClass("inactive_form");
+				invisibleElement.addClass("invisible");
+				button.removeClass("active_button");
+				button.addClass("inactive_form");
 			};
 
 		});
+	});
+</script>
+<script type="text/javascript">
+	$(".add_list").on("click", function(){
+		if (!$(".add_list").hasClass("active_form")) {
+			setTimeout(function(){
+				$(".new_list_form").removeClass("invisible");			
+				$(".add_list").removeClass("inactive_form")
+				$(".add_list").addClass("active_form");
+
+			},1)
+		};
+	});
+	
+	$(".new_list_form").bind( 'clickoutside', function(event){
+		if ($(".add_list").hasClass("active_form")) {
+			
+			$(".new_list_form").addClass("invisible");
+			$(".add_list").removeClass("active_form");
+			$(".add_list").addClass("inactive_form");
+		};
+
 	});
 </script>

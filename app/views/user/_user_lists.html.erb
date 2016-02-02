@@ -23,6 +23,20 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#new_list").on("ajax:success", function (e, data, status, xhr) {
+			var newList = '<div class="user_list"><a href="#"><b>' + data.name+'</b> '+ data.description +'</div>';
+			$(".user_lists .list").append(newList);
+			$(".new_list_form").addClass("invisible");
+			$(".add_list").removeClass("active_form");
+			$(".add_list").addClass("inactive_form");
+			$('input[name="list[description]"]').val("");
+			$('input[name="list[name]"]').val("");
+		});
+	})
+</script>
 <script type="text/javascript">
 	$(document).ready(function  () {
 

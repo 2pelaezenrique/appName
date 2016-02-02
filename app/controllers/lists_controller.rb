@@ -51,11 +51,8 @@ class ListsController < ApplicationController
 
     respond_to do |format|
       if @list.save
-        format.html { redirect_to @list, notice: 'List was successfully created.' }
-        format.js   { }
-        format.json { render json: @list, status: :created, location: @list }
+        format.json { render :json => {:name => @list.name, :description => @list.description, :id => @list.id.to_s}, status: :created }
       else
-        format.html { render :new }
         format.json { render json: @list.errors, status: :unprocessable_entity }
       end
     end
