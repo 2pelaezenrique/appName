@@ -24,10 +24,13 @@
 
 						Posts: <%= Material.where(youtubeChannel_id: @material.youtubeChannel_id).count%>
 					</div>
-					<%= render '/materials/add_to_list.html.erb' %>
+					
 					<div class="favs"><div class="icon star favoriteAjax"></div> <number><%= @material.favorites.count %></number></div>
 				<hr>	
 				Publicado el <%= @material.uploadDate %>
+					<div class="material_actions video_buttons">
+						<%= render '/materials/add_to_list.html.erb' %>
+					</div>
 				</div>
 			</div>
 			<div class="description">

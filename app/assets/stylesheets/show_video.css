@@ -343,7 +343,21 @@ i {
 .buttons a div.icon.download-circle:hover, .buttons .icon.plus:hover, .active_button{
     color: #167ac6 !important;
 }
-
+.video_buttons{
+    cursor: pointer;
+    z-index: 3;
+    display: inline-block;
+    position: absolute;
+    right: 14px;
+    color: #9A9A9A;
+}
+.video_buttons:hover{
+    color: #167ac6;
+}
+.video_buttons .plus .add_to_list{
+    right: -6px !important;
+    top: 134% !important;
+}
 .hr{
     margin: 5px;
     width: 100%;
