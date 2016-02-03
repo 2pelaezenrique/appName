@@ -109,6 +109,7 @@ html, body{
     animation-duration: 8s;
     animation-timing-function: linear;
     animation-fill-mode: forwards; 
+    z-index: 5; 
 }
 .notice_msg{
     width: 273px;
