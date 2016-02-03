@@ -28,7 +28,8 @@
 		            	</div>
 		            	
 		            </div>
-		            <div class="buttons">
+		            <div class="buttons material_actions">
+		            	<%= render '/materials/add_to_list.html.erb' %>
 		            	<%= link_to @material.file.url, :download => @material.file_file_name do %>
 		            		<div class="icon download-circle"></div>
 		            	<% end %>

@@ -286,6 +286,7 @@ article{
     width: 100%;
 }
 .description.pdf{
+    padding-bottom: 30px;
     max-height: 429px;
 }
 .description.pdf text{
@@ -333,8 +334,14 @@ i {
 .buttons a{
     margin-left: 10px;
 }
-.buttons a div.icon.download-circle{
+.buttons a div.icon.download-circle, .buttons .icon.plus{
     line-height: 79px;
+    z-index: 3;
+    color: grey;
+    cursor: pointer;
+}
+.buttons a div.icon.download-circle:hover, .buttons .icon.plus:hover, .active_button{
+    color: #167ac6 !important;
 }
 
 .hr{
