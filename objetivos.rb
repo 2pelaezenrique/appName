@@ -51,6 +51,9 @@
 
 # Ver aplicaciones que has autorizado 
 
+# Manejar contenido subido
+# Enlazar con cuenta en youtube
+# Asociar todos los materiales suyos publicados por otros usuarios
 
 
 
