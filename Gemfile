@@ -48,3 +48,4 @@ gem 'bson_ext'
 gem 'devise'
 gem "mongoid-paperclip", github: '2pelaezenrique/mongoid-paperclip', :require => "mongoid_paperclip"
 gem 'aws-sdk', '< 2.0'
+ruby "2.2.3"
