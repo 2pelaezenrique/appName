@@ -3,15 +3,15 @@
 
 
 ############# Materiales ######################
-# Subir material con una descripcion breve y ciertas referencias
-# Clasificar el material por tema
-# Añadir el material a una determinada escuela
-# Ver videos de youtube
+# ~ Subir material con una descripcion breve y ciertas referencias
+# ~ Clasificar el material por tema
+# ~ Añadir el material a una determinada escuela
+# ~ Ver videos de youtube
 # Ver videos subidos
-# Ver pdf
+# ~ Ver pdf
 # Ver fotos
-# Mostrar todos los demas tipos de archivos para poder descargarlos
-# Buscar un material
+# ~ Mostrar todos los demas tipos de archivos para poder descargarlos
+# ~ Buscar un material
 # Filtrar la busqueda por escuela
 # Filtrar la busqueda por autor
 # Filtrar la busqueda por tema
@@ -23,14 +23,14 @@
 
 
 ################### Usuario #####################
-# Tener una cuenta de usuario
+# ~ Tener una cuenta de usuario
 # Tener un avatar
 # Tener datos personales
 # Tener CV
 
-# Añadir a favoritos un material
-# Añadir a una lista de reproduccion un material
-# Comentar un material
+# ~ Añadir a favoritos un material
+# ~ Añadir a una lista de reproduccion un material
+# ~ Comentar un material
 
 # Ver tabla con todos los favoritos
 # Ver tabla con los elementos de una lista

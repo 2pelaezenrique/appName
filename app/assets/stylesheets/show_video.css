@@ -503,3 +503,7 @@ comments .comments form textarea{
 .menu_header{
     margin-top: 4px;
 }
+video{
+    width: 864px;
+    height: 486px;
+}

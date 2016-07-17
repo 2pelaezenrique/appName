@@ -9,7 +9,7 @@ Rails.application.config.assets.precompile += %w( materials_form.css )
 Rails.application.config.assets.precompile += %w( user.css )
 Rails.application.config.assets.precompile += %w( favorites.js )
 Rails.application.config.assets.precompile += %w( clickOutside.js )
-
+Rails.application.config.assets.precompile += %w( uploaded_video.png )
 
 
 Rails.application.config.assets.precompile += ['images/avatars/*']

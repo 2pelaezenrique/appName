@@ -45,6 +45,8 @@ class MaterialsController < ApplicationController
       render 'show_video'
     elsif @material.file_type == "pdf"
       render 'show_pdf'
+    elsif @material.file_type == "uploaded_video"
+      render 'show_uploaded_video'
     else
       render 'show'
     end
@@ -161,15 +163,14 @@ class MaterialsController < ApplicationController
     def validate_format
       format = params[:material][:format]
       case format
-      when "video"
-        return true      
-      when "file"
-        
-        if file_type == "unsupported_File"
-          return false
-        else
-          return true
-        end
+        when "video"
+          return true      
+        when "file"
+          if file_type == "unsupported_File"
+            return false
+          else
+            return true
+          end
       else
         return false
       end
@@ -193,6 +194,9 @@ class MaterialsController < ApplicationController
               return "excel"
             when "application/x-rar-compressed","application/x-tar","application/x-7z-compressed","application/zip"
               return "compressed_File"
+            when "video/mp4" , "video/ogg" , "video/webm"
+              return "uploaded_video"
+            
             else
               return "unsupported_File"
         end                
