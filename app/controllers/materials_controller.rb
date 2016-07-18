@@ -47,6 +47,8 @@ class MaterialsController < ApplicationController
       render 'show_pdf'
     elsif @material.file_type == "uploaded_video"
       render 'show_uploaded_video'
+    elsif @material.file_type == 'image'
+      render 'show_image'
     else
       render 'show'
     end

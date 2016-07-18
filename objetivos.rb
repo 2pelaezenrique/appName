@@ -7,7 +7,7 @@
 # ~ Clasificar el material por tema
 # ~ Añadir el material a una determinada escuela
 # ~ Ver videos de youtube
-# Ver videos subidos
+# ~ Ver videos subidos
 # ~ Ver pdf
 # Ver fotos
 # ~ Mostrar todos los demas tipos de archivos para poder descargarlos

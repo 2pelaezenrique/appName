@@ -507,3 +507,16 @@ video{
     width: 864px;
     height: 486px;
 }
+.image_box{
+    min-width: 818px;
+    width: 47%;
+    height: 700px;
+    margin-top: 2%;
+    margin-left: 5%;
+    display: inline-block;
+}
+#image{
+    opacity: 0;
+    width: 90%;
+    max-height: 728px;
+}
