@@ -9,7 +9,7 @@
 # ~ Ver videos de youtube
 # ~ Ver videos subidos
 # ~ Ver pdf
-# Ver fotos
+# ~ Ver fotos
 # ~ Mostrar todos los demas tipos de archivos para poder descargarlos
 # ~ Buscar un material
 # Filtrar la busqueda por escuela
